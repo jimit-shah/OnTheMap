@@ -8,20 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		EF9D4C571F2E9A3B00ECC6A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C561F2E9A3B00ECC6A5 /* AppDelegate.swift */; };
-		EF9D4C591F2E9A3B00ECC6A5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C581F2E9A3B00ECC6A5 /* ViewController.swift */; };
+		EF9D4C591F2E9A3B00ECC6A5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C581F2E9A3B00ECC6A5 /* LoginViewController.swift */; };
 		EF9D4C5C1F2E9A3B00ECC6A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF9D4C5A1F2E9A3B00ECC6A5 /* Main.storyboard */; };
 		EF9D4C5E1F2E9A3B00ECC6A5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EF9D4C5D1F2E9A3B00ECC6A5 /* Assets.xcassets */; };
 		EF9D4C611F2E9A3B00ECC6A5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF9D4C5F1F2E9A3B00ECC6A5 /* LaunchScreen.storyboard */; };
+		EF9D4C711F2E9B5500ECC6A5 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C701F2E9B5500ECC6A5 /* GCDBlackBox.swift */; };
+		EF9D4C731F2EB91100ECC6A5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C721F2EB91100ECC6A5 /* MapViewController.swift */; };
+		EF9D4C751F2EB95800ECC6A5 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C741F2EB95800ECC6A5 /* ListViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		EF9D4C531F2E9A3B00ECC6A5 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF9D4C561F2E9A3B00ECC6A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EF9D4C581F2E9A3B00ECC6A5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EF9D4C581F2E9A3B00ECC6A5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		EF9D4C5B1F2E9A3B00ECC6A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EF9D4C5D1F2E9A3B00ECC6A5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EF9D4C601F2E9A3B00ECC6A5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		EF9D4C621F2E9A3B00ECC6A5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EF9D4C701F2E9B5500ECC6A5 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
+		EF9D4C721F2EB91100ECC6A5 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		EF9D4C741F2EB95800ECC6A5 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,13 +61,80 @@
 			isa = PBXGroup;
 			children = (
 				EF9D4C561F2E9A3B00ECC6A5 /* AppDelegate.swift */,
-				EF9D4C581F2E9A3B00ECC6A5 /* ViewController.swift */,
+				EF9D4C701F2E9B5500ECC6A5 /* GCDBlackBox.swift */,
+				EF9D4C681F2E9A8600ECC6A5 /* Model */,
+				EF9D4C6C1F2E9ABD00ECC6A5 /* View */,
+				EF9D4C6D1F2E9AC500ECC6A5 /* Controller */,
+				EF9D4C6E1F2E9AD800ECC6A5 /* Assets */,
+				EF9D4C6F1F2E9AE500ECC6A5 /* Supporting Files */,
+			);
+			path = OnTheMap;
+			sourceTree = "<group>";
+		};
+		EF9D4C681F2E9A8600ECC6A5 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				EF9D4C691F2E9A9B00ECC6A5 /* Clients */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		EF9D4C691F2E9A9B00ECC6A5 /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				EF9D4C6B1F2E9AB200ECC6A5 /* Udacity */,
+				EF9D4C6A1F2E9AA700ECC6A5 /* Parse */,
+			);
+			name = Clients;
+			sourceTree = "<group>";
+		};
+		EF9D4C6A1F2E9AA700ECC6A5 /* Parse */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Parse;
+			sourceTree = "<group>";
+		};
+		EF9D4C6B1F2E9AB200ECC6A5 /* Udacity */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Udacity;
+			sourceTree = "<group>";
+		};
+		EF9D4C6C1F2E9ABD00ECC6A5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		EF9D4C6D1F2E9AC500ECC6A5 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				EF9D4C581F2E9A3B00ECC6A5 /* LoginViewController.swift */,
+				EF9D4C721F2EB91100ECC6A5 /* MapViewController.swift */,
+				EF9D4C741F2EB95800ECC6A5 /* ListViewController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		EF9D4C6E1F2E9AD800ECC6A5 /* Assets */ = {
+			isa = PBXGroup;
+			children = (
 				EF9D4C5A1F2E9A3B00ECC6A5 /* Main.storyboard */,
 				EF9D4C5D1F2E9A3B00ECC6A5 /* Assets.xcassets */,
 				EF9D4C5F1F2E9A3B00ECC6A5 /* LaunchScreen.storyboard */,
+			);
+			name = Assets;
+			sourceTree = "<group>";
+		};
+		EF9D4C6F1F2E9AE500ECC6A5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
 				EF9D4C621F2E9A3B00ECC6A5 /* Info.plist */,
 			);
-			path = OnTheMap;
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +210,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF9D4C591F2E9A3B00ECC6A5 /* ViewController.swift in Sources */,
+				EF9D4C591F2E9A3B00ECC6A5 /* LoginViewController.swift in Sources */,
+				EF9D4C711F2E9B5500ECC6A5 /* GCDBlackBox.swift in Sources */,
 				EF9D4C571F2E9A3B00ECC6A5 /* AppDelegate.swift in Sources */,
+				EF9D4C751F2EB95800ECC6A5 /* ListViewController.swift in Sources */,
+				EF9D4C731F2EB91100ECC6A5 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -302,6 +378,7 @@
 				EF9D4C671F2E9A3B00ECC6A5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
