@@ -15,6 +15,7 @@
 		EF9D4C711F2E9B5500ECC6A5 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C701F2E9B5500ECC6A5 /* GCDBlackBox.swift */; };
 		EF9D4C731F2EB91100ECC6A5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C721F2EB91100ECC6A5 /* MapViewController.swift */; };
 		EF9D4C751F2EB95800ECC6A5 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C741F2EB95800ECC6A5 /* ListViewController.swift */; };
+		EFDE500F1F319A9D009014AE /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDE500E1F319A9D009014AE /* BorderedButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		EF9D4C701F2E9B5500ECC6A5 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		EF9D4C721F2EB91100ECC6A5 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		EF9D4C741F2EB95800ECC6A5 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		EFDE500E1F319A9D009014AE /* BorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		EF9D4C6C1F2E9ABD00ECC6A5 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				EFDE500E1F319A9D009014AE /* BorderedButton.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			files = (
 				EF9D4C591F2E9A3B00ECC6A5 /* LoginViewController.swift in Sources */,
 				EF9D4C711F2E9B5500ECC6A5 /* GCDBlackBox.swift in Sources */,
+				EFDE500F1F319A9D009014AE /* BorderedButton.swift in Sources */,
 				EF9D4C571F2E9A3B00ECC6A5 /* AppDelegate.swift in Sources */,
 				EF9D4C751F2EB95800ECC6A5 /* ListViewController.swift in Sources */,
 				EF9D4C731F2EB91100ECC6A5 /* MapViewController.swift in Sources */,
