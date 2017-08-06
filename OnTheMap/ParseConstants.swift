@@ -30,7 +30,7 @@ extension ParseClient {
     
     // MARK: Student Locations
     static let StudentLocations = "/StudentLocation"
-    static let StudentLocation =  "/StudentLocation?where={\"uniqueKey\":value}"
+    static let StudentLocation =  "/StudentLocation?where={\"uniqueKey\":value}" /* NOTE SURE ABOUT THIS */
   }
   
   // MARK: URL Keys

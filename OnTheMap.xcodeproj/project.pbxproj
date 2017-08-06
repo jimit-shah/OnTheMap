@@ -10,6 +10,9 @@
 		EF3ECD8E1F35AB09000A258E /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3ECD8D1F35AB09000A258E /* ParseClient.swift */; };
 		EF3ECD901F35ABB5000A258E /* ParseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3ECD8F1F35ABB5000A258E /* ParseConfig.swift */; };
 		EF3ECD921F364105000A258E /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3ECD911F364105000A258E /* ParseConstants.swift */; };
+		EF3ECD941F36DFDE000A258E /* ParseStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3ECD931F36DFDE000A258E /* ParseStudent.swift */; };
+		EF3ECD981F36E514000A258E /* InfoPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3ECD971F36E514000A258E /* InfoPostingViewController.swift */; };
+		EF3ECD9A1F36EA89000A258E /* StudentsTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3ECD991F36EA89000A258E /* StudentsTabBarController.swift */; };
 		EF9D4C571F2E9A3B00ECC6A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C561F2E9A3B00ECC6A5 /* AppDelegate.swift */; };
 		EF9D4C591F2E9A3B00ECC6A5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C581F2E9A3B00ECC6A5 /* LoginViewController.swift */; };
 		EF9D4C5C1F2E9A3B00ECC6A5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EF9D4C5A1F2E9A3B00ECC6A5 /* Main.storyboard */; };
@@ -25,6 +28,9 @@
 		EF3ECD8D1F35AB09000A258E /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
 		EF3ECD8F1F35ABB5000A258E /* ParseConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConfig.swift; sourceTree = "<group>"; };
 		EF3ECD911F364105000A258E /* ParseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConstants.swift; sourceTree = "<group>"; };
+		EF3ECD931F36DFDE000A258E /* ParseStudent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseStudent.swift; sourceTree = "<group>"; };
+		EF3ECD971F36E514000A258E /* InfoPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoPostingViewController.swift; sourceTree = "<group>"; };
+		EF3ECD991F36EA89000A258E /* StudentsTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentsTabBarController.swift; sourceTree = "<group>"; };
 		EF9D4C531F2E9A3B00ECC6A5 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF9D4C561F2E9A3B00ECC6A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EF9D4C581F2E9A3B00ECC6A5 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -102,6 +108,7 @@
 				EF3ECD8D1F35AB09000A258E /* ParseClient.swift */,
 				EF3ECD8F1F35ABB5000A258E /* ParseConfig.swift */,
 				EF3ECD911F364105000A258E /* ParseConstants.swift */,
+				EF3ECD931F36DFDE000A258E /* ParseStudent.swift */,
 			);
 			name = Parse;
 			sourceTree = "<group>";
@@ -127,6 +134,8 @@
 				EF9D4C581F2E9A3B00ECC6A5 /* LoginViewController.swift */,
 				EF9D4C721F2EB91100ECC6A5 /* MapViewController.swift */,
 				EF9D4C741F2EB95800ECC6A5 /* ListViewController.swift */,
+				EF3ECD971F36E514000A258E /* InfoPostingViewController.swift */,
+				EF3ECD991F36EA89000A258E /* StudentsTabBarController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -223,10 +232,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				EF9D4C591F2E9A3B00ECC6A5 /* LoginViewController.swift in Sources */,
+				EF3ECD941F36DFDE000A258E /* ParseStudent.swift in Sources */,
 				EF9D4C711F2E9B5500ECC6A5 /* GCDBlackBox.swift in Sources */,
 				EF3ECD8E1F35AB09000A258E /* ParseClient.swift in Sources */,
+				EF3ECD981F36E514000A258E /* InfoPostingViewController.swift in Sources */,
 				EFDE500F1F319A9D009014AE /* BorderedButton.swift in Sources */,
 				EF9D4C571F2E9A3B00ECC6A5 /* AppDelegate.swift in Sources */,
+				EF3ECD9A1F36EA89000A258E /* StudentsTabBarController.swift in Sources */,
 				EF3ECD921F364105000A258E /* ParseConstants.swift in Sources */,
 				EF3ECD901F35ABB5000A258E /* ParseConfig.swift in Sources */,
 				EF9D4C751F2EB95800ECC6A5 /* ListViewController.swift in Sources */,
