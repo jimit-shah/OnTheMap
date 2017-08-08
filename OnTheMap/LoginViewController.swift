@@ -20,8 +20,7 @@ class LoginViewController: UIViewController {
   @IBAction func loginPressed(_ sender: Any) {
     completeLogin()
   }
-  
-  
+
   
   private func completeLogin() {
     let controller = storyboard!.instantiateViewController(withIdentifier: "MasterNavigationController") as! UINavigationController
