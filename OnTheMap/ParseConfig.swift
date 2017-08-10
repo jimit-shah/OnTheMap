@@ -10,8 +10,6 @@ import UIKit
 
 class ParseConfig: NSObject {
   
-
-  
   // MARK: Initialization
   
   override init() {}

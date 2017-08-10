@@ -47,7 +47,7 @@
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hki-ee-Ojd">
                                         <rect key="frame" x="0.0" y="166" width="300" height="32"/>
@@ -121,6 +121,11 @@
                             <constraint firstItem="85I-am-2P5" firstAttribute="top" secondItem="abv-Uo-v2H" secondAttribute="bottom" id="vKY-nt-Ek4"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loginButton" destination="Hki-ee-Ojd" id="NFO-CO-muB"/>
+                        <outlet property="passwordTextField" destination="zZe-HP-g5e" id="Myq-da-4gN"/>
+                        <outlet property="usernameTextField" destination="AuK-oc-JFH" id="uAd-tP-QbP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eWT-4U-w1x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

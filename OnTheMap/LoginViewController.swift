@@ -12,12 +12,27 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+  @IBOutlet weak var usernameTextField: UITextField!
+  @IBOutlet weak var passwordTextField: UITextField!
+  @IBOutlet weak var loginButton: UIButton!
+  
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
   }
 
   @IBAction func loginPressed(_ sender: Any) {
+    UdacityClient.sharedInstance().authenticateWithLogin(usernameTextField.text!, passwordTextField.text!) { (success, errorString) in
+      performUIUpdatesOnMain {
+        if success {
+          self.completeLogin()
+          print("Login Success!")
+        } else {
+          self.displayError(errorString)
+        }
+      }
+    }
     completeLogin()
   }
 
@@ -28,3 +43,14 @@ class LoginViewController: UIViewController {
   }
 }
 
+// MARK: - LoginViewController (Configure UI)
+
+private extension LoginViewController {
+
+  func displayError(_ errorString: String?) {
+    if let errorString = errorString {
+      print(errorString)
+    }
+  }
+
+}
