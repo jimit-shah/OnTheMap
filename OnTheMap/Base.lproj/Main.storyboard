@@ -172,7 +172,11 @@
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Lez-qt-ROq" customClass="StudentsTabBarController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="kzC-C4-R78">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="f0A-yQ-6xp"/>
+                        <barButtonItem key="leftBarButtonItem" title="Logout" id="f0A-yQ-6xp">
+                            <connections>
+                                <action selector="logout:" destination="Lez-qt-ROq" id="pVL-BM-wpN"/>
+                            </connections>
+                        </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem image="icon_addpin" id="yEL-g6-fF2">
                                 <connections>
