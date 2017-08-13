@@ -49,11 +49,7 @@ extension UdacityClient {
     static let Session = "session"
     static let SessionID = "id"
     
-    
   }
-  
-  
-  
   
   
 }
