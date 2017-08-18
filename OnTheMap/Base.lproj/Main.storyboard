@@ -261,6 +261,9 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="List" image="icon_listview-selected" id="QXd-yy-fm9"/>
+                    <connections>
+                        <outlet property="studentsTableView" destination="MIl-Al-cfe" id="1nV-FS-0D8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="c9j-og-bWW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

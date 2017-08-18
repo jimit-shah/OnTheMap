@@ -12,12 +12,32 @@ class ListViewController: UIViewController {
   
   // MARK: Properties
   
-  var students: [ParseStudent] = [ParseStudent]()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  // the data for the table
+  var students = [ParseStudent]()
+  
+  @IBOutlet weak var studentsTableView: UITableView!
+  
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    ParseClient.sharedInstance().getStudentLocations{(students, error) in
+      
+      if let students = students {
+        self.students = students
+        performUIUpdatesOnMain {
+          self.studentsTableView.reloadData()
+        }
+      } else {
+        print(error ?? "empty error")
+      }
     }
-
+    
+  }
   
 }
 

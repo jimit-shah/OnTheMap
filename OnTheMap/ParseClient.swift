@@ -37,13 +37,12 @@ class ParseClient: NSObject {
   func taskForGETMethod(_ method: String, parameters: [String:AnyObject], completionHandlerForGET: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
     
     // 1. Set the parameters
-    var parametersWithApiKey = parameters
-    parametersWithApiKey[ParameterKeys.ApiKey] = Constants.ApiKey as AnyObject?
-    parametersWithApiKey[ParameterKeys.ApplicationID] = Constants.ApplicationID as AnyObject?
-    
+    var parametersWithKeys = parameters
     
     // 2/3. Build the URL, Configure the request
-    let request = NSMutableURLRequest(url: parseURLFromParameters(parametersWithApiKey, withPathExtension: method))
+    let request = NSMutableURLRequest(url: parseURLFromParameters(parametersWithKeys, withPathExtension: method))
+    request.addValue(Constants.ApiKey, forHTTPHeaderField: ParameterKeys.ApiKey)
+    request.addValue(Constants.ApplicationID, forHTTPHeaderField: ParameterKeys.ApplicationID)
     
     // 4. Make the requeset
     let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
@@ -123,8 +122,9 @@ class ParseClient: NSObject {
       let queryItem = URLQueryItem(name: key, value: "\(value)")
       components.queryItems!.append(queryItem)
     }
-    
+    print("url: \(String(describing: components.url))")
     return components.url!
+    
   }
   
   // MARK: Shared Instance

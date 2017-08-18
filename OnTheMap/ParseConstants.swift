@@ -14,23 +14,23 @@ extension ParseClient {
   // MARK: Constants
   struct Constants {
     
-    // MARK: API Key
-    static let ApiKey = "API Key Here"
-    static let ApplicationID = "Application ID here"
+    // MARK: API Keys
+    static let ApiKey = "QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY"
+    static let ApplicationID = "QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr"
     
     // MARK: URLs
     static let ApiScheme = "https"
     static let ApiHost = "parse.udacity.com"
-    static let ApiPath = "/parse/classes/StudentLocation"
+    static let ApiPath = "/parse/classes"
     
   }
   
   // MARK: Methods
   struct Methods {
     
-    // MARK: Student Locations
-    static let StudentLocations = "/StudentLocation"
-    static let StudentLocation =  "/StudentLocation?where={\"uniqueKey\":value}" /* NOTE SURE ABOUT THIS */
+    // MARK: Student Location
+    static let StudentLocation = "/StudentLocation"
+    //static let StudentLocation =  "/StudentLocation?where={\"uniqueKey\":value}" /* NOTE SURE ABOUT THIS */
   }
   
   // MARK: URL Keys
