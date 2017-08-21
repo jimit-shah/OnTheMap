@@ -21,6 +21,7 @@ extension UdacityClient {
       if success {
         self.sessionID = sessionID
         print("SessionID: \(sessionID!)")
+        completionHandlerForAuth(success, nil)
       } else {
         completionHandlerForAuth(success, errorString)
       }

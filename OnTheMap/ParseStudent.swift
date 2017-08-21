@@ -13,15 +13,16 @@ struct ParseStudent {
   
   // MARK: Properties
   
-  let firstName: String
-  let lastName: String
+  let firstName: String?
+  let lastName: String?
   let mediaURL: String?
   
   
   // MARK: Initializers
   init(dictionary: [String:AnyObject]) {
-    firstName = dictionary[ParseClient.JSONResponseKeys.StudentFirstName] as! String
-    lastName = dictionary[ParseClient.JSONResponseKeys.StudentLastName] as! String
+    
+    firstName = dictionary[ParseClient.JSONResponseKeys.StudentFirstName] as? String
+    lastName = dictionary[ParseClient.JSONResponseKeys.StudentLastName] as? String
     mediaURL = dictionary[ParseClient.JSONResponseKeys.StudentMediaURL] as? String
     
   }
