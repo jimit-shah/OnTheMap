@@ -27,16 +27,25 @@ class LoginViewController: UIViewController {
   // MARK: Actions
 
   @IBAction func loginPressed(_ sender: Any) {
+    
+    if checkTextfieldsEmpty() {
+      notifyUser(nil, message: "Email or Password Empty.")
+    } else {
     UdacityClient.sharedInstance().authenticateWithLogin(usernameTextField.text!, passwordTextField.text!) { (success, errorString) in
       performUIUpdatesOnMain {
         if success {
           self.completeLogin()
           print("Login Success!")
+          
+          // reset textfields after successfully login.
+          self.resetControls()
+          
         } else {
           //self.displayError(errorString)
           self.notifyUser(nil, message: "Invalid Email or Password.")
         }
       }
+    }
     }
   }
 
@@ -45,6 +54,19 @@ class LoginViewController: UIViewController {
   private func completeLogin() {
     let controller = storyboard!.instantiateViewController(withIdentifier: "MasterNavigationController") as! UINavigationController
     present(controller, animated: true, completion: nil)
+  }
+  
+  private func checkTextfieldsEmpty() -> Bool {
+    if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
+      return true
+    } else {
+      return false
+    }
+  }
+  
+  private func resetControls() {
+    usernameTextField.text = nil
+    passwordTextField.text = nil
   }
 }
 
