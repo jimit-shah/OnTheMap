@@ -18,11 +18,11 @@
                         <viewControllerLayoutGuide type="top" id="abv-Uo-v2H"/>
                         <viewControllerLayoutGuide type="bottom" id="3xV-Pq-XDN"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="AHt-n5-jpq">
+                    <view key="view" contentMode="scaleToFill" id="AHt-n5-jpq" userLabel="Main View">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="85I-am-2P5" userLabel="Main Stack View">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="85I-am-2P5" userLabel="Login Stack View">
                                 <rect key="frame" x="37.5" y="20" width="300" height="238"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-u" translatesAutoresizingMaskIntoConstraints="NO" id="NVH-k5-ihE">
@@ -61,37 +61,50 @@
                                             <action selector="loginPressed:" destination="hmH-sU-e5J" eventType="touchUpInside" id="EFT-2K-zMV"/>
                                         </connections>
                                     </button>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WwQ-FW-F5e">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ych-Uw-gOj" userLabel="Signup View">
                                         <rect key="frame" x="0.0" y="206" width="300" height="32"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DkV-qf-vct">
-                                                <rect key="frame" x="0.0" y="0.0" width="212" height="32"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="32" id="y5G-1z-WWM"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N1R-Pl-rdm">
-                                                <rect key="frame" x="220" y="0.0" width="80" height="32"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="32" id="H4F-sD-Tfo"/>
-                                                    <constraint firstAttribute="width" constant="80" id="n4x-ho-7Cq"/>
-                                                </constraints>
-                                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                <state key="normal" title="Sign Up">
-                                                    <color key="titleColor" red="0.010518638417124748" green="0.70716160535812378" blue="0.89919906854629517" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleAspectFit" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="WwQ-FW-F5e">
+                                                <rect key="frame" x="8" y="0.0" width="284" height="32"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account?" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DkV-qf-vct">
+                                                        <rect key="frame" x="0.0" y="0.0" width="200" height="32"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="32" id="AjH-Bt-Acm"/>
+                                                            <constraint firstAttribute="width" constant="200" id="zo6-j4-ggE"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N1R-Pl-rdm">
+                                                        <rect key="frame" x="208" y="0.0" width="76" height="32"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="76" id="1Mc-Ea-VIi"/>
+                                                            <constraint firstAttribute="height" constant="32" id="UQf-ki-CHW"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                        <state key="normal" title="Sign Up">
+                                                            <color key="titleColor" red="0.010518638417124748" green="0.70716160535812378" blue="0.89919906854629517" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        </state>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="32" id="fqU-LB-Ll2"/>
+                                            <constraint firstItem="WwQ-FW-F5e" firstAttribute="top" secondItem="ych-Uw-gOj" secondAttribute="top" id="Aor-nD-Ali"/>
+                                            <constraint firstItem="WwQ-FW-F5e" firstAttribute="leading" secondItem="ych-Uw-gOj" secondAttribute="leading" constant="8" id="iFy-8y-3QN"/>
+                                            <constraint firstAttribute="trailing" secondItem="WwQ-FW-F5e" secondAttribute="trailing" constant="8" id="rMN-97-JfM"/>
+                                            <constraint firstAttribute="bottom" secondItem="WwQ-FW-F5e" secondAttribute="bottom" id="sV1-UZ-Kir"/>
+                                            <constraint firstAttribute="bottom" secondItem="WwQ-FW-F5e" secondAttribute="bottom" id="tWZ-rR-k4B"/>
+                                            <constraint firstItem="WwQ-FW-F5e" firstAttribute="top" secondItem="ych-Uw-gOj" secondAttribute="top" id="wDQ-rc-BXp"/>
+                                            <constraint firstAttribute="height" constant="32" id="zm0-Jh-1qZ"/>
                                         </constraints>
-                                    </stackView>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="B8x-dR-w7o"/>
+                                    <constraint firstItem="ych-Uw-gOj" firstAttribute="centerX" secondItem="85I-am-2P5" secondAttribute="centerX" id="F9R-5Q-Uua"/>
+                                    <constraint firstAttribute="width" constant="300" id="qCO-SK-EMo"/>
                                     <constraint firstAttribute="height" constant="238" id="wJB-T1-bxx"/>
                                 </constraints>
                             </stackView>
@@ -129,7 +142,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eWT-4U-w1x" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2087" y="788"/>
+            <point key="canvasLocation" x="-2159" y="342"/>
         </scene>
         <!--Map-->
         <scene sceneID="kR1-4u-tgs">
