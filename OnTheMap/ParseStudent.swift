@@ -16,7 +16,8 @@ struct ParseStudent {
   let firstName: String?
   let lastName: String?
   let mediaURL: String?
-  
+  let latitude: Double?
+  let longitude: Double?
   
   // MARK: Initializers
   init(dictionary: [String:AnyObject]) {
@@ -24,6 +25,8 @@ struct ParseStudent {
     firstName = dictionary[ParseClient.JSONResponseKeys.StudentFirstName] as? String
     lastName = dictionary[ParseClient.JSONResponseKeys.StudentLastName] as? String
     mediaURL = dictionary[ParseClient.JSONResponseKeys.StudentMediaURL] as? String
+    latitude = dictionary[ParseClient.JSONResponseKeys.StudentLatitude] as? Double
+    longitude = dictionary[ParseClient.JSONResponseKeys.StudentLongitude] as? Double
     
   }
   

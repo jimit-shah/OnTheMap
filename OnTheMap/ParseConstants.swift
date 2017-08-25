@@ -45,6 +45,8 @@ extension ParseClient {
     static let SessionID = "session_id"
     static let RequestToken = "request_token"
     static let Query = "query"
+    static let Limit = "limit"
+    static let Order = "order"
   }
   
   // MARK: JSON Body Keys

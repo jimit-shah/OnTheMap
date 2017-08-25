@@ -155,9 +155,26 @@
                     <view key="view" contentMode="scaleToFill" id="gm4-sI-y7h">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="9II-H2-s9x">
+                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <connections>
+                                    <outlet property="delegate" destination="XCP-yZ-CoJ" id="QpI-Qc-8Cd"/>
+                                </connections>
+                            </mapView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="9II-H2-s9x" firstAttribute="top" secondItem="mND-62-mEO" secondAttribute="bottom" id="0LK-2B-laD"/>
+                            <constraint firstItem="9II-H2-s9x" firstAttribute="leading" secondItem="gm4-sI-y7h" secondAttribute="leading" id="Xxo-gI-RUo"/>
+                            <constraint firstItem="YMw-fV-2mH" firstAttribute="top" secondItem="9II-H2-s9x" secondAttribute="bottom" id="Xyg-9M-svK"/>
+                            <constraint firstAttribute="trailing" secondItem="9II-H2-s9x" secondAttribute="trailing" id="ziu-wS-bRh"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Map" image="icon_mapview-selected" selectedImage="icon_mapview-selected" id="ggu-5A-gUb" userLabel="Map"/>
+                    <connections>
+                        <outlet property="mapView" destination="9II-H2-s9x" id="agx-Cn-ryP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kRt-TV-RR8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
