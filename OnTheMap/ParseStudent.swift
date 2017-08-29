@@ -16,29 +16,32 @@ struct ParseStudent {
   let firstName: String?
   let lastName: String?
   let mediaURL: String?
-  let latitude: Double?
-  let longitude: Double?
+  let latitude: Double
+  let longitude: Double
   
   // MARK: Initializers
   init(dictionary: [String:AnyObject]) {
-    
     firstName = dictionary[ParseClient.JSONResponseKeys.StudentFirstName] as? String
     lastName = dictionary[ParseClient.JSONResponseKeys.StudentLastName] as? String
     mediaURL = dictionary[ParseClient.JSONResponseKeys.StudentMediaURL] as? String
-    latitude = dictionary[ParseClient.JSONResponseKeys.StudentLatitude] as? Double
-    longitude = dictionary[ParseClient.JSONResponseKeys.StudentLongitude] as? Double
-    
+    latitude = dictionary[ParseClient.JSONResponseKeys.StudentLatitude] as! Double
+    longitude = dictionary[ParseClient.JSONResponseKeys.StudentLongitude] as! Double
   }
   
   static func studentsFromResults(_ results: [[String:AnyObject]]) -> [ParseStudent] {
     var students = [ParseStudent]()
     
     // iterate through array of dictionaries, each Student is a dictionary
+    
     for result in results {
-      students.append(ParseStudent(dictionary: result))
+      
+      // check if lat or long are provided otherwise do not add student.
+      if (result["latitude"] != nil) || (result["longitude"] != nil) {
+        students.append(ParseStudent(dictionary: result))
+      }
+      
     }
     return students
   }
-  
   
 }

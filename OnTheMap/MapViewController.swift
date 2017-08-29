@@ -11,40 +11,23 @@ import MapKit
 
 class MapViewController: UIViewController {
   
-  //var studentLocations = [ParseStudent]()
-  var annotations = [MKPointAnnotation]()
-  
+  var locations = [ParseStudent]()
   
   @IBOutlet weak var mapView: MKMapView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    //TODO: HOW TO MOVE THIS CODE IN StudentsTabBarController and access here????
-    
     ParseClient.sharedInstance().getStudentLocations{ (students, error) in
       
+      var annotations = [MKPointAnnotation]()
+      
       if let students = students {
-        // self.studentLocations = students
         
         for location in students {
           
-          // Make sure latitude and longitude values are not nil.
-          guard let latitude = location.latitude else {
-            print("No Latitude Data found.")
-            return // IT SEEMS WHEN THERE IS NO LAT/LONG DATA IT WILL SKIP ENTIRE DATASET TO PROCESS AND AS RESULT WE WILL HAVE NO PINS AT ALL. HOW SHOULD WE HANDLE THIS???
-          }
-          
-          guard let longitude = location.longitude else {
-            print("No Longitude found.")
-            return
-          }
-          
-          // Notice that the float values are being used to create CLLocationDegree values.
-          // This is a version of the Double type.
-          let lat = CLLocationDegrees(latitude)
-          let long = CLLocationDegrees(longitude)
-          
+          let lat = CLLocationDegrees(location.latitude)
+          let long = CLLocationDegrees(location.longitude)
           
           // The lat and long are used to create a CLLocationCoordinates2D instance.
           let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
@@ -59,20 +42,23 @@ class MapViewController: UIViewController {
           annotation.title = "\(first) \(last)"
           annotation.subtitle = mediaURL
           
-          // Finally we place the annotation in an array of annotations.
-          self.annotations.append(annotation)
+          annotations.append(annotation)
         }
-        // performUIUpdatesOnMain {
         
-        // When the array is complete, we add the annotations to the map.
-        self.mapView.addAnnotations(self.annotations)
-        //}
+        performUIUpdatesOnMain {
+          // Finally we place the annotation in an array of annotations.
+          self.mapView.addAnnotations(annotations)
+        }
       } else {
         print(error ?? "empty error")
       }
     }
+    
   }
+  
 }
+
+
 
 extension MapViewController: MKMapViewDelegate {
   

@@ -8,30 +8,11 @@
 
 import UIKit
 
+var studentLocations = [ParseStudent]()
+
 class StudentsTabBarController: UITabBarController {
-
-  // MARK: Properties
   
-  // the data for the table
-  var students = [ParseStudent]()
-  var firstName = "No First Name"
-  var lastName = "No Last Name"
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    ParseClient.sharedInstance().getStudentLocations{ (students, error) in
-      
-      if let students = students {
-        self.students = students
-      } else {
-        print(error ?? "empty error")
-      }
-    }
-    
-  }
-
-
   @IBAction func logout(_ sender: Any) {
     
     UdacityClient.sharedInstance().sessionLogout{ (success, errorString) in
@@ -46,15 +27,24 @@ class StudentsTabBarController: UITabBarController {
     }
     
   }
-
+  
   func completeLogout() {
     self.dismiss(animated: true, completion: nil)
   }
   
-    func displayError(_ errorString: String?) {
-      if let errorString = errorString {
-        print(errorString)
-      }
+  func displayError(_ errorString: String?) {
+    if let errorString = errorString {
+      print(errorString)
     }
+  }
+  
+//  func save(locations: [ParseStudent]) {
+//    //print("Student: \(locations)")
+//    let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//    appDelegate.locations = locations
+//    print("\nAll students are saved in global locations: \(appDelegate.locations)\n")
+  
+//  }
+  
 
 }
