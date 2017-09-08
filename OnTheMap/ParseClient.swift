@@ -122,7 +122,10 @@ class ParseClient: NSObject {
       let queryItem = URLQueryItem(name: key, value: "\(value)")
       components.queryItems!.append(queryItem)
     }
+    
+    // print url for the request
     print("url: \(String(describing: components.url))")
+    
     return components.url!
     
   }

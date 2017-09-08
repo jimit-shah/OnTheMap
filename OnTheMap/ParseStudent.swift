@@ -16,8 +16,8 @@ struct ParseStudent {
   let firstName: String?
   let lastName: String?
   let mediaURL: String?
-  let latitude: Double
-  let longitude: Double
+  var latitude: Double
+  var longitude: Double
   
   // MARK: Initializers
   init(dictionary: [String:AnyObject]) {
@@ -36,11 +36,13 @@ struct ParseStudent {
     for result in results {
       
       // check if lat or long are provided otherwise do not add student.
-      if (result["latitude"] != nil) || (result["longitude"] != nil) {
+      if let _ = result["latitude"] as? Double, let _ = result["longitude"] as? Double {
+        print("\n result: \(result)")
         students.append(ParseStudent(dictionary: result))
       }
       
     }
+    
     return students
   }
   
