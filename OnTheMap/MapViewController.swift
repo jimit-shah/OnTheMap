@@ -9,6 +9,8 @@
 import UIKit
 import MapKit
 
+// MARK: - MapViewController
+
 class MapViewController: UIViewController {
   
   var locations = [ParseStudent]()
@@ -60,8 +62,11 @@ class MapViewController: UIViewController {
 
 
 
+// MARK: - MKMapViewDelegate
+
 extension MapViewController: MKMapViewDelegate {
   
+  // Create a view with a "right callout accessory view".
   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     
     let reuseId = "pin"
@@ -77,6 +82,21 @@ extension MapViewController: MKMapViewDelegate {
       pinView!.annotation = annotation
     }
     return pinView
+  }
+  
+  // This delegate method is implemented to respond to taps. It opens the system browser
+  // to the URL specified in the annotationViews subtitle property.
+  func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    if control == view.rightCalloutAccessoryView {
+      let app = UIApplication.shared
+      if let url = view.annotation?.subtitle! {
+        app.open(URL(string:url)!, options: [:], completionHandler: { (success) in
+          if !success {
+            print("Could not open URL")
+          }
+        })
+      }
+    }
   }
   
 }

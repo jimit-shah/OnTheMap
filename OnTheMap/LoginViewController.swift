@@ -13,7 +13,7 @@ import UIKit
 class LoginViewController: UIViewController {
   
   // MARK: Properties
-
+  
   @IBOutlet weak var usernameTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var loginButton: UIButton!
@@ -25,30 +25,42 @@ class LoginViewController: UIViewController {
   }
   
   // MARK: Actions
-
+  
   @IBAction func loginPressed(_ sender: Any) {
     
     if checkTextfieldsEmpty() {
       notifyUser(nil, message: "Email or Password Empty.")
     } else {
-    UdacityClient.sharedInstance().authenticateWithLogin(usernameTextField.text!, passwordTextField.text!) { (success, errorString) in
-      performUIUpdatesOnMain {
-        if success {
-          self.completeLogin()
-          print("Login Success!")
-          
-          // reset textfields after successfully login.
-          self.resetControls()
-          
-        } else {
-          //self.displayError(errorString)
-          self.notifyUser(nil, message: "Invalid Email or Password.")
+      UdacityClient.sharedInstance().authenticateWithLogin(usernameTextField.text!, passwordTextField.text!) { (success, errorString) in
+        performUIUpdatesOnMain {
+          if success {
+            self.completeLogin()
+            print("Login Success!")
+            
+            // reset textfields after successfully login.
+            self.resetControls()
+            
+          } else {
+            //self.displayError(errorString)
+            self.notifyUser(nil, message: "Invalid Email or Password.")
+          }
         }
       }
     }
-    }
   }
-
+  
+  // Open Sign up page in Safari
+  @IBAction func signupPressed(_ sender: Any) {
+    let urlString = UdacityClient.Constants.SignupPath
+    let url = URL(string: urlString)
+    
+    if UIApplication.shared.canOpenURL(url!) {
+      UIApplication.shared.open(url!, options: [:], completionHandler: nil)
+    }
+    
+  }
+  
+  
   // MARK: Login
   
   private func completeLogin() {
@@ -73,7 +85,7 @@ class LoginViewController: UIViewController {
 // MARK: - LoginViewController (Configure UI)
 
 private extension LoginViewController {
-
+  
   func displayError(_ errorString: String?) {
     if let errorString = errorString {
       print(errorString)
@@ -89,5 +101,8 @@ private extension LoginViewController {
     alert.addAction(action)
     self.present(alert, animated: true, completion: nil)
   }
-
+  
+  
+  
+  
 }
