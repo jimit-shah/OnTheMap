@@ -18,11 +18,8 @@ class LoginViewController: UIViewController {
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var loginButton: UIButton!
   
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-  }
+  // MARK: Text Field Delegate object
+  let textFieldDelegate = TextFieldDelegate()
   
   // MARK: Actions
   
@@ -61,6 +58,12 @@ class LoginViewController: UIViewController {
   }
   
   
+  // MARK: Life Cycle
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    configureTextFields()
+  }
+  
   // MARK: Login
   
   private func completeLogin() {
@@ -90,6 +93,12 @@ private extension LoginViewController {
     if let errorString = errorString {
       print(errorString)
     }
+  }
+  
+  // MARK: configure
+  func configureTextFields() {
+    usernameTextField.delegate = textFieldDelegate
+    passwordTextField.delegate = textFieldDelegate
   }
   
   // MARK: Notify
