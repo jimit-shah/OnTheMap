@@ -214,7 +214,7 @@
                             <barButtonItem image="icon_addpin" id="yEL-g6-fF2">
                                 <connections>
                                     <action selector="postInformation:" destination="Lez-qt-ROq" id="2j8-MW-ThB"/>
-                                    <segue destination="zRu-sd-RG8" kind="show" id="COI-er-k7h"/>
+                                    <segue destination="zRu-sd-RG8" kind="presentation" id="COI-er-k7h"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="icon_refresh" id="cy7-hB-e6J"/>
@@ -356,6 +356,10 @@
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Find on the Map"/>
+                                        <connections>
+                                            <action selector="findOnMapPressed:" destination="R6r-js-IxE" eventType="touchUpInside" id="CMk-de-UIs"/>
+                                            <segue destination="TcT-ws-stR" kind="show" id="9Y5-Ky-4qE"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -373,7 +377,7 @@
                             <constraint firstItem="Q2R-gT-ZuC" firstAttribute="centerX" secondItem="nt6-J7-vW2" secondAttribute="centerX" id="vVY-gO-xT9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="P2G-v3-hMe">
+                    <navigationItem key="navigationItem" title="Add Location" id="P2G-v3-hMe">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="abC-pT-KWC">
                             <connections>
                                 <action selector="cancelButton:" destination="R6r-js-IxE" id="cij-cu-dFS"/>
@@ -388,6 +392,48 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4N6-pk-Dcy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="468.75" y="1836.25"/>
+        </scene>
+        <!--Location-->
+        <scene sceneID="nHC-qL-7w8">
+            <objects>
+                <viewController id="TcT-ws-stR" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="s3h-9A-UnS"/>
+                        <viewControllerLayoutGuide type="bottom" id="Qk8-nR-YCH"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="WyP-Aa-FgD">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Q5B-ja-9Rt">
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3mC-jX-gH4">
+                                <rect key="frame" x="10" y="509" width="300" height="34"/>
+                                <color key="backgroundColor" red="0.01051863842" green="0.70716160539999995" blue="0.89919906849999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="FINISH"/>
+                                <connections>
+                                    <action selector="findOnMapPressed:" destination="R6r-js-IxE" eventType="touchUpInside" id="wf1-Jk-fso"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Q5B-ja-9Rt" firstAttribute="leading" secondItem="WyP-Aa-FgD" secondAttribute="leading" id="0Hl-iv-hqh"/>
+                            <constraint firstAttribute="bottom" secondItem="Q5B-ja-9Rt" secondAttribute="bottom" id="0lg-ZM-vBo"/>
+                            <constraint firstItem="Qk8-nR-YCH" firstAttribute="top" secondItem="3mC-jX-gH4" secondAttribute="bottom" constant="25" id="6QU-xs-hQf"/>
+                            <constraint firstAttribute="trailing" secondItem="Q5B-ja-9Rt" secondAttribute="trailing" id="7gL-f7-xpn"/>
+                            <constraint firstAttribute="trailing" secondItem="3mC-jX-gH4" secondAttribute="trailing" constant="10" id="F2Q-LS-tfI"/>
+                            <constraint firstItem="3mC-jX-gH4" firstAttribute="leading" secondItem="WyP-Aa-FgD" secondAttribute="leading" constant="10" id="XQU-nt-nfk"/>
+                            <constraint firstItem="Q5B-ja-9Rt" firstAttribute="top" secondItem="s3h-9A-UnS" secondAttribute="bottom" id="gvv-b1-HbN"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Location" id="gV7-WV-42K"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wOe-rq-901" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1338.75" y="1835.9154929577464"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zC6-Oa-nG5">
