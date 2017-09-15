@@ -213,7 +213,6 @@
                         <rightBarButtonItems>
                             <barButtonItem image="icon_addpin" id="yEL-g6-fF2">
                                 <connections>
-                                    <action selector="postInformation:" destination="Lez-qt-ROq" id="2j8-MW-ThB"/>
                                     <segue destination="zRu-sd-RG8" kind="presentation" id="COI-er-k7h"/>
                                 </connections>
                             </barButtonItem>
@@ -357,8 +356,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="Find on the Map"/>
                                         <connections>
-                                            <action selector="findOnMapPressed:" destination="R6r-js-IxE" eventType="touchUpInside" id="CMk-de-UIs"/>
-                                            <segue destination="TcT-ws-stR" kind="show" id="9Y5-Ky-4qE"/>
+                                            <segue destination="TcT-ws-stR" kind="show" identifier="mapViewSegue" id="9Y5-Ky-4qE"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -396,7 +394,7 @@
         <!--Location-->
         <scene sceneID="nHC-qL-7w8">
             <objects>
-                <viewController id="TcT-ws-stR" sceneMemberID="viewController">
+                <viewController id="TcT-ws-stR" customClass="LocationViewController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="s3h-9A-UnS"/>
                         <viewControllerLayoutGuide type="bottom" id="Qk8-nR-YCH"/>
@@ -412,7 +410,7 @@
                                 <rect key="frame" x="10" y="509" width="300" height="34"/>
                                 <color key="backgroundColor" red="0.01051863842" green="0.70716160539999995" blue="0.89919906849999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="FINISH"/>
+                                <state key="normal" title="Finish"/>
                                 <connections>
                                     <action selector="findOnMapPressed:" destination="R6r-js-IxE" eventType="touchUpInside" id="wf1-Jk-fso"/>
                                 </connections>
@@ -430,6 +428,9 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Location" id="gV7-WV-42K"/>
+                    <connections>
+                        <outlet property="mapView" destination="Q5B-ja-9Rt" id="nj3-sM-cCZ"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wOe-rq-901" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -26,6 +26,7 @@
 		EF9D4C711F2E9B5500ECC6A5 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C701F2E9B5500ECC6A5 /* GCDBlackBox.swift */; };
 		EF9D4C731F2EB91100ECC6A5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C721F2EB91100ECC6A5 /* MapViewController.swift */; };
 		EF9D4C751F2EB95800ECC6A5 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C741F2EB95800ECC6A5 /* ListViewController.swift */; };
+		EFD54B761F6A548300FC443D /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD54B751F6A548300FC443D /* LocationViewController.swift */; };
 		EFDE500F1F319A9D009014AE /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDE500E1F319A9D009014AE /* BorderedButton.swift */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,7 @@
 		EF9D4C701F2E9B5500ECC6A5 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		EF9D4C721F2EB91100ECC6A5 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		EF9D4C741F2EB95800ECC6A5 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		EFD54B751F6A548300FC443D /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		EFDE500E1F319A9D009014AE /* BorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,6 +153,7 @@
 				EF3ECD971F36E514000A258E /* InfoPostingViewController.swift */,
 				EF3ECD991F36EA89000A258E /* StudentsTabBarController.swift */,
 				EF47780D1F67AAEE008671EF /* TextFieldDelegate.swift */,
+				EFD54B751F6A548300FC443D /* LocationViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				EF4777DB1F3AA3E6008671EF /* UdacityConstants.swift in Sources */,
 				EF9D4C751F2EB95800ECC6A5 /* ListViewController.swift in Sources */,
 				EF4777DD1F3BB052008671EF /* UdacityClient.swift in Sources */,
+				EFD54B761F6A548300FC443D /* LocationViewController.swift in Sources */,
 				EF9D4C731F2EB91100ECC6A5 /* MapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
