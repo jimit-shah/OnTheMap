@@ -12,10 +12,7 @@ import MapKit
 class LocationViewController: UIViewController {
   
   var geocoder: CLGeocoder?
-  //var latitude: CLLocationDegrees?
-  //var longitude: CLLocationDegrees?
   var userLocation: String?
-  var address: String?
   
   @IBOutlet weak var mapView: MKMapView!
   
@@ -23,11 +20,12 @@ class LocationViewController: UIViewController {
   // MARK: View Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    //mapView.delegate = self
+    mapView.delegate = self
     lookupGeocoding()
+    
   }
   
-  // MARK: Geocoding Function
+  // MARK: Forward Geocoding to get latitude and longitude based on user entry.
   func lookupGeocoding() {
     if geocoder == nil {
       geocoder = CLGeocoder()
@@ -39,71 +37,71 @@ class LocationViewController: UIViewController {
       let long = placemark?.location?.coordinate.longitude
       
       if let lat =  lat, let long = long {
-        
-        var annotations = [MKPointAnnotation]()
         self.reverseGeocoding(latitude: lat, longitude: long)
-        
-        let coordinates = CLLocationCoordinate2D(latitude: lat, longitude: long)
-        
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = coordinates
-        
-        
-        if let address = self.address {
-        annotation.title = address
-        }
-    
-        annotations.append(annotation)
-        
-        performUIUpdatesOnMain {
-          self.mapView.addAnnotations(annotations)
-          self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(CLLocationCoordinate2DMake(lat, long), 250, 250), animated: true)
-        }
-        
       }
     })
+
   }
   
-  
+  // MARK: reverseGeocoding for accuracy to save location.
   func reverseGeocoding(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
   
     let location = CLLocation(latitude: latitude, longitude: longitude)
     geocoder?.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
+      
       let placemark = placemarks?.first
-      let streetNumber = placemark?.subThoroughfare
-      let street = placemark?.thoroughfare
+      //let streetNumber = placemark?.subThoroughfare
+      //let street = placemark?.thoroughfare
       let city = placemark?.locality
       let state = placemark?.administrativeArea
       let zip = placemark?.postalCode
+      let country = placemark?.isoCountryCode
       
       var address: String? = ""
+      let comma: String = ", "
+      let space: String = " "
+      
+      /*
       if let streetNumber = streetNumber {
-        address?.append(streetNumber)
+        address?.append("\(streetNumber) ")
       }
       if let street = street {
-        address?.append(street)
+        address?.append("\(street)\(comma)")
       }
+       */
       
-      if let city = city {
-        address?.append(city)
+      func appendAddress(_ optionalString: String?, _ seprator: String) {
+        if let optionalString = optionalString {
+          address?.append("\(optionalString)\(seprator)")
+        }
       }
+
+      appendAddress(city, comma)
+      appendAddress(state, space)
+      appendAddress(zip, comma )
+      appendAddress(country, "")
       
-      if let state = state {
-        address?.append(state)
-      }
-      
-      if let zip = zip {
-        address?.append(zip)
-      }
-      if let address = address {
-        print("address: \(address)")
-        self.address = address
-        //let address = "\(streetNumber!) \(street!) \(city!) \(state!) \(zip!)"
-      }
-      
+      // Pass values to generate MapView
+      self.renderMapWithPinView(latitude: latitude, longitude: longitude, title: address!)
     })
     
   }
+  
+  // MARK: renderMapWithPinView
+  func renderMapWithPinView(latitude: CLLocationDegrees, longitude: CLLocationDegrees, title: String) {
+    let annotation = MKPointAnnotation()
+    let coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+    let regionRadius: CLLocationDistance  = 250
+    
+    annotation.coordinate = coordinate
+    annotation.title = title
+    
+    performUIUpdatesOnMain {
+      self.mapView.addAnnotation(annotation)
+      self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(coordinate, regionRadius, regionRadius), animated: true)
+    }
+  }
+  
   
 }
 
@@ -120,13 +118,10 @@ extension LocationViewController: MKMapViewDelegate {
       pinAnnotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
       pinAnnotationView!.canShowCallout = true
       pinAnnotationView!.pinTintColor = .red
-      pinAnnotationView!.rightCalloutAccessoryView = UIButton(type: .detailDisclosure)
     } else {
       pinAnnotationView?.annotation = annotation
     }
     return pinAnnotationView
   }
-  
-
   
 }

@@ -405,9 +405,6 @@
                         <subviews>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Q5B-ja-9Rt">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
-                                <connections>
-                                    <outlet property="delegate" destination="TcT-ws-stR" id="sgi-Rw-OIu"/>
-                                </connections>
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3mC-jX-gH4">
                                 <rect key="frame" x="10" y="509" width="300" height="34"/>
