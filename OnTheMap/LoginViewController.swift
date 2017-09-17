@@ -102,6 +102,7 @@ private extension LoginViewController {
   }
   
   // MARK: Notify
+  
   func notifyUser(_ title: String?, message: String) -> Void
   {
     let alert = UIAlertController(title: title,

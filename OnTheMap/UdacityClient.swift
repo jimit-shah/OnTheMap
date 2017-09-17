@@ -18,9 +18,13 @@ class UdacityClient : NSObject {
   
   // shared session
   var session = URLSession.shared
+  //var udacityStudent = UdacityStudent
   
   // authentication state
   var sessionID: String? = nil
+  // udacityStudnet: 
+  
+  //[]
   
   // MARK: Initializers
   

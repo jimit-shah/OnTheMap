@@ -20,6 +20,10 @@ extension UdacityClient {
       
       if success {
         self.sessionID = sessionID
+        //get the public onformation -> first name and last name 
+        
+        // object of uDacityStudent -> 
+        // .shared.udacitystudent = uDacityStudent
         print("SessionID: \(sessionID!)")
         completionHandlerForAuth(success, nil)
       } else {

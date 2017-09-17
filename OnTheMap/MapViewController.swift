@@ -13,54 +13,43 @@ import MapKit
 
 class MapViewController: UIViewController {
   
-  var locations = [ParseStudent]()
+  // MARK: Outlets
   
   @IBOutlet weak var mapView: MKMapView!
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
+  //MARK: View Lifecycle
+  
+  func addAnnotationsToMapView(locations: [ParseStudent]) {
     
-    ParseClient.sharedInstance().getStudentLocations{ (students, error) in
+    var annotations = [MKPointAnnotation]()
+    
+    for location in locations {
       
-      var annotations = [MKPointAnnotation]()
+      let lat = CLLocationDegrees(location.latitude)
+      let long = CLLocationDegrees(location.longitude)
       
-      if let students = students {
-        
-        for location in students {
-          
-          let lat = CLLocationDegrees(location.latitude)
-          let long = CLLocationDegrees(location.longitude)
-          
-          // The lat and long are used to create a CLLocationCoordinates2D instance.
-          let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
-          
-          let first = location.firstName!
-          let last = location.lastName!
-          let mediaURL = location.mediaURL
-          
-          // Here we create the annotation and set its coordiate, title, and subtitle properties
-          let annotation = MKPointAnnotation()
-          annotation.coordinate = coordinate
-          annotation.title = "\(first) \(last)"
-          annotation.subtitle = mediaURL
-          
-          annotations.append(annotation)
-        }
-        
-        performUIUpdatesOnMain {
-          // Finally we place the annotation in an array of annotations.
-          self.mapView.addAnnotations(annotations)
-        }
-      } else {
-        print(error ?? "empty error")
-      }
+      // The lat and long are used to create a CLLocationCoordinates2D instance.
+      let coordinate = CLLocationCoordinate2D(latitude: lat, longitude: long)
+      
+      let first = location.firstName!
+      let last = location.lastName!
+      let mediaURL = location.mediaURL
+      
+      // Here we create the annotation and set its coordiate, title, and subtitle properties
+      let annotation = MKPointAnnotation()
+      annotation.coordinate = coordinate
+      annotation.title = "\(first) \(last)"
+      annotation.subtitle = mediaURL
+      annotations.append(annotation)
     }
     
+    performUIUpdatesOnMain {
+      // Finally we place the annotation in an array of annotations.
+      self.mapView.addAnnotations(annotations)
+    }
   }
   
 }
-
-
 
 // MARK: - MKMapViewDelegate
 

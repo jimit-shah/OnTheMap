@@ -17,7 +17,7 @@ class LocationViewController: UIViewController {
   @IBOutlet weak var mapView: MKMapView!
   
   
-  // MARK: View Life Cycle
+  // MARK: Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     mapView.delegate = self
@@ -50,8 +50,6 @@ class LocationViewController: UIViewController {
     geocoder?.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
       
       let placemark = placemarks?.first
-      //let streetNumber = placemark?.subThoroughfare
-      //let street = placemark?.thoroughfare
       let city = placemark?.locality
       let state = placemark?.administrativeArea
       let zip = placemark?.postalCode
@@ -60,15 +58,6 @@ class LocationViewController: UIViewController {
       var address: String? = ""
       let comma: String = ", "
       let space: String = " "
-      
-      /*
-      if let streetNumber = streetNumber {
-        address?.append("\(streetNumber) ")
-      }
-      if let street = street {
-        address?.append("\(street)\(comma)")
-      }
-       */
       
       func appendAddress(_ optionalString: String?, _ seprator: String) {
         if let optionalString = optionalString {
@@ -87,6 +76,7 @@ class LocationViewController: UIViewController {
     
   }
   
+  
   // MARK: renderMapWithPinView
   func renderMapWithPinView(latitude: CLLocationDegrees, longitude: CLLocationDegrees, title: String) {
     let annotation = MKPointAnnotation()
@@ -102,9 +92,9 @@ class LocationViewController: UIViewController {
     }
   }
   
-  
 }
 
+// MARK: MKMapViewDelegate
 
 extension LocationViewController: MKMapViewDelegate {
   
@@ -125,3 +115,5 @@ extension LocationViewController: MKMapViewDelegate {
   }
   
 }
+
+

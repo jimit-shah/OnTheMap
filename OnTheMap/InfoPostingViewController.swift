@@ -8,9 +8,10 @@
 
 import UIKit
 
+// MARK: InfoPostingViewController: UIViewController
+
 class InfoPostingViewController: UIViewController {
   
-  // MARK: Properties
   
   // MARK: Outlets
   
@@ -33,6 +34,7 @@ class InfoPostingViewController: UIViewController {
     
   }
   
+  // MARK: Prepare for Segue
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "mapViewSegue" {
       guard self.locationTextField != nil else {

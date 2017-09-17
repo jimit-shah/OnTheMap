@@ -17,28 +17,16 @@ class ListViewController: UIViewController {
   var firstName = "No First Name"
   var lastName = "No Last Name"
   
+  // MARK: Outlets
   @IBOutlet weak var studentsTableView: UITableView!
   
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-  }
-  
+  // MARK: Life cycle
   override func viewWillAppear(_ animated: Bool) {
+    
     super.viewWillAppear(animated)
     
-    ParseClient.sharedInstance().getStudentLocations{ (students, error) in
-      
-      if let students = students {
-        self.students = students
-        performUIUpdatesOnMain {
-          self.studentsTableView.reloadData()
-        }
-      } else {
-        print(error ?? "empty error")
-      }
-    }
-    
+    self.studentsTableView.reloadData()
   }
   
 }
@@ -104,5 +92,6 @@ private extension ListViewController {
     self.present(alert, animated: true, completion: nil)
   }
   
-  
 }
+  
+
