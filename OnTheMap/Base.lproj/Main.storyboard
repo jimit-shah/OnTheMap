@@ -216,7 +216,11 @@
                                     <segue destination="zRu-sd-RG8" kind="presentation" id="COI-er-k7h"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="icon_refresh" id="cy7-hB-e6J"/>
+                            <barButtonItem image="icon_refresh" id="cy7-hB-e6J">
+                                <connections>
+                                    <action selector="refreshPressed:" destination="Lez-qt-ROq" id="PpJ-Uz-lVR"/>
+                                </connections>
+                            </barButtonItem>
                         </rightBarButtonItems>
                     </navigationItem>
                     <tabBar key="tabBar" contentMode="scaleToFill" id="5AA-27-ZR0">

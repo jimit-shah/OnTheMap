@@ -16,15 +16,17 @@ extension UdacityClient {
   // MARK: Authentication (POST) Methods
   
   func authenticateWithLogin(_ username: String, _ password: String, _ completionHandlerForAuth: @escaping (_ success: Bool, _ errorString: String?)-> Void) {
-    self.postSessionId(username, password) { (success, sessionID, errorString) in
+    self.postSessionId(username, password) { (success, sessionID, uniqueKey, errorString) in
       
       if success {
         self.sessionID = sessionID
-        //get the public onformation -> first name and last name 
+        self.userID = uniqueKey
+        //get the public onformation -> first name and last name
         
-        // object of uDacityStudent -> 
+        // object of uDacityStudent ->
         // .shared.udacitystudent = uDacityStudent
         print("SessionID: \(sessionID!)")
+        print("UniqueKey(UserID): \(uniqueKey!)")
         completionHandlerForAuth(success, nil)
       } else {
         completionHandlerForAuth(success, errorString)
@@ -33,7 +35,7 @@ extension UdacityClient {
     }
   }
   
-  func postSessionId(_ username: String, _ password: String, _ completionHandlerForSession: @escaping (_ success: Bool, _ sessionID: String?, _ errorString: String?) -> Void) {
+  func postSessionId(_ username: String, _ password: String, _ completionHandlerForSession: @escaping (_ success: Bool, _ sessionID: String?, _ uniqueKey: String?, _ errorString: String?) -> Void) {
     
     
     let parameters = [String:AnyObject]()
@@ -44,16 +46,32 @@ extension UdacityClient {
       
       if let error = error {
         print(error)
-        completionHandlerForSession(false, nil, "Login Failed (Session ID).")
-      } else if let session = results?[UdacityClient.JSONResponseKeys.Session] as? [String:AnyObject] {
+        completionHandlerForSession(false, nil, nil, "Login Failed (Session ID).")
+      } else if let session = results?[UdacityClient.JSONResponseKeys.Session] as? [String:AnyObject], let account = results?[UdacityClient.JSONResponseKeys.Account] as? [String:AnyObject] {
         let sessionID = session[UdacityClient.JSONResponseKeys.SessionID] as? String
-        completionHandlerForSession(true, sessionID, nil)
+        let uniqueKey = account[UdacityClient.JSONResponseKeys.UniqueKey] as? String
+        completionHandlerForSession(true, sessionID, uniqueKey, nil)
       } else {
         print("Could not find \(UdacityClient.JSONResponseKeys.SessionID) in \(results!)")
-        completionHandlerForSession(false, nil, "Login Failed (Session ID).")
+        completionHandlerForSession(false, nil, nil, "Login Failed (Session ID).")
       }
     }
   }
+  
+  // MAR: Public User Data (GET) Method
+  func getUserInfo(_ userID: String, _ completionHandlerForGetUserInfo: @escaping (_ success: Bool, _ userData: UdacityStudent?, _ errorString: String?) -> Void) {
+    let parameters = [String:AnyObject]()
+    
+    let _ = taskForGETMethod(Methods.Get, parameters: parameters as [String:AnyObject]) { ( results, error) in
+    
+      if let error = error {
+        print(error)
+        completionHandlerForGetUserInfo(false, nil, "Couldn't Get User Info.")
+      }
+    } //WORK...IN...Process...
+  
+  }
+  
   
   // MARK: Logout (DELETE) Method
   

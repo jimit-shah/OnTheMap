@@ -18,18 +18,55 @@ class UdacityClient : NSObject {
   
   // shared session
   var session = URLSession.shared
-  //var udacityStudent = UdacityStudent
   
   // authentication state
   var sessionID: String? = nil
-  // udacityStudnet: 
+  var userID: String? = nil
+  var udacityStudnet: UdacityStudent? = nil
   
-  //[]
   
   // MARK: Initializers
   
   override init() {
     super.init()
+  }
+  
+  // MARK: GET
+  func taskForGETMethod(_ method: String, parameters: [String:AnyObject], completionHandlerForGET: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    //var parametersWith = parameters
+    
+    let request = NSMutableURLRequest(url: URLFromParameters(parameters, withPathExtension: method))
+    request.httpMethod = "GET"
+    
+    let task = session.dataTask(with: request as URLRequest) { data, response, error in
+      
+      guard error == nil else {
+        print("Error: \(error!)")
+        return
+      }
+      
+      guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+        print("Your request returned a status code other than 2xx!")
+        return
+      }
+      
+      guard let data = data else {
+        print("No data was returned by the request!")
+        return
+      }
+      
+      let range = Range(5..<data.count)
+      
+      let newData = data.subdata(in: range) /* subset response data! */
+      
+      /* 5/6. Parse the data and use the data (happens in completion handler) */
+      self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completionHandlerForGET)
+      
+    }
+    
+    task.resume()
+    
+    return task
   }
   
   
@@ -39,7 +76,7 @@ class UdacityClient : NSObject {
     
     /* 1. Set the parameters */
     var parametersWithApiKey = parameters
-//    parametersWithApiKey[ParameterKeys.ApiKey] = Constants.ApiKey as AnyObject?
+    //    parametersWithApiKey[ParameterKeys.ApiKey] = Constants.ApiKey as AnyObject?
     
     /* 2/3. Build the URL, Configure the request */
     let request = NSMutableURLRequest(url: URLFromParameters(parametersWithApiKey, withPathExtension: method))
@@ -115,7 +152,7 @@ class UdacityClient : NSObject {
         sendError("There was an error with your request: \(error!)")
         return
       }
-
+      
       guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
         sendError("Your request returned a status code other than 2xx!")
         return
@@ -125,7 +162,7 @@ class UdacityClient : NSObject {
         sendError("No data was returned by the request!")
         return
       }
-
+      
       let range = Range(5..<data.count)
       let newData = data.subdata(in: range)
       
@@ -187,6 +224,6 @@ class UdacityClient : NSObject {
       static var sharedInstance = UdacityClient()
     }
     return Singleton.sharedInstance
-}
+  }
   
 }

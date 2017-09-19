@@ -12,8 +12,13 @@ import UIKit
 
 class StudentsTabBarController: UITabBarController {
   
-
   // MARK: Actions
+  
+  
+  @IBAction func refreshPressed(_ sender: Any) {
+    refreshData()
+  }
+  
   @IBAction func logout(_ sender: Any) {
     
     UdacityClient.sharedInstance().sessionLogout{ (success, errorString) in
@@ -46,9 +51,18 @@ class StudentsTabBarController: UITabBarController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+  }
+  
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    refreshData()
+  }
+  
+  func refreshData() {
     let mapViewController = self.viewControllers?[0] as! MapViewController
     let listViewController = self.viewControllers?[1] as! ListViewController
+    
     
     ParseClient.sharedInstance().getStudentLocations{ (students, error) in
       
@@ -56,16 +70,15 @@ class StudentsTabBarController: UITabBarController {
         
         performUIUpdatesOnMain {
           mapViewController.addAnnotationsToMapView(locations: students)
-          //listViewController.loadDataInTableView(locations: students)
           listViewController.students = students
         }
       } else {
-        print(error ?? "Could not find any Student Locations.")
+        //print(error ?? "Could not find any Student Locations.")
+        self.notifyUser("No Data Found", message: (error?.localizedDescription)!)
       }
       
     }
   }
-  
   
 }
 
@@ -81,6 +94,6 @@ private extension StudentsTabBarController {
     let action = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
     alert.addAction(action)
     self.present(alert, animated: true, completion: nil)
-}
-
+  }
+  
 }
