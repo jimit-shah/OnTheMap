@@ -417,6 +417,7 @@
                                 <state key="normal" title="Finish"/>
                                 <connections>
                                     <action selector="findOnMapPressed:" destination="R6r-js-IxE" eventType="touchUpInside" id="wf1-Jk-fso"/>
+                                    <action selector="finishPressed:" destination="TcT-ws-stR" eventType="touchUpInside" id="PN3-6t-lV7"/>
                                 </connections>
                             </button>
                         </subviews>

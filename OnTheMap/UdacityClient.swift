@@ -21,7 +21,7 @@ class UdacityClient : NSObject {
   
   // authentication state
   var sessionID: String? = nil
-  var userID: Int? = nil
+  var userID: String? = nil
   var udacityStudnet: UdacityStudent? = nil
   
   
@@ -33,14 +33,14 @@ class UdacityClient : NSObject {
   
   // MARK: GET
   func taskForGETMethod(_ method: String, parameters: [String:AnyObject], completionHandlerForGET: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
-    //var parametersWith = parameters
+    
     
     let request = NSMutableURLRequest(url: URLFromParameters(parameters, withPathExtension: method))
     request.httpMethod = "GET"
     
     let task = session.dataTask(with: request as URLRequest) { data, response, error in
       
-      guard error == nil else {
+      guard (error == nil) else {
         print("Error: \(error!)")
         return
       }
@@ -213,6 +213,9 @@ class UdacityClient : NSObject {
       let queryItem = URLQueryItem(name: key, value: "\(value)")
       components.queryItems!.append(queryItem)
     }
+    
+    // TESTING URL
+    print("url: \(String(describing: components.url))")
     
     return components.url!
   }

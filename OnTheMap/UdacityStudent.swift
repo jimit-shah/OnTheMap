@@ -28,6 +28,8 @@ struct UdacityStudent {
   
   static func studentInfoFromResults(_ result: [String:AnyObject]) -> UdacityStudent {
     var student = UdacityStudent(dictionary: [:])
+    print("Result in UdacityStudent: \(result)")
+    
     student = UdacityStudent(dictionary: result)
     return student
   }

@@ -13,17 +13,47 @@ class LocationViewController: UIViewController {
   
   var geocoder: CLGeocoder?
   var userLocation: String?
+  var student: UdacityStudent?
   
   @IBOutlet weak var mapView: MKMapView!
+  
+  @IBAction func finishPressed(_ sender: Any) {
+    // Get Student's Public Data
+    UdacityClient.sharedInstance().getUserInfo { (result, error) in
+      
+      if let result = result {
+        
+        performUIUpdatesOnMain {
+          
+          print("Student Info: \(result)")
+          self.student = result
+        }
+      } else {
+        print(error ?? "empty error")
+      }
+    }
+    
+  }
   
   
   // MARK: Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
     mapView.delegate = self
+    
+    // Call Geacoding
     lookupGeocoding()
     
+    
+    
   }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    
+  }
+  
   
   // MARK: Forward Geocoding to get latitude and longitude based on user entry.
   func lookupGeocoding() {
@@ -40,12 +70,12 @@ class LocationViewController: UIViewController {
         self.reverseGeocoding(latitude: lat, longitude: long)
       }
     })
-
+    
   }
   
   // MARK: reverseGeocoding for accuracy to save location.
   func reverseGeocoding(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
-  
+    
     let location = CLLocation(latitude: latitude, longitude: longitude)
     geocoder?.reverseGeocodeLocation(location, completionHandler: { (placemarks, error) in
       
@@ -64,7 +94,7 @@ class LocationViewController: UIViewController {
           address?.append("\(optionalString)\(seprator)")
         }
       }
-
+      
       appendAddress(city, comma)
       appendAddress(state, space)
       appendAddress(zip, comma )

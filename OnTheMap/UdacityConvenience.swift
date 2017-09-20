@@ -37,7 +37,7 @@ extension UdacityClient {
   
   // MARK: Session (POST) Method
   
-  func postSessionId(_ username: String, _ password: String, _ completionHandlerForSession: @escaping (_ success: Bool, _ sessionID: String?, _ uniqueKey: Int?, _ errorString: String?) -> Void) {
+  func postSessionId(_ username: String, _ password: String, _ completionHandlerForSession: @escaping (_ success: Bool, _ sessionID: String?, _ uniqueKey: String?, _ errorString: String?) -> Void) {
     
     
     let parameters = [String:AnyObject]()
@@ -50,8 +50,13 @@ extension UdacityClient {
         print(error)
         completionHandlerForSession(false, nil, nil, "Login Failed (Session ID).")
       } else if let session = results?[UdacityClient.JSONResponseKeys.Session] as? [String:AnyObject], let account = results?[UdacityClient.JSONResponseKeys.Account] as? [String:AnyObject] {
+        
         let sessionID = session[UdacityClient.JSONResponseKeys.SessionID] as? String
-        let uniqueKey = account[UdacityClient.JSONResponseKeys.UniqueKey] as? Int
+        let uniqueKey = account[UdacityClient.JSONResponseKeys.UniqueKey] as? String
+        
+        print("SessionID = \(sessionID!)")
+        print("UniqueKey = \(uniqueKey!)")
+        
         completionHandlerForSession(true, sessionID, uniqueKey, nil)
       } else {
         print("Could not find \(UdacityClient.JSONResponseKeys.SessionID) in \(results!)")
@@ -62,24 +67,27 @@ extension UdacityClient {
   
   // MARK: Public User Data (GET) Method
   
-  func getUserInfo(_ userID: String, _ completionHandlerForGetUserInfo: @escaping (_ result: Bool, _ result: UdacityStudent?, _ errorString: NSError?) -> Void) {
+  func getUserInfo(_ completionHandlerForGetUserInfo: @escaping (_ result: UdacityStudent?, _ errorString: NSError?) -> Void) {
     
     let parameters = [String:AnyObject]()
     
     var mutableMethod: String = Methods.Get
-    mutableMethod = substituteKeyInMethod(mutableMethod, key: UdacityClient.URLKeys.UserID, value: String(UdacityClient.sharedInstance().userID!))!
+    mutableMethod = substituteKeyInMethod(mutableMethod, key: UdacityClient.URLKeys.UserID, value: UdacityClient.sharedInstance().userID!)!
     
     let _ = taskForGETMethod(mutableMethod, parameters: parameters as [String:AnyObject]) { ( results, error) in
     
       if let error = error {
         print(error)
-        completionHandlerForGetUserInfo(false, nil, error)
+        completionHandlerForGetUserInfo(nil, error)
       } else {
         if let results = results?[UdacityClient.JSONResponseKeys.UserResult] as? [String:AnyObject] {
+          print("Result: \(results)")
             let student = UdacityStudent.studentInfoFromResults(results)
-                  completionHandlerForGetUserInfo(true, student, nil)
+          
+          print("Student: \(student)")
+                  completionHandlerForGetUserInfo(student, nil)
         } else {
-          completionHandlerForGetUserInfo(false, nil, NSError(domain: "getUserInfo parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "could not parse getUserInfo"]))
+          completionHandlerForGetUserInfo(nil, NSError(domain: "getUserInfo parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "could not parse getUserInfo"]))
         }
       }
     }
