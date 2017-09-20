@@ -24,15 +24,10 @@ struct UdacityStudent {
     userID = dictionary[UdacityClient.JSONResponseKeys.UniqueKey] as! String
     firstName = dictionary[UdacityClient.JSONResponseKeys.FirstName] as! String
     lastName = dictionary[UdacityClient.JSONResponseKeys.LastName] as! String
-    
-    //mapString = dictionary[UdacityClient.JSONResponseKeys.mapString] as? String
-    //mediaURL = dictionary[UdacityClient.JSONResponseKeys.Url] as? String
-    //latitude = dictionary[UdacityClient.JSONResponseKeys.Latitude] as? Double
-    //longitude = dictionary[UdacityClient.JSONResponseKeys.Longitude] as? Double
   }
   
-  func studentInformation(_ result: [String:AnyObject]) -> UdacityStudent {
-    var student: UdacityStudent
+  static func studentInfoFromResults(_ result: [String:AnyObject]) -> UdacityStudent {
+    var student = UdacityStudent(dictionary: [:])
     student = UdacityStudent(dictionary: result)
     return student
   }
