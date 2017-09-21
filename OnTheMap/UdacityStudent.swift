@@ -14,22 +14,15 @@ struct UdacityStudent {
   let firstName: String
   let lastName: String
   
-  //let mapString: String?
-  //let mediaURL: String?
-  //let latitude: Double?
-  //let longitude: Double?
-  
   // MARK: Initializers
   init(dictionary: [String:AnyObject]) {
     userID = dictionary[UdacityClient.JSONResponseKeys.UniqueKey] as! String
     firstName = dictionary[UdacityClient.JSONResponseKeys.FirstName] as! String
     lastName = dictionary[UdacityClient.JSONResponseKeys.LastName] as! String
   }
-  
+  // Method to initialize and return data.
   static func studentInfoFromResults(_ result: [String:AnyObject]) -> UdacityStudent {
-    var student = UdacityStudent(dictionary: [:])
-    print("Result in UdacityStudent: \(result)")
-    
+    let student: UdacityStudent
     student = UdacityStudent(dictionary: result)
     return student
   }

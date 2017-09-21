@@ -9,8 +9,12 @@
 import UIKit
 import MapKit
 
+
+// MARK: LocationViewController: UIViewController
+
 class LocationViewController: UIViewController {
   
+  // MARK: Properties
   var geocoder: CLGeocoder?
   var userLocation: String?
   var student: UdacityStudent?
@@ -18,16 +22,15 @@ class LocationViewController: UIViewController {
   @IBOutlet weak var mapView: MKMapView!
   
   @IBAction func finishPressed(_ sender: Any) {
+    
     // Get Student's Public Data
     UdacityClient.sharedInstance().getUserInfo { (result, error) in
       
       if let result = result {
+        self.student = result
         
-        performUIUpdatesOnMain {
-          
-          print("Student Info: \(result)")
-          self.student = result
-        }
+        print("Student Info: \(result)")
+        
       } else {
         print(error ?? "empty error")
       }
