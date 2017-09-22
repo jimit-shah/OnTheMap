@@ -30,7 +30,8 @@ extension ParseClient {
     
     // MARK: Student Location
     static let StudentLocation = "/StudentLocation"
-    //static let StudentLocation =  "/StudentLocation?where={\"uniqueKey\":value}" /* NOTE SURE ABOUT THIS */
+    //static let StudentLocationForStudent =  "/StudentLocation?where={\"uniqueKey\":value}" /* NOTE SURE ABOUT THIS */
+    
   }
   
   // MARK: URL Keys
@@ -44,6 +45,7 @@ extension ParseClient {
     static let ApplicationID = "X-Parse-Application-Id"
     static let SessionID = "session_id"
     static let RequestToken = "request_token"
+    static let Where = "where"
     static let Query = "query"
     static let Limit = "limit"
     static let Order = "order"
@@ -74,6 +76,7 @@ extension ParseClient {
     static let StudentLatitude = "latitude"
     static let StudentLongitude = "longitude"
     static let StudentResults = "results"
+  
   }
   
   

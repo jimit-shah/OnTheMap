@@ -18,6 +18,8 @@ struct ParseStudent {
   let mediaURL: String?
   let latitude: Double
   let longitude: Double
+  let mapString: String?
+  let objectID: String?
   
   // MARK: Initializers
   init(dictionary: [String:AnyObject]) {
@@ -26,6 +28,8 @@ struct ParseStudent {
     mediaURL = dictionary[ParseClient.JSONResponseKeys.StudentMediaURL] as? String
     latitude = dictionary[ParseClient.JSONResponseKeys.StudentLatitude] as! Double
     longitude = dictionary[ParseClient.JSONResponseKeys.StudentLongitude] as! Double
+    mapString = dictionary[ParseClient.JSONResponseKeys.StudentMapString] as? String
+    objectID = dictionary[ParseClient.JSONResponseKeys.StudentObjectId] as? String
   }
   
   static func studentsFromResults(_ results: [[String:AnyObject]]) -> [ParseStudent] {
@@ -43,6 +47,11 @@ struct ParseStudent {
     }
     
     return students
+  }
+  
+  // function to get and store result for only one student
+  static func studentFromResults(_ results: [String:AnyObject]) -> ParseStudent {
+    return ParseStudent(dictionary: results)
   }
   
 }

@@ -35,6 +35,30 @@ extension ParseClient {
     
   }
   
+  func getStudentLocation(_ userID: String, _ completionHandlerForStudentLocation: @escaping (_ result: ParseStudent?, _ error: NSError?) -> Void) {
+    
+    var parametersWithKeys = [String:AnyObject]()
+    parametersWithKeys[ParameterKeys.Where] = "uniqueKey:\(userID)" as AnyObject?
+    
+    let _ = taskForGETMethod(Methods.StudentLocation, parameters: parametersWithKeys) { (results, error) in
+      
+      if let error = error {
+        completionHandlerForStudentLocation(nil, error)
+      } else {
+        
+        if let results = results?[ParseClient.JSONResponseKeys.StudentResults] as? [[String:AnyObject]] {
+          
+          // only select first location if multiple records are found for a user.
+          if let result = results.first {
+            let student = ParseStudent.studentFromResults(result)
+            completionHandlerForStudentLocation(student, nil)
+          }
+        } else {
+          completionHandlerForStudentLocation(nil, NSError(domain: "getStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse getStudentLocation"]))
+        }
+      }
+    }
+  }
   
   
 }

@@ -17,19 +17,41 @@ class LocationViewController: UIViewController {
   // MARK: Properties
   var geocoder: CLGeocoder?
   var userLocation: String?
-  var student: UdacityStudent?
+  var student: ParseStudent?
   
   @IBOutlet weak var mapView: MKMapView!
   
   @IBAction func finishPressed(_ sender: Any) {
     
     // Get Student's Public Data
-    UdacityClient.sharedInstance().getUserInfo { (result, error) in
+    UdacityClient.sharedInstance().getUserInfo { (student, error) in
       
-      if let result = result {
-        self.student = result
+      if let student = student {
+        //self.student = student
         
-        print("Student Info: \(result)")
+        print("Student First: \(student.firstName) LastName: \(student.lastName)")
+        print("Student Info: \(student)")
+        ParseClient.sharedInstance().getStudentLocation(student.userID, { (result, error) in
+          /*
+           "objectId": "pIA79QIzdX",
+           "mapString": "Mountain View, CA",
+           "updatedAt": "2016-06-29T23:12:10.552Z",
+           "mediaURL": "www.facebook.com",
+           "createdAt": "2016-06-29T23:12:10.552Z",
+           "lastName": "1234",
+           "uniqueKey": "1234",
+           "firstName": "Test",
+           "latitude": 37.39008,
+           "longitude": -122.0813919
+ */
+          if let result = result {
+            self.student = result
+            print("Location Detail Found: \(result)")
+          } else {
+            print("No location Data found")
+          }
+          
+        })
         
       } else {
         print(error ?? "empty error")
