@@ -20,8 +20,8 @@ class UdacityClient : NSObject {
   var session = URLSession.shared
   
   // authentication state
-  var sessionID: String? = nil
-  var userID: String? = nil
+ // var sessionID: String? = nil
+  //var userID: String? = nil
   var udacityStudnet: UdacityStudent? = nil
   
   

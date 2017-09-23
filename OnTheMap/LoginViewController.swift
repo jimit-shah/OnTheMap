@@ -39,7 +39,8 @@ class LoginViewController: UIViewController {
             
           } else {
             //self.displayError(errorString)
-            self.notifyUser(nil, message: "Invalid Email or Password.")
+            //self.notifyUser(nil, message: "Invalid Email or Password.")
+            self.notify(nil, message: "Invalid Email or Password.")
           }
         }
       }
@@ -113,7 +114,17 @@ private extension LoginViewController {
     self.present(alert, animated: true, completion: nil)
   }
   
+}
+
+extension UIViewController {
   
-  
-  
+  func notify( _ title: String?, message: String) -> Void
+  {
+    let alert = UIAlertController(title: title,
+                                  message: message,
+                                  preferredStyle: UIAlertControllerStyle.alert)
+    let action = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
+    alert.addAction(action)
+    self.present(alert, animated: true, completion: nil)
+  }
 }

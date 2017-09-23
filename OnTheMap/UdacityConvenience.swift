@@ -19,8 +19,10 @@ extension UdacityClient {
     self.postSessionId(username, password) { (success, sessionID, uniqueKey, errorString) in
       
       if success {
-        self.sessionID = sessionID
-        self.userID = uniqueKey
+        //self.sessionID = sessionID
+        //self.userID = uniqueKey
+        ParseClient.sharedInstance().sessionID = sessionID
+        ParseClient.sharedInstance().userID = uniqueKey
         //get the public onformation -> first name and last name
         
         // object of uDacityStudent ->
@@ -65,14 +67,14 @@ extension UdacityClient {
     }
   }
   
-  // MARK: Public User Data (GET) Method
+  // MARK: Udacity Public User Data (GET) Method 
   
   func getUserInfo(_ completionHandlerForGetUserInfo: @escaping (_ result: UdacityStudent?, _ errorString: NSError?) -> Void) {
     
     let parameters = [String:AnyObject]()
     
     var mutableMethod: String = Methods.Get
-    mutableMethod = substituteKeyInMethod(mutableMethod, key: UdacityClient.URLKeys.UserID, value: UdacityClient.sharedInstance().userID!)!
+    mutableMethod = substituteKeyInMethod(mutableMethod, key: UdacityClient.URLKeys.UserID, value: ParseClient.sharedInstance().userID!)!
     
     let _ = taskForGETMethod(mutableMethod, parameters: parameters as [String:AnyObject]) { ( results, error) in
     
@@ -101,7 +103,7 @@ extension UdacityClient {
       
       if success {
         print("Logout Success for SessionID: \(sessionID!)")
-        self.sessionID = nil
+        ParseClient.sharedInstance().sessionID = nil
         completionHandlerForLogout(success, errorString)
       } else {
         completionHandlerForLogout(success, errorString)
