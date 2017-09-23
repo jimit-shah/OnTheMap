@@ -64,14 +64,16 @@ class StudentsTabBarController: UITabBarController {
     let mapViewController = self.viewControllers?[0] as! MapViewController
     let listViewController = self.viewControllers?[1] as! ListViewController
     
-    
     ParseClient.sharedInstance().getStudentLocations{ (students, error) in
       
       if let students = students {
+        listViewController.students = students
         
         performUIUpdatesOnMain {
           mapViewController.addAnnotationsToMapView(locations: students)
-          listViewController.students = students
+          //call the reload data
+          listViewController.studentsTableView.reloadData()
+          
         }
       } else {
         //print(error ?? "Could not find any Student Locations.")

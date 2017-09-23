@@ -65,22 +65,33 @@ extension ParseClient {
   }
   
   // MARK: POST Convenience Methods
-  
+ /*
   func postToStudentLocation(_ student: ParseStudent, _ completionHandlerForLocationPost: @escaping (_ result: Int?, _ error: NSError?) -> Void) {
     let parameters = [String:AnyObject]()
     
-//    let userID = ParseClient.sharedInstance().userID as! String
-//    let dictionary: [String:AnyObject] = [
-//      "\(ParseClient.JSONBodyKeys.UniqueKey)": userID,
-//      "\(ParseClient.JSONBodyKeys.FirstName)": student.firstName,
-//      "\(ParseClient.JSONBodyKeys.LastName)": student.lastName,
-//      "\(ParseClient.JSONBodyKeys.MapString)": student.mapString,
-//      "\(ParseClient.JSONBodyKeys.MediaURL)": student.mediaURL,
-//      "\(ParseClient.JSONBodyKeys.Latitude)": student.latitude,
-//      "\(ParseClient.JSONBodyKeys.Longitude)": student.longitude
-//    ]
+    let userID = ParseClient.sharedInstance().userID!
+    
+    let dictionary: [String:AnyObject] = [
+      ParseClient.JSONBodyKeys.UniqueKey: userID as AnyObject,
+      "\(ParseClient.JSONBodyKeys.FirstName)": student.firstName as AnyObject,
+      "\(ParseClient.JSONBodyKeys.LastName)": student.lastName as AnyObject,
+      "\(ParseClient.JSONBodyKeys.MapString)": student.mapString as AnyObject,
+      "\(ParseClient.JSONBodyKeys.MediaURL)": student.mediaURL as AnyObject,
+      "\(ParseClient.JSONBodyKeys.Latitude)": student.latitude as AnyObject,
+      "\(ParseClient.JSONBodyKeys.Longitude)": student.longitude as AnyObject
+    ]
+    if JSONSerialization.isValidJSONObject(dictionary) {
+      do {
+      let data = try  JSONSerialization.data(withJSONObject: dictionary, options:[] )
 
-    let jsonBody = "{\"\(ParseClient.JSONBodyKeys.UniqueKey)\": \"\(userID)\", \"\(ParseClient.JSONBodyKeys.FirstName)\": \"\(student.firstName)\", \"\(ParseClient.JSONBodyKeys.LastName)\": \(student.lastName)\", \"\(ParseClient.JSONBodyKeys.MapString)\": \"\(student.mapString)\", \"\(ParseClient.JSONBodyKeys.MediaURL)\": \(student.mediaURL)\", \"\(ParseClient.JSONBodyKeys.Latitude)\": \"\(student.latitude)\", \"\(ParseClient.JSONBodyKeys.Longitude)\": \(student.longitude)}"
+      }catch {
+        
+      }
+
+      
+     // let jsonBody = JSONSerialization.data(withJSONObject: dictionary, options: nil)
+    }
+//    let jsonBody = "{\"\(ParseClient.JSONBodyKeys.UniqueKey)\": \"\(userID)\", \"\(ParseClient.JSONBodyKeys.FirstName)\": \"\(student.firstName)\", \"\(ParseClient.JSONBodyKeys.LastName)\": \(student.lastName)\", \"\(ParseClient.JSONBodyKeys.MapString)\": \"\(student.mapString)\", \"\(ParseClient.JSONBodyKeys.MediaURL)\": \(student.mediaURL)\", \"\(ParseClient.JSONBodyKeys.Latitude)\": \"\(student.latitude)\", \"\(ParseClient.JSONBodyKeys.Longitude)\": \(student.longitude)}"
 
 
     // Make the request
@@ -96,7 +107,8 @@ extension ParseClient {
         }
       }
     }
+ 
   }
-  
+ */
   
 }

@@ -20,7 +20,7 @@ class MapViewController: UIViewController {
   //MARK: View Lifecycle
   
   func addAnnotationsToMapView(locations: [ParseStudent]) {
-    
+    // remove all pins.
     var annotations = [MKPointAnnotation]()
     
     for location in locations {
