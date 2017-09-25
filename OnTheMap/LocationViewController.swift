@@ -19,8 +19,10 @@ class LocationViewController: UIViewController {
   var userLocation: String?
   var student: ParseStudent?
   
+  // MARK: Outlets
   @IBOutlet weak var mapView: MKMapView!
   
+  // MARK: Actions
   @IBAction func finishPressed(_ sender: Any) {
     
     // Get Student's Public Data
@@ -66,10 +68,8 @@ class LocationViewController: UIViewController {
     super.viewDidLoad()
     mapView.delegate = self
     
-    // Call Geacoding
+    // Call Geacoding function
     lookupGeocoding()
-    
-    
     
   }
   

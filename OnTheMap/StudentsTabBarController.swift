@@ -14,7 +14,6 @@ class StudentsTabBarController: UITabBarController {
   
   // MARK: Actions
   
-  
   @IBAction func refreshPressed(_ sender: Any) {
     refreshData()
   }
@@ -64,15 +63,23 @@ class StudentsTabBarController: UITabBarController {
     let mapViewController = self.viewControllers?[0] as! MapViewController
     let listViewController = self.viewControllers?[1] as! ListViewController
     
+    
     ParseClient.sharedInstance().getStudentLocations{ (students, error) in
       
       if let students = students {
         listViewController.students = students
         
         performUIUpdatesOnMain {
+          // first remove all annotations (if already added before)
+          mapViewController.removeAnnotations()
+          
+          // now add all annotations to mapview
           mapViewController.addAnnotationsToMapView(locations: students)
+          
           //call the reload data
-          listViewController.studentsTableView.reloadData()
+          if let studentsTableView = listViewController.studentsTableView {
+            studentsTableView.reloadData()
+          }
           
         }
       } else {

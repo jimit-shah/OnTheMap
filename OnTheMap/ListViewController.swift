@@ -20,13 +20,10 @@ class ListViewController: UIViewController {
   // MARK: Outlets
   @IBOutlet weak var studentsTableView: UITableView!
   
-  
   // MARK: Life cycle
   override func viewWillAppear(_ animated: Bool) {
-    
     super.viewWillAppear(animated)
-    
-    self.studentsTableView.reloadData()
+    studentsTableView.reloadData()
   }
   
 }

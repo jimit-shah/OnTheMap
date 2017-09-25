@@ -163,6 +163,11 @@
                                     <outlet property="delegate" destination="XCP-yZ-CoJ" id="QpI-Qc-8Cd"/>
                                 </connections>
                             </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZg-fw-0EP">
+                                <rect key="frame" x="281" y="26" width="46" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Button"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -216,7 +221,7 @@
                             </barButtonItem>
                             <barButtonItem image="icon_refresh" id="cy7-hB-e6J">
                                 <connections>
-                                    <action selector="refreshPressed:" destination="Lez-qt-ROq" id="PpJ-Uz-lVR"/>
+                                    <action selector="refreshPressed:" destination="Lez-qt-ROq" id="uH5-uM-hM9"/>
                                 </connections>
                             </barButtonItem>
                         </rightBarButtonItems>

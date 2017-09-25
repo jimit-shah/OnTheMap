@@ -13,15 +13,19 @@ import MapKit
 
 class MapViewController: UIViewController {
   
+  // MARK: Properties
+  var annotations = [MKPointAnnotation]()
+  
   // MARK: Outlets
-  
   @IBOutlet weak var mapView: MKMapView!
+
+  // Remove all pins
+  func removeAnnotations() {
+    annotations.removeAll()
+  }
   
-  //MARK: View Lifecycle
-  
+  // Function to Add Annotations to MapView
   func addAnnotationsToMapView(locations: [ParseStudent]) {
-    // remove all pins.
-    var annotations = [MKPointAnnotation]()
     
     for location in locations {
       
@@ -45,7 +49,7 @@ class MapViewController: UIViewController {
     
     performUIUpdatesOnMain {
       // Finally we place the annotation in an array of annotations.
-      self.mapView.addAnnotations(annotations)
+      self.mapView.addAnnotations(self.annotations)
     }
   }
   
