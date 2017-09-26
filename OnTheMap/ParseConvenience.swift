@@ -65,7 +65,7 @@ extension ParseClient {
   }
   
   // MARK: POST Convenience Methods
- /*
+  
   func postToStudentLocation(_ student: ParseStudent, _ completionHandlerForLocationPost: @escaping (_ result: Int?, _ error: NSError?) -> Void) {
     let parameters = [String:AnyObject]()
     
@@ -80,20 +80,9 @@ extension ParseClient {
       "\(ParseClient.JSONBodyKeys.Latitude)": student.latitude as AnyObject,
       "\(ParseClient.JSONBodyKeys.Longitude)": student.longitude as AnyObject
     ]
-    if JSONSerialization.isValidJSONObject(dictionary) {
-      do {
-      let data = try  JSONSerialization.data(withJSONObject: dictionary, options:[] )
-
-      }catch {
-        
-      }
-
-      
-     // let jsonBody = JSONSerialization.data(withJSONObject: dictionary, options: nil)
-    }
-//    let jsonBody = "{\"\(ParseClient.JSONBodyKeys.UniqueKey)\": \"\(userID)\", \"\(ParseClient.JSONBodyKeys.FirstName)\": \"\(student.firstName)\", \"\(ParseClient.JSONBodyKeys.LastName)\": \(student.lastName)\", \"\(ParseClient.JSONBodyKeys.MapString)\": \"\(student.mapString)\", \"\(ParseClient.JSONBodyKeys.MediaURL)\": \(student.mediaURL)\", \"\(ParseClient.JSONBodyKeys.Latitude)\": \"\(student.latitude)\", \"\(ParseClient.JSONBodyKeys.Longitude)\": \(student.longitude)}"
-
-
+    
+    let jsonBody = convertDictionaryToJSONString(dictionary: dictionary)!
+    
     // Make the request
     let _ = taskForPOSTMethod(Methods.StudentLocation, parameters: parameters, jsonBody: jsonBody) { (results, error) in
       
@@ -107,8 +96,6 @@ extension ParseClient {
         }
       }
     }
- 
   }
- */
   
 }

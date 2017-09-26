@@ -140,6 +140,18 @@ class ParseClient: NSObject {
     }
   }
   
+  func convertDictionaryToJSONString(dictionary: [String:AnyObject]) -> String? {
+    if JSONSerialization.isValidJSONObject(dictionary) {
+      do {
+        let data = try JSONSerialization.data(withJSONObject: dictionary, options:[])
+        return String(data: data, encoding: .utf8)!
+      } catch {
+        print("Could not convert data dictionary to JSONString for httpBody).")
+      }
+    }
+    return nil
+  }
+  
   // given raw JSON, return a usable Foundation object
   private func convertDataWithCompletionHandler(_ data: Data, completionHandlerForConvertData: (_ result: AnyObject?, _ error: NSError?) -> Void) {
     

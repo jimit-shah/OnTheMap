@@ -19,16 +19,13 @@ extension UdacityClient {
     self.postSessionId(username, password) { (success, sessionID, uniqueKey, errorString) in
       
       if success {
-        //self.sessionID = sessionID
-        //self.userID = uniqueKey
         ParseClient.sharedInstance().sessionID = sessionID
         ParseClient.sharedInstance().userID = uniqueKey
-        //get the public onformation -> first name and last name
         
-        // object of uDacityStudent ->
-        // .shared.udacitystudent = uDacityStudent
+        
         print("SessionID: \(sessionID!)")
         print("UniqueKey(UserID): \(uniqueKey!)")
+        
         completionHandlerForAuth(success, nil)
       } else {
         completionHandlerForAuth(success, errorString)
