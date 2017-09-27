@@ -52,8 +52,7 @@ class LocationViewController: UIViewController {
            "longitude": -122.0813919
            */
           if let location = location {
-            //self.student = location
-            print("Location Detail Found: \(location)")
+            // PUT (update info based on objectID)
           } else {
             // POST new location
             

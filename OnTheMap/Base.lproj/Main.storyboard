@@ -216,7 +216,7 @@
                         <rightBarButtonItems>
                             <barButtonItem image="icon_addpin" id="yEL-g6-fF2">
                                 <connections>
-                                    <segue destination="zRu-sd-RG8" kind="presentation" id="COI-er-k7h"/>
+                                    <segue destination="zRu-sd-RG8" kind="presentation" identifier="infoPostingSegue" id="COI-er-k7h"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="icon_refresh" id="cy7-hB-e6J">

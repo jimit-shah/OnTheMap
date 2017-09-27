@@ -12,6 +12,11 @@ import UIKit
 
 class StudentsTabBarController: UITabBarController {
   
+  
+  // MARK: Properties
+  
+  var studentLocation: ParseStudent?
+  
   // MARK: Actions
   
   @IBAction func refreshPressed(_ sender: Any) {
@@ -27,11 +32,42 @@ class StudentsTabBarController: UITabBarController {
           self.completeLogout()
         } else {
           self.displayError(errorString)
-          self.notifyUser(nil, message: "Invalid Link")
+          self.notify(nil, message: "Invalid Link")
         }
       }
     }
     
+  }
+  
+  // MARK: shouldPerformSegue 
+  override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    var overwrite: Bool = true
+    
+    if identifier == "infoPostingSegue" {
+      
+      if let studentLocation = studentLocation {
+        
+        let alert = UIAlertController(title: nil, message: "User \"\(studentLocation.firstName!) \(studentLocation.lastName!)\" Has Already Posted a Location. Would you like to Overwrite Their Location?", preferredStyle:.alert)
+        
+        let overwriteAction = UIAlertAction(title: "Overwrite", style: .default, handler: { action in
+          self.performSegue(withIdentifier: "infoPostingSegue", sender: sender)
+        })
+        
+        // Create Cancel button with action handlder
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
+          overwrite = false
+        })
+        
+        //Add OK and Cancel button to dialog message
+        alert.addAction(overwriteAction)
+        alert.addAction(cancelAction)
+        
+        // Present dialog message to user
+        self.present(alert, animated: true, completion: nil)
+      }
+    
+    }
+    return overwrite
   }
   
   // Dismiss View Function
@@ -50,7 +86,17 @@ class StudentsTabBarController: UITabBarController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    let userID = ParseClient.sharedInstance().userID!
+    print("USERID is available in viewDidLoad")
     
+    ParseClient.sharedInstance().getStudentLocation(userID, { (studentLocation, error) in
+      
+      if let studentLocation = studentLocation {
+        self.studentLocation = studentLocation
+        print("StudentLocation is created by getStudentLocation.")
+        print("Student Infor \(studentLocation)")
+      }
+    })
   }
   
   
@@ -84,7 +130,7 @@ class StudentsTabBarController: UITabBarController {
         }
       } else {
         //print(error ?? "Could not find any Student Locations.")
-        self.notifyUser("No Data Found", message: (error?.localizedDescription)!)
+        self.notify("No Data Found", message: (error?.localizedDescription)!)
       }
       
     }

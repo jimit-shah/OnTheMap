@@ -127,4 +127,27 @@ extension UIViewController {
     alert.addAction(action)
     self.present(alert, animated: true, completion: nil)
   }
+  
+  func warningAlert(_ title: String?, message: String) -> Bool
+  {
+    var ok = false
+    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+
+    let overwriteAction = UIAlertAction(title: "Overwrite", style: .default, handler: { (action) -> Void in
+      ok = false
+    })
+
+    // Create Cancel button with action handlder
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+      ok = true
+    })
+
+    //Add OK and Cancel button to dialog message
+    alert.addAction(overwriteAction)
+    alert.addAction(cancelAction)
+
+    // Present dialog message to user
+    self.present(alert, animated: true, completion: nil)
+    return ok
+  }
 }

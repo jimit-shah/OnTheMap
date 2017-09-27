@@ -47,10 +47,7 @@ class MapViewController: UIViewController {
       annotations.append(annotation)
     }
     
-    performUIUpdatesOnMain {
-      // Finally we place the annotation in an array of annotations.
-      self.mapView.addAnnotations(self.annotations)
-    }
+    mapView.addAnnotations(annotations)
   }
   
 }
@@ -85,7 +82,7 @@ extension MapViewController: MKMapViewDelegate {
       if let url = view.annotation?.subtitle! {
         app.open(URL(string:url)!, options: [:], completionHandler: { (success) in
           if !success {
-            print("Could not open URL")
+            self.notify("Invalid URL", message: "Could not open URL")
           }
         })
       }
