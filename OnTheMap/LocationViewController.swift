@@ -16,8 +16,13 @@ class LocationViewController: UIViewController {
   
   // MARK: Properties
   var geocoder: CLGeocoder?
-  var userLocation: String?
+  
   var student: ParseStudent?
+  
+  var userLocationString: String?
+  var mediaURL: String?
+  var lat: CLLocationDegrees?
+  var long: CLLocationDegrees?
   
   // MARK: Outlets
   @IBOutlet weak var mapView: MKMapView!
@@ -33,7 +38,7 @@ class LocationViewController: UIViewController {
         
         print("Student First: \(student.firstName) LastName: \(student.lastName)")
         print("Student Info: \(student)")
-        ParseClient.sharedInstance().getStudentLocation(student.userID, { (result, error) in
+        ParseClient.sharedInstance().getStudentLocation(student.userID, { (location, error) in
           /*
            "objectId": "pIA79QIzdX",
            "mapString": "Mountain View, CA",
@@ -45,12 +50,31 @@ class LocationViewController: UIViewController {
            "firstName": "Test",
            "latitude": 37.39008,
            "longitude": -122.0813919
- */
-          if let result = result {
-            self.student = result
-            print("Location Detail Found: \(result)")
+           */
+          if let location = location {
+            //self.student = location
+            print("Location Detail Found: \(location)")
           } else {
-            print("No location Data found")
+            // POST new location
+            
+            let dictionary: [String:AnyObject] = [
+              "uniqueKey": ParseClient.sharedInstance().userID as AnyObject,
+              "firstName": student.firstName as AnyObject,
+              "lastName": student.lastName as AnyObject,
+              "mapString": self.userLocationString as AnyObject,
+              "mediaURL": self.mediaURL as AnyObject,
+              "latitude": self.lat as AnyObject,
+              "longitude": self.long as AnyObject
+            ]
+            
+            let studentInfo = ParseStudent.studentFromResults(dictionary)
+            ParseClient.sharedInstance().postToStudentLocation(studentInfo, { (result, error) in
+              if result {
+                print("Posted new location successfully!")
+              } else {
+                print("Error posting a new location: \(error!)")
+              }
+            })
           }
           
         })
@@ -86,12 +110,14 @@ class LocationViewController: UIViewController {
       geocoder = CLGeocoder()
     }
     
-    geocoder?.geocodeAddressString(userLocation!, completionHandler: { (placemarks, error) in
+    geocoder?.geocodeAddressString(userLocationString!, completionHandler: { (placemarks, error) in
       let placemark = placemarks?.first
       let lat = placemark?.location?.coordinate.latitude
       let long = placemark?.location?.coordinate.longitude
       
       if let lat =  lat, let long = long {
+        self.lat = lat
+        self.long = long
         self.reverseGeocoding(latitude: lat, longitude: long)
       }
     })

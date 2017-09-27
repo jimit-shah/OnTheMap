@@ -37,14 +37,29 @@ class InfoPostingViewController: UIViewController {
   // MARK: Prepare for Segue
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "mapViewSegue" {
-      guard self.locationTextField != nil else {
-        print("Location text field is empty")
-        return
-      }
       let controller = segue.destination as! LocationViewController
-      controller.userLocation = self.locationTextField.text
+      controller.userLocationString = locationTextField.text
+      controller.mediaURL = websiteTextField.text
     }
     
   }
   
+  // MARK: Shoud Perform Sqgue with Identifier on conditions
+  override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+    if identifier == "mapViewSegue" {
+      guard let locationString = locationTextField.text, !locationString.isEmpty  else {
+        notify("Location Not Found", message: "Must Enter a Location.")
+        return false
+      }
+      guard let url = websiteTextField.text, !url.isEmpty else {
+        notify("Location Not Found", message: "Must Enter a Website.")
+        return false
+      }
+      if (!url.contains("https://")) {
+        notify("Location Not Found", message: "Website must include \"https://\"")
+        return false
+      }
+    }
+    return true
+  }
 }

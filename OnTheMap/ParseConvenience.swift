@@ -66,7 +66,7 @@ extension ParseClient {
   
   // MARK: POST Convenience Methods
   
-  func postToStudentLocation(_ student: ParseStudent, _ completionHandlerForLocationPost: @escaping (_ result: Int?, _ error: NSError?) -> Void) {
+  func postToStudentLocation(_ student: ParseStudent, _ completionHandlerForLocationPost: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
     let parameters = [String:AnyObject]()
     
     let userID = ParseClient.sharedInstance().userID!
@@ -87,12 +87,12 @@ extension ParseClient {
     let _ = taskForPOSTMethod(Methods.StudentLocation, parameters: parameters, jsonBody: jsonBody) { (results, error) in
       
       if let error = error {
-        completionHandlerForLocationPost(nil, error)
+        completionHandlerForLocationPost(false, error)
       } else {
-        if let results = results?[ParseClient.JSONResponseKeys.StatusCode] as? Int {
-          completionHandlerForLocationPost(results, nil)
+        if let _ = results?[ParseClient.JSONResponseKeys.StudentObjectId] as? String {
+          completionHandlerForLocationPost(true, nil)
         } else {
-          completionHandlerForLocationPost(nil, NSError(domain: "postToStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse postToStudentLocation"]))
+          completionHandlerForLocationPost(false, NSError(domain: "postToStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse postToStudentLocation"]))
         }
       }
     }
