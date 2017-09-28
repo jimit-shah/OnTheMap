@@ -16,8 +16,7 @@ class LocationViewController: UIViewController {
   
   // MARK: Properties
   var geocoder: CLGeocoder?
-  
-  var student: ParseStudent?
+  var objectID: String?
   
   var userLocationString: String?
   var mediaURL: String?
@@ -38,48 +37,48 @@ class LocationViewController: UIViewController {
         
         print("Student First: \(student.firstName) LastName: \(student.lastName)")
         print("Student Info: \(student)")
-        ParseClient.sharedInstance().getStudentLocation(student.userID, { (location, error) in
-          /*
-           "objectId": "pIA79QIzdX",
-           "mapString": "Mountain View, CA",
-           "updatedAt": "2016-06-29T23:12:10.552Z",
-           "mediaURL": "www.facebook.com",
-           "createdAt": "2016-06-29T23:12:10.552Z",
-           "lastName": "1234",
-           "uniqueKey": "1234",
-           "firstName": "Test",
-           "latitude": 37.39008,
-           "longitude": -122.0813919
-           */
-          if let location = location {
-            // PUT (update info based on objectID)
-          } else {
-            // POST new location
-            
-            let dictionary: [String:AnyObject] = [
-              "uniqueKey": ParseClient.sharedInstance().userID as AnyObject,
-              "firstName": student.firstName as AnyObject,
-              "lastName": student.lastName as AnyObject,
-              "mapString": self.userLocationString as AnyObject,
-              "mediaURL": self.mediaURL as AnyObject,
-              "latitude": self.lat as AnyObject,
-              "longitude": self.long as AnyObject
-            ]
-            
-            let studentInfo = ParseStudent.studentFromResults(dictionary)
-            ParseClient.sharedInstance().postToStudentLocation(studentInfo, { (result, error) in
-              if result {
-                print("Posted new location successfully!")
-              } else {
-                print("Error posting a new location: \(error!)")
-              }
-            })
-          }
-          
-        })
         
-      } else {
-        print(error ?? "empty error")
+        let dictionary: [String:AnyObject] = [
+          "uniqueKey": ParseClient.sharedInstance().userID as AnyObject,
+          "firstName": student.firstName as AnyObject,
+          "lastName": student.lastName as AnyObject,
+          "mapString": self.userLocationString as AnyObject,
+          "mediaURL": self.mediaURL as AnyObject,
+          "latitude": self.lat as AnyObject,
+          "longitude": self.long as AnyObject
+        ]
+        
+        let studentInfo = ParseStudent.studentFromResults(dictionary)
+        
+        //if let objectID = self.objectID, !objectID.isEmpty {
+        if self.objectID != nil {
+          // PUT to existing record
+          print("student Info: \(studentInfo)")
+          print("ObjectID is: \(self.objectID!)")
+          self.notify(nil, message: "PUT/Update to your location Success!.")
+//          ParseClient.sharedInstance().putToStudentLocation(objectID, studentInfo, { (result, error) in
+//            if result {
+//              self.notify(nil, message: "PUT/Update to your location Success!.")
+//            } else {
+//              self.notify(nil,message: "Error PUTing to existing location: \(error!)")
+//            }
+//        })
+          
+        } else {
+          print("student Info: \(studentInfo)")
+              self.notify(nil, message: "Posted a new location successfully!")
+          // POST a new location
+//          ParseClient.sharedInstance().postToStudentLocation(studentInfo, { (result, error) in
+//            if result {
+//              self.notify(nil, message: "Posted a new location successfully!")
+//            } else {
+//              self.notify(nil,message: "Error POSTing a new location: \(error!)")
+//            }
+//          })
+        }
+        
+        } else if let error = error {
+        self.notify("Error retrieving user details " , message: "\(error)")
       }
     }
     
@@ -93,7 +92,6 @@ class LocationViewController: UIViewController {
     
     // Call Geacoding function
     lookupGeocoding()
-    
   }
   
   override func viewWillAppear(_ animated: Bool) {

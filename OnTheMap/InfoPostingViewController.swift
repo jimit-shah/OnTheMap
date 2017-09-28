@@ -12,6 +12,7 @@ import UIKit
 
 class InfoPostingViewController: UIViewController {
   
+  var student: ParseStudent?
   
   // MARK: Outlets
   
@@ -40,6 +41,12 @@ class InfoPostingViewController: UIViewController {
       let controller = segue.destination as! LocationViewController
       controller.userLocationString = locationTextField.text
       controller.mediaURL = websiteTextField.text
+      
+      // if student location exist
+      if let student = student {
+      controller.objectID = student.objectID
+        print("ObjectID being passed to LocationViewController \(student.objectID!)")
+      }
     }
     
   }

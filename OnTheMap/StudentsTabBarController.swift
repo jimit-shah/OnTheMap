@@ -39,6 +39,13 @@ class StudentsTabBarController: UITabBarController {
     
   }
   
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == "mapViewSegue" {
+      let controller = segue.destination as! InfoPostingViewController
+      controller.student = studentLocation
+    }
+  }
+  
   // MARK: shouldPerformSegue 
   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
     var overwrite: Bool = true
@@ -87,14 +94,13 @@ class StudentsTabBarController: UITabBarController {
   override func viewDidLoad() {
     super.viewDidLoad()
     let userID = ParseClient.sharedInstance().userID!
-    print("USERID is available in viewDidLoad")
     
     ParseClient.sharedInstance().getStudentLocation(userID, { (studentLocation, error) in
       
       if let studentLocation = studentLocation {
         self.studentLocation = studentLocation
-        print("StudentLocation is created by getStudentLocation.")
-        print("Student Infor \(studentLocation)")
+        print("StudentLocation is retrieved by getStudentLocation.")
+        print("Student Info: \(studentLocation)")
       }
     })
   }

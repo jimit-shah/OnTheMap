@@ -39,7 +39,6 @@ extension ParseClient {
     
     var parametersWithKeys = [String:AnyObject]()
     parametersWithKeys[ParameterKeys.Where] = "{\"uniqueKey\":\"\(userID)\"}" as AnyObject?
-    //"{\"uniqueKey\":\"\(User.sharedUser().uniqueKey)\"}"
     
     let _ = taskForGETMethod(Methods.StudentLocation, parameters: parametersWithKeys) { (results, error) in
       
@@ -98,4 +97,40 @@ extension ParseClient {
     }
   }
   
+  
+  // MARK: PUT Convenience Methods
+  
+  func putToStudentLocation(_ objectID: String, _ student: ParseStudent, _ completionHandlerForLocationPut: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
+    
+    let parameters = [String:AnyObject]()
+    let dictionary: [String:AnyObject] = [
+      ParseClient.JSONBodyKeys.UniqueKey: userID as AnyObject,
+      "\(ParseClient.JSONBodyKeys.FirstName)": student.firstName as AnyObject,
+      "\(ParseClient.JSONBodyKeys.LastName)": student.lastName as AnyObject,
+      "\(ParseClient.JSONBodyKeys.MapString)": student.mapString as AnyObject,
+      "\(ParseClient.JSONBodyKeys.MediaURL)": student.mediaURL as AnyObject,
+      "\(ParseClient.JSONBodyKeys.Latitude)": student.latitude as AnyObject,
+      "\(ParseClient.JSONBodyKeys.Longitude)": student.longitude as AnyObject
+    ]
+    
+    let jsonBody = convertDictionaryToJSONString(dictionary: dictionary)!
+    
+    var mutableMethod: String = Methods.Put
+    mutableMethod = substituteKeyInMethod(mutableMethod, key: ParseClient.URLKeys.ObjectID, value: objectID)!
+    // Make the request
+    let _ = taskForPOSTMethod(mutableMethod, parameters: parameters, jsonBody: jsonBody) { (results, error) in
+      
+      if let error = error {
+        completionHandlerForLocationPut(false, error)
+      } else {
+        if let _ = results?[ParseClient.JSONResponseKeys.StudentObjectId] as? String {
+          completionHandlerForLocationPut(true, nil)
+        } else {
+          completionHandlerForLocationPut(false, NSError(domain: "putToStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse putToStudentLocation"]))
+        }
+      }
+    }
+    
+  }
+
 }

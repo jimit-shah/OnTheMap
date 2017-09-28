@@ -102,7 +102,7 @@ private extension LoginViewController {
     passwordTextField.delegate = textFieldDelegate
   }
   
-  // MARK: Notify
+  // MARK: AlertView to Notify User.
   
   func notifyUser(_ title: String?, message: String) -> Void
   {
@@ -128,6 +128,7 @@ extension UIViewController {
     self.present(alert, animated: true, completion: nil)
   }
   
+  // WIP function // needs some testing
   func warningAlert(_ title: String?, message: String) -> Bool
   {
     var ok = false

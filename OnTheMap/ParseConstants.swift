@@ -30,13 +30,14 @@ extension ParseClient {
     
     // MARK: Student Location
     static let StudentLocation = "/StudentLocation"
-    //static let StudentLocationForStudent =  "/StudentLocation?where={\"uniqueKey\":value}" /* NOTE SURE ABOUT THIS */
+    static let Put = "/StudentLocation/{objectId}"
     
   }
   
   // MARK: URL Keys
   struct URLKeys {
     static let UniqueKey = "uniqueKey"
+    static let ObjectID = "objectId"
   }
   
   // MARK: Parameter Keys
