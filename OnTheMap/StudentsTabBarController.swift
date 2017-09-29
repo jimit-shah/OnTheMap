@@ -40,41 +40,48 @@ class StudentsTabBarController: UITabBarController {
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == "mapViewSegue" {
-      let controller = segue.destination as! InfoPostingViewController
+    
+    if segue.identifier == "infoPostingSegue" {
+      let navController = segue.destination as! UINavigationController
+      let controller = navController.viewControllers.first as! InfoPostingViewController
       controller.student = studentLocation
     }
   }
   
+  
   // MARK: shouldPerformSegue 
   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-    var overwrite: Bool = true
     
     if identifier == "infoPostingSegue" {
-      
       if let studentLocation = studentLocation {
         
-        let alert = UIAlertController(title: nil, message: "User \"\(studentLocation.firstName!) \(studentLocation.lastName!)\" Has Already Posted a Location. Would you like to Overwrite Their Location?", preferredStyle:.alert)
+//        askToContinueAlert(nil, message: "User \"\(studentLocation.firstName!) \(studentLocation.lastName!)\" Has Already Posted a Location. Would you like to Overwrite Their Location?", { (continue) in
+//          if continue {
+//            return true
+//          } else {
+//            return false
+//          }
+//        })
         
+        let alert = UIAlertController(title: nil, message: "User \"\(studentLocation.firstName!) \(studentLocation.lastName!)\" Has Already Posted a Location. Would you like to Overwrite Their Location?", preferredStyle:.alert)
+
         let overwriteAction = UIAlertAction(title: "Overwrite", style: .default, handler: { action in
           self.performSegue(withIdentifier: "infoPostingSegue", sender: sender)
         })
-        
+
         // Create Cancel button with action handlder
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-          overwrite = false
         })
-        
+
         //Add OK and Cancel button to dialog message
         alert.addAction(overwriteAction)
         alert.addAction(cancelAction)
-        
+
         // Present dialog message to user
         self.present(alert, animated: true, completion: nil)
       }
-    
     }
-    return overwrite
+    return true
   }
   
   // Dismiss View Function
@@ -127,7 +134,7 @@ class StudentsTabBarController: UITabBarController {
           
           // now add all annotations to mapview
           mapViewController.addAnnotationsToMapView(locations: students)
-          
+          //listViewController.re
           //call the reload data
           if let studentsTableView = listViewController.studentsTableView {
             studentsTableView.reloadData()

@@ -33,13 +33,9 @@ class LocationViewController: UIViewController {
     UdacityClient.sharedInstance().getUserInfo { (student, error) in
       
       if let student = student {
-        //self.student = student
         
-        print("Student First: \(student.firstName) LastName: \(student.lastName)")
-        print("Student Info: \(student)")
-        
-        let dictionary: [String:AnyObject] = [
-          "uniqueKey": ParseClient.sharedInstance().userID as AnyObject,
+        let studentDict: [String:AnyObject] = [
+          "uniqueKey": student.userID as AnyObject,
           "firstName": student.firstName as AnyObject,
           "lastName": student.lastName as AnyObject,
           "mapString": self.userLocationString as AnyObject,
@@ -48,37 +44,31 @@ class LocationViewController: UIViewController {
           "longitude": self.long as AnyObject
         ]
         
-        let studentInfo = ParseStudent.studentFromResults(dictionary)
-        
-        //if let objectID = self.objectID, !objectID.isEmpty {
-        if self.objectID != nil {
+        if let objectID = self.objectID, !objectID.isEmpty {
+          
           // PUT to existing record
-          print("student Info: \(studentInfo)")
-          print("ObjectID is: \(self.objectID!)")
-          self.notify(nil, message: "PUT/Update to your location Success!.")
-//          ParseClient.sharedInstance().putToStudentLocation(objectID, studentInfo, { (result, error) in
-//            if result {
-//              self.notify(nil, message: "PUT/Update to your location Success!.")
-//            } else {
-//              self.notify(nil,message: "Error PUTing to existing location: \(error!)")
-//            }
-//        })
+          ParseClient.sharedInstance().putToStudentLocation(objectID, studentDict, { (result, error) in
+            if result {
+              self.notify(nil, message: "PUT/Update to your location Success!.")
+            } else {
+              self.notify(nil,message: "Error PUTing to existing location: \(error!)")
+            }
+        })
           
         } else {
-          print("student Info: \(studentInfo)")
-              self.notify(nil, message: "Posted a new location successfully!")
+          
           // POST a new location
-//          ParseClient.sharedInstance().postToStudentLocation(studentInfo, { (result, error) in
-//            if result {
-//              self.notify(nil, message: "Posted a new location successfully!")
-//            } else {
-//              self.notify(nil,message: "Error POSTing a new location: \(error!)")
-//            }
-//          })
+          ParseClient.sharedInstance().postToStudentLocation(studentDict, { (result, error) in
+            if result {
+              self.notify(nil, message: "Posted a new location successfully!")
+            } else {
+              self.notify(nil,message: "Error POSTing a new location: \(error!)")
+            }
+          })
         }
         
         } else if let error = error {
-        self.notify("Error retrieving user details " , message: "\(error)")
+        self.notify("Error retrieving User Info" , message: "Error: \(error)")
       }
     }
     

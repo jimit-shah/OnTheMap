@@ -128,8 +128,9 @@ class ParseClient: NSObject {
   
   // MARK: PUT
   func taskForPUTMethod(_ method: String, parameters: [String:AnyObject], jsonBody: String, completionHandlerForPUT: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
+    var parametersWithApiKey = parameters
     
-    let request = NSMutableURLRequest(url: parseURLFromParameters(parameters))
+    let request = NSMutableURLRequest(url: parseURLFromParameters(parametersWithApiKey, withPathExtension: method))
     request.httpMethod = "PUT"
     request.addValue(Constants.ApiKey, forHTTPHeaderField: ParameterKeys.ApiKey)
     request.addValue(Constants.ApplicationID, forHTTPHeaderField: ParameterKeys.ApplicationID)

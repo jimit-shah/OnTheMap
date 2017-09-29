@@ -83,6 +83,7 @@ extension ParseClient {
     static let StudentLatitude = "latitude"
     static let StudentLongitude = "longitude"
     static let StudentResults = "results"
+    static let StudentUpdatedAt = "updatedAt"
   
   }
   

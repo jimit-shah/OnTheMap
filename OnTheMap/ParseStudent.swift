@@ -12,7 +12,7 @@ import Foundation
 struct ParseStudent {
   
   // MARK: Properties
-  
+  let userID: String?
   let firstName: String?
   let lastName: String?
   let mediaURL: String?
@@ -23,6 +23,7 @@ struct ParseStudent {
   
   // MARK: Initializers
   init(dictionary: [String:AnyObject]) {
+    userID = dictionary[ParseClient.JSONResponseKeys.StudentUniqueKey] as? String
     firstName = dictionary[ParseClient.JSONResponseKeys.StudentFirstName] as? String
     lastName = dictionary[ParseClient.JSONResponseKeys.StudentLastName] as? String
     mediaURL = dictionary[ParseClient.JSONResponseKeys.StudentMediaURL] as? String

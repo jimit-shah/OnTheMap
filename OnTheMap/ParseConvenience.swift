@@ -65,22 +65,10 @@ extension ParseClient {
   
   // MARK: POST Convenience Methods
   
-  func postToStudentLocation(_ student: ParseStudent, _ completionHandlerForLocationPost: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
+  func postToStudentLocation(_ student: [String:AnyObject], _ completionHandlerForLocationPost: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
     let parameters = [String:AnyObject]()
     
-    let userID = ParseClient.sharedInstance().userID!
-    
-    let dictionary: [String:AnyObject] = [
-      ParseClient.JSONBodyKeys.UniqueKey: userID as AnyObject,
-      "\(ParseClient.JSONBodyKeys.FirstName)": student.firstName as AnyObject,
-      "\(ParseClient.JSONBodyKeys.LastName)": student.lastName as AnyObject,
-      "\(ParseClient.JSONBodyKeys.MapString)": student.mapString as AnyObject,
-      "\(ParseClient.JSONBodyKeys.MediaURL)": student.mediaURL as AnyObject,
-      "\(ParseClient.JSONBodyKeys.Latitude)": student.latitude as AnyObject,
-      "\(ParseClient.JSONBodyKeys.Longitude)": student.longitude as AnyObject
-    ]
-    
-    let jsonBody = convertDictionaryToJSONString(dictionary: dictionary)!
+    let jsonBody = convertDictionaryToJSONString(dictionary: student)!
     
     // Make the request
     let _ = taskForPOSTMethod(Methods.StudentLocation, parameters: parameters, jsonBody: jsonBody) { (results, error) in
@@ -100,30 +88,21 @@ extension ParseClient {
   
   // MARK: PUT Convenience Methods
   
-  func putToStudentLocation(_ objectID: String, _ student: ParseStudent, _ completionHandlerForLocationPut: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
+  func putToStudentLocation(_ objectID: String, _ student: [String:AnyObject], _ completionHandlerForLocationPut: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
     
     let parameters = [String:AnyObject]()
-    let dictionary: [String:AnyObject] = [
-      ParseClient.JSONBodyKeys.UniqueKey: userID as AnyObject,
-      "\(ParseClient.JSONBodyKeys.FirstName)": student.firstName as AnyObject,
-      "\(ParseClient.JSONBodyKeys.LastName)": student.lastName as AnyObject,
-      "\(ParseClient.JSONBodyKeys.MapString)": student.mapString as AnyObject,
-      "\(ParseClient.JSONBodyKeys.MediaURL)": student.mediaURL as AnyObject,
-      "\(ParseClient.JSONBodyKeys.Latitude)": student.latitude as AnyObject,
-      "\(ParseClient.JSONBodyKeys.Longitude)": student.longitude as AnyObject
-    ]
     
-    let jsonBody = convertDictionaryToJSONString(dictionary: dictionary)!
+    let jsonBody = convertDictionaryToJSONString(dictionary: student)!
     
     var mutableMethod: String = Methods.Put
     mutableMethod = substituteKeyInMethod(mutableMethod, key: ParseClient.URLKeys.ObjectID, value: objectID)!
+    
     // Make the request
-    let _ = taskForPOSTMethod(mutableMethod, parameters: parameters, jsonBody: jsonBody) { (results, error) in
-      
+    let _ = taskForPUTMethod(mutableMethod, parameters: parameters as [String:AnyObject], jsonBody: jsonBody) { (results, error) in
       if let error = error {
         completionHandlerForLocationPut(false, error)
       } else {
-        if let _ = results?[ParseClient.JSONResponseKeys.StudentObjectId] as? String {
+        if let _ = results?[ParseClient.JSONResponseKeys.StudentUpdatedAt] as? String {
           completionHandlerForLocationPut(true, nil)
         } else {
           completionHandlerForLocationPut(false, NSError(domain: "putToStudentLocation parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "Could not parse putToStudentLocation"]))

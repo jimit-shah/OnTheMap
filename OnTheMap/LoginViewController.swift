@@ -128,19 +128,17 @@ extension UIViewController {
     self.present(alert, animated: true, completion: nil)
   }
   
-  // WIP function // needs some testing
-  func warningAlert(_ title: String?, message: String) -> Bool
-  {
-    var ok = false
+  
+  func askToContinueAlert(_ title: String?, message: String, _ completionHandler: @escaping (_ ok: Bool) -> Void) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
 
     let overwriteAction = UIAlertAction(title: "Overwrite", style: .default, handler: { (action) -> Void in
-      ok = false
+      completionHandler(true)
     })
 
     // Create Cancel button with action handlder
     let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
-      ok = true
+      completionHandler(false)
     })
 
     //Add OK and Cancel button to dialog message
@@ -149,6 +147,5 @@ extension UIViewController {
 
     // Present dialog message to user
     self.present(alert, animated: true, completion: nil)
-    return ok
   }
 }
