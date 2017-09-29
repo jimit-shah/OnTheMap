@@ -45,35 +45,39 @@ class LocationViewController: UIViewController {
         ]
         
         if let objectID = self.objectID, !objectID.isEmpty {
-          
           // PUT to existing record
-          ParseClient.sharedInstance().putToStudentLocation(objectID, studentDict, { (result, error) in
-            if result {
-              self.notify(nil, message: "PUT/Update to your location Success!.")
-            } else {
-              self.notify(nil,message: "Error PUTing to existing location: \(error!)")
-            }
-        })
-          
+          self.putToExistingLocation(objectID: objectID, dictionary: studentDict)
         } else {
-          
           // POST a new location
-          ParseClient.sharedInstance().postToStudentLocation(studentDict, { (result, error) in
-            if result {
-              self.notify(nil, message: "Posted a new location successfully!")
-            } else {
-              self.notify(nil,message: "Error POSTing a new location: \(error!)")
-            }
-          })
+          self.postNewLocation(dictionary: studentDict)
         }
         
-        } else if let error = error {
+      } else if let error = error {
         self.notify("Error retrieving User Info" , message: "Error: \(error)")
       }
     }
     
   }
   
+  func putToExistingLocation(objectID: String, dictionary: [String:AnyObject]) {
+    ParseClient.sharedInstance().putToStudentLocation(objectID, dictionary, { (result, error) in
+      if result {
+        self.notify(nil, message: "PUT/Update to your location Success!.")
+      } else {
+        self.notify(nil,message: "Error PUTing to existing location: \(error!)")
+      }
+    })
+  }
+  
+  func postNewLocation(dictionary: [String:AnyObject]) {
+    ParseClient.sharedInstance().postToStudentLocation(dictionary, { (result, error) in
+      if result {
+        self.notify(nil, message: "Posted a new location successfully!")
+      } else {
+        self.notify(nil,message: "Error POSTing a new location: \(error!)")
+      }
+    })
+  }
   
   // MARK: Life Cycle
   override func viewDidLoad() {
