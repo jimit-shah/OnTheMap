@@ -27,6 +27,7 @@
 		EF9D4C711F2E9B5500ECC6A5 /* GCDBlackBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C701F2E9B5500ECC6A5 /* GCDBlackBox.swift */; };
 		EF9D4C731F2EB91100ECC6A5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C721F2EB91100ECC6A5 /* MapViewController.swift */; };
 		EF9D4C751F2EB95800ECC6A5 /* ListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C741F2EB95800ECC6A5 /* ListViewController.swift */; };
+		EFA21DF01F7F5D2D00488ECA /* GenericViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA21DEF1F7F5D2D00488ECA /* GenericViewController.swift */; };
 		EFD54B761F6A548300FC443D /* LocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFD54B751F6A548300FC443D /* LocationViewController.swift */; };
 		EFDE500F1F319A9D009014AE /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFDE500E1F319A9D009014AE /* BorderedButton.swift */; };
 /* End PBXBuildFile section */
@@ -54,6 +55,7 @@
 		EF9D4C701F2E9B5500ECC6A5 /* GCDBlackBox.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GCDBlackBox.swift; sourceTree = "<group>"; };
 		EF9D4C721F2EB91100ECC6A5 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		EF9D4C741F2EB95800ECC6A5 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
+		EFA21DEF1F7F5D2D00488ECA /* GenericViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericViewController.swift; sourceTree = "<group>"; };
 		EFD54B751F6A548300FC443D /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		EFDE500E1F319A9D009014AE /* BorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,6 +153,7 @@
 		EF9D4C6D1F2E9AC500ECC6A5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				EFA21DEF1F7F5D2D00488ECA /* GenericViewController.swift */,
 				EF9D4C581F2E9A3B00ECC6A5 /* LoginViewController.swift */,
 				EF9D4C721F2EB91100ECC6A5 /* MapViewController.swift */,
 				EF9D4C741F2EB95800ECC6A5 /* ListViewController.swift */,
@@ -255,6 +258,7 @@
 			files = (
 				EF9D4C591F2E9A3B00ECC6A5 /* LoginViewController.swift in Sources */,
 				EF3ECD941F36DFDE000A258E /* ParseStudent.swift in Sources */,
+				EFA21DF01F7F5D2D00488ECA /* GenericViewController.swift in Sources */,
 				EF9D4C711F2E9B5500ECC6A5 /* GCDBlackBox.swift in Sources */,
 				EF4777E11F3BE7BB008671EF /* UdacityConvenience.swift in Sources */,
 				EF47780E1F67AAEE008671EF /* TextFieldDelegate.swift in Sources */,
