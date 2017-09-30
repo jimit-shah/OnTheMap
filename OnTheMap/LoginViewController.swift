@@ -129,7 +129,7 @@ extension UIViewController {
   }
   
   
-  func askToContinueAlert(_ title: String?, message: String, _ completionHandler: @escaping (_ ok: Bool) -> Void) {
+  func askToContinueAlert(_ title: String?, message: String, _ completionHandler: @escaping (_ : Bool) -> Void) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
 
     let overwriteAction = UIAlertAction(title: "Overwrite", style: .default, handler: { (action) -> Void in
@@ -148,4 +148,5 @@ extension UIViewController {
     // Present dialog message to user
     self.present(alert, animated: true, completion: nil)
   }
+  
 }

@@ -12,7 +12,6 @@ import UIKit
 
 class StudentsTabBarController: UITabBarController {
   
-  
   // MARK: Properties
   
   var studentLocation: ParseStudent?
@@ -21,6 +20,23 @@ class StudentsTabBarController: UITabBarController {
   
   @IBAction func refreshPressed(_ sender: Any) {
     refreshData()
+  }
+  
+  @IBAction func addLocationPressed(_ sender: Any) {
+    
+    if let studentLocation = studentLocation {
+      
+      // if location exist ask to continue
+      askToContinueAlert(nil, message: "User \"\(studentLocation.firstName!) \(studentLocation.lastName!)\" Has Already Posted a Location. Would you like to Overwrite Their Location?", { (overwrite) in
+        if overwrite {
+          self.performSegue(withIdentifier: "infoPostingSegue", sender: sender)
+        }
+      })
+      
+    } else {
+      // if location doesn't exist perform segue
+      performSegue(withIdentifier: "infoPostingSegue", sender: sender)
+    }
   }
   
   @IBAction func logout(_ sender: Any) {
@@ -39,50 +55,6 @@ class StudentsTabBarController: UITabBarController {
     
   }
   
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    
-    if segue.identifier == "infoPostingSegue" {
-      let navController = segue.destination as! UINavigationController
-      let controller = navController.viewControllers.first as! InfoPostingViewController
-      controller.student = studentLocation
-    }
-  }
-  
-  
-  // MARK: shouldPerformSegue 
-  override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-    
-    if identifier == "infoPostingSegue" {
-      if let studentLocation = studentLocation {
-        
-//        askToContinueAlert(nil, message: "User \"\(studentLocation.firstName!) \(studentLocation.lastName!)\" Has Already Posted a Location. Would you like to Overwrite Their Location?", { (continue) in
-//          if continue {
-//            return true
-//          } else {
-//            return false
-//          }
-//        })
-        
-        let alert = UIAlertController(title: nil, message: "User \"\(studentLocation.firstName!) \(studentLocation.lastName!)\" Has Already Posted a Location. Would you like to Overwrite Their Location?", preferredStyle:.alert)
-
-        let overwriteAction = UIAlertAction(title: "Overwrite", style: .default, handler: { action in
-          self.performSegue(withIdentifier: "infoPostingSegue", sender: sender)
-        })
-
-        // Create Cancel button with action handlder
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
-        })
-
-        //Add OK and Cancel button to dialog message
-        alert.addAction(overwriteAction)
-        alert.addAction(cancelAction)
-
-        // Present dialog message to user
-        self.present(alert, animated: true, completion: nil)
-      }
-    }
-    return true
-  }
   
   // Dismiss View Function
   func completeLogout() {
@@ -122,7 +94,6 @@ class StudentsTabBarController: UITabBarController {
     let mapViewController = self.viewControllers?[0] as! MapViewController
     let listViewController = self.viewControllers?[1] as! ListViewController
     
-    
     ParseClient.sharedInstance().getStudentLocations{ (students, error) in
       
       if let students = students {
@@ -145,7 +116,18 @@ class StudentsTabBarController: UITabBarController {
         //print(error ?? "Could not find any Student Locations.")
         self.notify("No Data Found", message: (error?.localizedDescription)!)
       }
-      
+    }
+  }
+  
+  // MARK: prepareForSegue
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    //var overwriteLocation = false
+    if segue.identifier == "infoPostingSegue" {
+      if let studentLocation = studentLocation {
+        let navController = segue.destination as! UINavigationController
+        let controller = navController.viewControllers.first as! InfoPostingViewController
+        controller.student = studentLocation
+      }
     }
   }
   

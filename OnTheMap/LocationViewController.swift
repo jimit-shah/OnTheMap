@@ -59,6 +59,7 @@ class LocationViewController: UIViewController {
     
   }
   
+  // Function to Update an Existing Location
   func putToExistingLocation(objectID: String, dictionary: [String:AnyObject]) {
     ParseClient.sharedInstance().putToStudentLocation(objectID, dictionary, { (result, error) in
       if result {
@@ -69,6 +70,7 @@ class LocationViewController: UIViewController {
     })
   }
   
+  // Function to Post a New Location
   func postNewLocation(dictionary: [String:AnyObject]) {
     ParseClient.sharedInstance().postToStudentLocation(dictionary, { (result, error) in
       if result {

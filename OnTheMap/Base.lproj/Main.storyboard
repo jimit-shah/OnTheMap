@@ -214,12 +214,12 @@
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
-                            <barButtonItem image="icon_addpin" id="yEL-g6-fF2">
+                            <barButtonItem image="icon_addpin" id="yEL-g6-fF2" userLabel="Add Loction">
                                 <connections>
-                                    <segue destination="zRu-sd-RG8" kind="presentation" identifier="infoPostingSegue" id="COI-er-k7h"/>
+                                    <action selector="addLocationPressed:" destination="Lez-qt-ROq" id="PPr-HO-KcJ"/>
                                 </connections>
                             </barButtonItem>
-                            <barButtonItem image="icon_refresh" id="cy7-hB-e6J">
+                            <barButtonItem image="icon_refresh" id="cy7-hB-e6J" userLabel="Refresh">
                                 <connections>
                                     <action selector="refreshPressed:" destination="Lez-qt-ROq" id="uH5-uM-hM9"/>
                                 </connections>
@@ -234,11 +234,12 @@
                     <connections>
                         <segue destination="XCP-yZ-CoJ" kind="relationship" relationship="viewControllers" id="kGh-lC-M71"/>
                         <segue destination="bZ1-ma-ozr" kind="relationship" relationship="viewControllers" id="avN-2J-YfK"/>
+                        <segue destination="zRu-sd-RG8" kind="presentation" identifier="infoPostingSegue" id="7v4-jS-CwH"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jhs-li-pap" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-410" y="779"/>
+            <point key="canvasLocation" x="-420" y="779"/>
         </scene>
         <!--List-->
         <scene sceneID="3Rb-gM-KcN">
