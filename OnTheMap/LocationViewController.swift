@@ -47,6 +47,7 @@ class LocationViewController: UIViewController {
         if let objectID = self.objectID, !objectID.isEmpty {
           // PUT to existing record
           self.putToExistingLocation(objectID: objectID, dictionary: studentDict)
+          
         } else {
           // POST a new location
           self.postNewLocation(dictionary: studentDict)
@@ -61,13 +62,39 @@ class LocationViewController: UIViewController {
   
   // Function to Update an Existing Location
   func putToExistingLocation(objectID: String, dictionary: [String:AnyObject]) {
-    ParseClient.sharedInstance().putToStudentLocation(objectID, dictionary, { (result, error) in
-      if result {
-        self.notify(nil, message: "PUT/Update to your location Success!.")
+    
+    var message: String?
+    ParseClient.sharedInstance().putToStudentLocation(objectID, dictionary, { (success, error) in
+      if success {
+        message = "PUT/Update to your location Success!."
       } else {
-        self.notify(nil,message: "Error PUTing to existing location: \(error!)")
+        message = "Error PUTing a new location: \(error!)"
       }
+      
+      self.dismissAlert(nil, message: message!, handler: {
+        self.startOver()
+      })
+      
+      // direcly using Alert view
+      /*
+            dismissAlert(nil, message: message, handler { (success) in
+                self.startOver()
+              }
+            })
+            let alert = UIAlertController(title: nil,
+                                          message: message!,
+                                          preferredStyle: UIAlertControllerStyle.alert)
+            let action = UIAlertAction(title: "Dismiss", style: .default, handler: { (action) in
+              self.startOver()
+            })
+ 
+            alert.addAction(action)
+            self.present(alert, animated: true, completion: nil)
+       */
+ 
     })
+    
+    
   }
   
   // Function to Post a New Location
@@ -89,13 +116,6 @@ class LocationViewController: UIViewController {
     // Call Geacoding function
     lookupGeocoding()
   }
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    
-    
-  }
-  
   
   // MARK: Forward Geocoding to get latitude and longitude based on user entry.
   func lookupGeocoding() {
@@ -165,7 +185,10 @@ class LocationViewController: UIViewController {
       self.mapView.setRegion(MKCoordinateRegionMakeWithDistance(coordinate, regionRadius, regionRadius), animated: true)
     }
   }
-  
+  // MARK: startOver()
+  func startOver() {
+    self.navigationController?.dismiss(animated: true, completion: nil)
+  }
 }
 
 // MARK: MKMapViewDelegate
