@@ -22,6 +22,7 @@ class LocationViewController: UIViewController {
   var mediaURL: String?
   var lat: CLLocationDegrees?
   var long: CLLocationDegrees?
+  var message: String?
   
   // MARK: Outlets
   @IBOutlet weak var mapView: MKMapView!
@@ -54,7 +55,9 @@ class LocationViewController: UIViewController {
         }
         
       } else if let error = error {
-        self.notify("Error retrieving User Info" , message: "Error: \(error)")
+        self.dismissAlert(nil, message: "Error Retrieving User Info: \(error)", handler: {
+          self.startOver()
+        })
       }
     }
     
@@ -63,48 +66,31 @@ class LocationViewController: UIViewController {
   // Function to Update an Existing Location
   func putToExistingLocation(objectID: String, dictionary: [String:AnyObject]) {
     
-    var message: String?
+    //var message: String?
     ParseClient.sharedInstance().putToStudentLocation(objectID, dictionary, { (success, error) in
       if success {
-        message = "PUT/Update to your location Success!."
+        self.message = "PUT/Update to your location Success!"
       } else {
-        message = "Error PUTing a new location: \(error!)"
+        self.message = "Error PUTing a new location: \(error!)"
       }
-      
-      self.dismissAlert(nil, message: message!, handler: {
+      self.dismissAlert(nil, message: self.message!, handler: {
         self.startOver()
       })
-      
-      // direcly using Alert view
-      /*
-            dismissAlert(nil, message: message, handler { (success) in
-                self.startOver()
-              }
-            })
-            let alert = UIAlertController(title: nil,
-                                          message: message!,
-                                          preferredStyle: UIAlertControllerStyle.alert)
-            let action = UIAlertAction(title: "Dismiss", style: .default, handler: { (action) in
-              self.startOver()
-            })
- 
-            alert.addAction(action)
-            self.present(alert, animated: true, completion: nil)
-       */
- 
     })
-    
     
   }
   
   // Function to Post a New Location
   func postNewLocation(dictionary: [String:AnyObject]) {
-    ParseClient.sharedInstance().postToStudentLocation(dictionary, { (result, error) in
-      if result {
-        self.notify(nil, message: "Posted a new location successfully!")
+    ParseClient.sharedInstance().postToStudentLocation(dictionary, { (success, error) in
+      if success {
+        self.message = "Posted a new location successfully!"
       } else {
-        self.notify(nil,message: "Error POSTing a new location: \(error!)")
+        self.message = "Error POSTing a new location: \(error!)"
       }
+      self.dismissAlert(nil, message: self.message!, handler: {
+        self.startOver()
+      })
     })
   }
   
@@ -113,7 +99,7 @@ class LocationViewController: UIViewController {
     super.viewDidLoad()
     mapView.delegate = self
     
-    // Call Geacoding function
+    // Call to Geacoding function
     lookupGeocoding()
   }
   
