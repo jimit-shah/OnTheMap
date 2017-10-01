@@ -24,6 +24,13 @@ class LocationViewController: UIViewController {
   var long: CLLocationDegrees?
   var message: String?
   
+  enum Messages: String {
+    case putSuccess = "Your Location Updated Successfully!"
+    case postSuccess = "Your Location Added Successfully!"
+    case putError = "Error - Location Update Failed."
+    case postError = "Error - Didn't Save Location."
+  }
+  
   // MARK: Outlets
   @IBOutlet weak var mapView: MKMapView!
   
@@ -69,9 +76,9 @@ class LocationViewController: UIViewController {
     //var message: String?
     ParseClient.sharedInstance().putToStudentLocation(objectID, dictionary, { (success, error) in
       if success {
-        self.message = "PUT/Update to your location Success!"
+        self.message = Messages.putSuccess.rawValue
       } else {
-        self.message = "Error PUTing a new location: \(error!)"
+        self.message = Messages.putError.rawValue
       }
       self.dismissAlert(nil, message: self.message!, handler: {
         self.startOver()
@@ -84,9 +91,9 @@ class LocationViewController: UIViewController {
   func postNewLocation(dictionary: [String:AnyObject]) {
     ParseClient.sharedInstance().postToStudentLocation(dictionary, { (success, error) in
       if success {
-        self.message = "Posted a new location successfully!"
+        self.message = Messages.postSuccess.rawValue
       } else {
-        self.message = "Error POSTing a new location: \(error!)"
+        self.message = Messages.postError.rawValue
       }
       self.dismissAlert(nil, message: self.message!, handler: {
         self.startOver()
