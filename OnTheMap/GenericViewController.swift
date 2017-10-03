@@ -48,4 +48,28 @@ extension UIViewController {
     self.present(alert, animated: true, completion: nil)
   }
   
+  // MARK: startAcitivityIndicator
+  func startAcitivtyIndicator(_ activityIndicator: UIActivityIndicatorView, for controller: UIViewController) {
+    activityIndicator.center = controller.view.center
+    activityIndicator.hidesWhenStopped = true
+    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+    
+    for subview in controller.view.subviews {
+      subview.alpha = 0.6
+    }
+    
+    controller.view.backgroundColor = UIColor.darkGray
+    controller.view.addSubview(activityIndicator)
+    activityIndicator.startAnimating()
+    
+  }
+  
+  // MARK: stopAcitivityIndicator
+  func stopActivityIndicator(_ activityIndicator: UIActivityIndicatorView, for controller: UIViewController) {
+    for subview in controller.view.subviews {
+      subview.alpha = 1.0
+    }
+    activityIndicator.stopAnimating()
+  }
+  
 }

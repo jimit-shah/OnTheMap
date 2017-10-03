@@ -39,7 +39,9 @@ class LocationViewController: UIViewController {
   // MARK: Actions
   @IBAction func finishPressed(_ sender: Any) {
     
-    startAcitivtyIndicator()
+    // show an activity indicator
+    startAcitivtyIndicator(activityIndicator, for: self)
+    
     // Get Student's Public Data
     UdacityClient.sharedInstance().getUserInfo { (student, error) in
     
@@ -57,12 +59,10 @@ class LocationViewController: UIViewController {
         
         if let objectID = self.objectID, !objectID.isEmpty {
           // PUT to existing record
-          
           self.putToExistingLocation(objectID: objectID, dictionary: studentDict)
           
         } else {
           // POST a new location
-          
           self.postNewLocation(dictionary: studentDict)
         }
         
@@ -85,13 +85,12 @@ class LocationViewController: UIViewController {
       } else {
         self.message = Messages.putError.rawValue
       }
-      
-        self.stopActivityIndicator()
+      performUIUpdatesOnMain {
+        self.stopActivityIndicator(self.activityIndicator, for: self)
         self.dismissAlert(nil, message: self.message!, handler: {
           self.startOver()
         })
-      
-      
+      }
     })
     
   }
@@ -109,23 +108,7 @@ class LocationViewController: UIViewController {
       })
     })
   }
-  
-  func startAcitivtyIndicator() {
-    activityIndicator.center = self.view.center
-    activityIndicator.hidesWhenStopped = true
-    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-    view.addSubview(activityIndicator)
-    activityIndicator.startAnimating()
-    UIApplication.shared.beginIgnoringInteractionEvents()
-  }
-  
-  func stopActivityIndicator() {
-    performUIUpdatesOnMain {
-      self.activityIndicator.stopAnimating()
-      UIApplication.shared.endIgnoringInteractionEvents()
-    }
-  }
-
+ 
   // MARK: Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()

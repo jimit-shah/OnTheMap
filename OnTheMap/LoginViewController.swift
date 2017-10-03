@@ -26,7 +26,7 @@ class LoginViewController: UIViewController {
   @IBAction func loginPressed(_ sender: Any) {
     
     if checkTextfieldsEmpty() {
-      notifyUser(nil, message: "Email or Password Empty.")
+      notify(nil, message: "Email or Password Empty.")
     } else {
       UdacityClient.sharedInstance().authenticateWithLogin(usernameTextField.text!, passwordTextField.text!) { (success, errorString) in
         performUIUpdatesOnMain {
@@ -98,18 +98,6 @@ private extension LoginViewController {
   func configureTextFields() {
     usernameTextField.delegate = textFieldDelegate
     passwordTextField.delegate = textFieldDelegate
-  }
-  
-  // MARK: AlertView to Notify User.
-  
-  func notifyUser(_ title: String?, message: String) -> Void
-  {
-    let alert = UIAlertController(title: title,
-                                  message: message,
-                                  preferredStyle: UIAlertControllerStyle.alert)
-    let action = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
-    alert.addAction(action)
-    self.present(alert, animated: true, completion: nil)
   }
   
 }

@@ -15,6 +15,7 @@ class StudentsTabBarController: UITabBarController {
   // MARK: Properties
   
   var studentLocation: ParseStudent?
+  var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
   
   // MARK: Actions
   
@@ -78,8 +79,6 @@ class StudentsTabBarController: UITabBarController {
       
       if let studentLocation = studentLocation {
         self.studentLocation = studentLocation
-        print("StudentLocation is retrieved by getStudentLocation.")
-        print("Student Info: \(studentLocation)")
       }
     })
   }
@@ -87,10 +86,14 @@ class StudentsTabBarController: UITabBarController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    startAcitivtyIndicator(activityIndicator, for: self)
     refreshData()
   }
   
   func refreshData() {
+    
+    startAcitivtyIndicator(activityIndicator, for: self)
+    
     let mapViewController = self.viewControllers?[0] as! MapViewController
     let listViewController = self.viewControllers?[1] as! ListViewController
     
@@ -100,23 +103,23 @@ class StudentsTabBarController: UITabBarController {
         listViewController.students = students
         
         performUIUpdatesOnMain {
-          // first remove all annotations (if already added before)
-          mapViewController.removeAnnotations()
           
-          // now add all annotations to mapview
+          // Add Annotations to MapView
           mapViewController.addAnnotationsToMapView(locations: students)
-          //listViewController.re
+          listViewController.refreshTableView()
           //call the reload data
-          if let studentsTableView = listViewController.studentsTableView {
-            studentsTableView.reloadData()
-          }
+//          if let studentsTableView = listViewController.studentsTableView {
+//            studentsTableView.reloadData()
+//          }
           
+          self.stopActivityIndicator(self.activityIndicator, for: self)
         }
       } else {
         //print(error ?? "Could not find any Student Locations.")
         self.notify("No Data Found", message: (error?.localizedDescription)!)
       }
     }
+    
   }
   
   // MARK: prepareForSegue
@@ -129,22 +132,6 @@ class StudentsTabBarController: UITabBarController {
         controller.student = studentLocation
       }
     }
-  }
-  
-}
-
-// MARK: - ListViewController (Configure UI)
-
-private extension StudentsTabBarController {
-  
-  func notifyUser(_ title: String?, message: String) -> Void
-  {
-    let alert = UIAlertController(title: title,
-                                  message: message,
-                                  preferredStyle: UIAlertControllerStyle.alert)
-    let action = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
-    alert.addAction(action)
-    self.present(alert, animated: true, completion: nil)
   }
   
 }

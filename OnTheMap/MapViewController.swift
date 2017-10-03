@@ -27,6 +27,9 @@ class MapViewController: UIViewController {
   // Function to Add Annotations to MapView
   func addAnnotationsToMapView(locations: [ParseStudent]) {
     //remove
+    //mapViewController.removeAnnotations()
+    self.removeAnnotations()
+    
     for location in locations {
       
       let lat = CLLocationDegrees(location.latitude)

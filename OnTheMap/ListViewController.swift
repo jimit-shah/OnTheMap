@@ -23,7 +23,7 @@ class ListViewController: UIViewController {
   // MARK: Life cycle
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    studentsTableView.reloadData()
+    refreshTableView()
   }
   
 }
@@ -73,11 +73,11 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     }
   }
   
-//  func refreshTableView() {
-//    if let tableV = tab {
-//    tableV.reload)
-//    }
-//  }
+  func refreshTableView() {
+    if let studentsTableView = studentsTableView {
+    studentsTableView.reloadData()
+    }
+  }
   
 }
 
