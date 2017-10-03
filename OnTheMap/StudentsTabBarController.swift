@@ -86,13 +86,12 @@ class StudentsTabBarController: UITabBarController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    startAcitivtyIndicator(activityIndicator, for: self)
     refreshData()
   }
   
   func refreshData() {
     
-    startAcitivtyIndicator(activityIndicator, for: self)
+    startWhiteAcitivtyIndicator(activityIndicator, for: self)
     
     let mapViewController = self.viewControllers?[0] as! MapViewController
     let listViewController = self.viewControllers?[1] as! ListViewController
@@ -104,19 +103,17 @@ class StudentsTabBarController: UITabBarController {
         
         performUIUpdatesOnMain {
           
-          // Add Annotations to MapView
+          // Add Annotations to MapView and refresh data
           mapViewController.addAnnotationsToMapView(locations: students)
           listViewController.refreshTableView()
-          //call the reload data
-//          if let studentsTableView = listViewController.studentsTableView {
-//            studentsTableView.reloadData()
-//          }
-          
-          self.stopActivityIndicator(self.activityIndicator, for: self)
+          self.stopWhiteActivityIndicator(self.activityIndicator, for: self)
         }
       } else {
-        //print(error ?? "Could not find any Student Locations.")
-        self.notify("No Data Found", message: (error?.localizedDescription)!)
+        performUIUpdatesOnMain {
+          self.notify("No Data Found", message: (error?.localizedDescription)!)
+          self.stopWhiteActivityIndicator(self.activityIndicator, for: self)
+        }
+        
       }
     }
     

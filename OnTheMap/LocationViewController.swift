@@ -40,7 +40,7 @@ class LocationViewController: UIViewController {
   @IBAction func finishPressed(_ sender: Any) {
     
     // show an activity indicator
-    startAcitivtyIndicator(activityIndicator, for: self)
+    startWhiteAcitivtyIndicator(activityIndicator, for: self)
     
     // Get Student's Public Data
     UdacityClient.sharedInstance().getUserInfo { (student, error) in
@@ -68,6 +68,7 @@ class LocationViewController: UIViewController {
         
       } else if let error = error {
         self.dismissAlert(nil, message: "Error Retrieving User Info: \(error)", handler: {
+          self.stopWhiteActivityIndicator(self.activityIndicator, for: self)
           self.startOver()
         })
       }
@@ -86,7 +87,7 @@ class LocationViewController: UIViewController {
         self.message = Messages.putError.rawValue
       }
       performUIUpdatesOnMain {
-        self.stopActivityIndicator(self.activityIndicator, for: self)
+        self.stopWhiteActivityIndicator(self.activityIndicator, for: self)
         self.dismissAlert(nil, message: self.message!, handler: {
           self.startOver()
         })
@@ -103,9 +104,13 @@ class LocationViewController: UIViewController {
       } else {
         self.message = Messages.postError.rawValue
       }
-      self.dismissAlert(nil, message: self.message!, handler: {
-        self.startOver()
-      })
+      performUIUpdatesOnMain {
+        self.stopWhiteActivityIndicator(self.activityIndicator, for: self)
+        self.dismissAlert(nil, message: self.message!, handler: {
+          self.startOver()
+        })
+      }
+      
     })
   }
  

@@ -18,13 +18,15 @@ class LoginViewController: UIViewController {
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var loginButton: UIButton!
   
+  var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+  
   // MARK: Text Field Delegate object
   let textFieldDelegate = TextFieldDelegate()
   
   // MARK: Actions
   
   @IBAction func loginPressed(_ sender: Any) {
-    
+    startGrayAcitivtyIndicator(activityIndicator, for: self)
     if checkTextfieldsEmpty() {
       notify(nil, message: "Email or Password Empty.")
     } else {
@@ -32,13 +34,13 @@ class LoginViewController: UIViewController {
         performUIUpdatesOnMain {
           if success {
             self.completeLogin()
-            print("Login Success!")
-            
+            self.stopGrayActivityIndicator(self.activityIndicator, for: self)
             // reset textfields after successfully login.
             self.resetControls()
             
           } else {
             self.notify(nil, message: "Invalid Email or Password.")
+            self.stopGrayActivityIndicator(self.activityIndicator, for: self)
           }
         }
       }
