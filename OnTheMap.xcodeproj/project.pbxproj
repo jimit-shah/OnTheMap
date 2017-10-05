@@ -18,6 +18,9 @@
 		EF4777E11F3BE7BB008671EF /* UdacityConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4777E01F3BE7BB008671EF /* UdacityConvenience.swift */; };
 		EF4777E31F411787008671EF /* ParseConvenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF4777E21F411787008671EF /* ParseConvenience.swift */; };
 		EF47780E1F67AAEE008671EF /* TextFieldDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF47780D1F67AAEE008671EF /* TextFieldDelegate.swift */; };
+		EF72F2C51F86B21E00D1E21D /* Bolts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF72F2C21F86B10E00D1E21D /* Bolts.framework */; };
+		EF72F2C61F86B21E00D1E21D /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF72F2C31F86B10F00D1E21D /* FBSDKCoreKit.framework */; };
+		EF72F2C71F86B21E00D1E21D /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EF72F2C41F86B10F00D1E21D /* FBSDKLoginKit.framework */; };
 		EF92D9201F70AE6D0014524E /* UdacityStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF92D91F1F70AE6D0014524E /* UdacityStudent.swift */; };
 		EF9D4C571F2E9A3B00ECC6A5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C561F2E9A3B00ECC6A5 /* AppDelegate.swift */; };
 		EF9D4C591F2E9A3B00ECC6A5 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF9D4C581F2E9A3B00ECC6A5 /* LoginViewController.swift */; };
@@ -44,6 +47,9 @@
 		EF4777E01F3BE7BB008671EF /* UdacityConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConvenience.swift; sourceTree = "<group>"; };
 		EF4777E21F411787008671EF /* ParseConvenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConvenience.swift; sourceTree = "<group>"; };
 		EF47780D1F67AAEE008671EF /* TextFieldDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldDelegate.swift; sourceTree = "<group>"; };
+		EF72F2C21F86B10E00D1E21D /* Bolts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Bolts.framework; sourceTree = "<group>"; };
+		EF72F2C31F86B10F00D1E21D /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		EF72F2C41F86B10F00D1E21D /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		EF92D91F1F70AE6D0014524E /* UdacityStudent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityStudent.swift; sourceTree = "<group>"; };
 		EF9D4C531F2E9A3B00ECC6A5 /* OnTheMap.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnTheMap.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF9D4C561F2E9A3B00ECC6A5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -65,17 +71,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EF72F2C51F86B21E00D1E21D /* Bolts.framework in Frameworks */,
+				EF72F2C61F86B21E00D1E21D /* FBSDKCoreKit.framework in Frameworks */,
+				EF72F2C71F86B21E00D1E21D /* FBSDKLoginKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF72F2BE1F85A57200D1E21D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EF72F2C21F86B10E00D1E21D /* Bolts.framework */,
+				EF72F2C31F86B10F00D1E21D /* FBSDKCoreKit.framework */,
+				EF72F2C41F86B10F00D1E21D /* FBSDKLoginKit.framework */,
+			);
+			name = Frameworks;
+			path = OnTheMap;
+			sourceTree = "<group>";
+		};
 		EF9D4C4A1F2E9A3B00ECC6A5 = {
 			isa = PBXGroup;
 			children = (
 				EF9D4C551F2E9A3B00ECC6A5 /* OnTheMap */,
 				EF9D4C541F2E9A3B00ECC6A5 /* Products */,
+				EF72F2BE1F85A57200D1E21D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -413,6 +434,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = R98NQ2F62J;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OnTheMap",
+				);
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jimitshah.OnTheMap;
@@ -427,6 +452,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = R98NQ2F62J;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OnTheMap",
+				);
 				INFOPLIST_FILE = OnTheMap/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jimitshah.OnTheMap;

@@ -10,7 +10,10 @@ import UIKit
 
 extension UIViewController {
   
-  func notify( _ title: String?, message: String) -> Void
+  
+  // Alert Views
+  
+  func showAlert( _ title: String?, message: String) -> Void
   {
     let alert = UIAlertController(title: title,
                                   message: message,
@@ -47,6 +50,8 @@ extension UIViewController {
     alert.addAction(dismissAction)
     self.present(alert, animated: true, completion: nil)
   }
+  
+  // Activity Indicators
   
   // MARK: startWhiteAcitivityIndicator
   func startWhiteAcitivtyIndicator(_ activityIndicator: UIActivityIndicatorView, for controller: UIViewController) {

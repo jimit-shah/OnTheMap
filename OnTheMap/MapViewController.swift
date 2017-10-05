@@ -85,7 +85,7 @@ extension MapViewController: MKMapViewDelegate {
       if let url = view.annotation?.subtitle! {
         app.open(URL(string:url)!, options: [:], completionHandler: { (success) in
           if !success {
-            self.notify("Invalid URL", message: "Could not open URL")
+            self.showAlert("Invalid URL", message: "Could not open URL")
           }
         })
       }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 // MARK: - LoginViewController: UIViewController
 
@@ -28,7 +29,7 @@ class LoginViewController: UIViewController {
   @IBAction func loginPressed(_ sender: Any) {
     startGrayAcitivtyIndicator(activityIndicator, for: self)
     if checkTextfieldsEmpty() {
-      notify(nil, message: "Email or Password Empty.")
+      showAlert(nil, message: "Email or Password Empty.")
     } else {
       UdacityClient.sharedInstance().authenticateWithLogin(usernameTextField.text!, passwordTextField.text!) { (success, errorString) in
         performUIUpdatesOnMain {
@@ -39,7 +40,7 @@ class LoginViewController: UIViewController {
             self.resetControls()
             
           } else {
-            self.notify(nil, message: "Invalid Email or Password.")
+            self.showAlert(nil, message: "Invalid Email or Password.")
             self.stopGrayActivityIndicator(self.activityIndicator, for: self)
           }
         }
@@ -63,6 +64,23 @@ class LoginViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     configureTextFields()
+    
+    // Facebook Login
+    
+    // Create the login button
+    let loginButton = FBSDKLoginButton()
+    loginButton.center = view.center
+    loginButton.delegate = self
+    view.addSubview(loginButton)
+    
+     // Check if user is logged in
+    if ((FBSDKAccessToken.current()) != nil) {
+      //presentWithSegueIdentifier("showAccount", animated: false)
+      completeLogin()
+    }
+    
+    // Set read permissions
+    loginButton.readPermissions = ["public_profile"]
   }
   
   // MARK: Login
@@ -102,4 +120,25 @@ private extension LoginViewController {
     passwordTextField.delegate = textFieldDelegate
   }
   
+}
+
+// MARK: - LoginViewController: FBSDKLoginButtonDelegate
+extension LoginViewController: FBSDKLoginButtonDelegate {
+  
+  public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith
+    result: FBSDKLoginManagerLoginResult!, error: Error!) {
+    if let error = error {
+      showAlert("Login Failed", message: "Error: \(error)")
+    }
+    
+    // The FBSDKAccessToken is expected to be available, so we can let the user in.
+    if result.token != nil {
+      completeLogin()
+      //presentWithSegueIdentifier("MasterNavigationController", animated: true)
+    }
+  }
+  
+  public func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
+    // On logout, we just remain on the login view controller
+  }
 }

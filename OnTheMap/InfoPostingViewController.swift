@@ -55,15 +55,15 @@ class InfoPostingViewController: UIViewController {
   override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
     if identifier == "mapViewSegue" {
       guard let locationString = locationTextField.text, !locationString.isEmpty  else {
-        notify("Location Not Found", message: "Must Enter a Location.")
+        showAlert("Location Not Found", message: "Must Enter a Location.")
         return false
       }
       guard let url = websiteTextField.text, !url.isEmpty else {
-        notify("Location Not Found", message: "Must Enter a Website.")
+        showAlert("Location Not Found", message: "Must Enter a Website.")
         return false
       }
       if (!url.contains("https://")) {
-        notify("Location Not Found", message: "Website must include \"https://\"")
+        showAlert("Location Not Found", message: "Website must include \"https://\"")
         return false
       }
     }

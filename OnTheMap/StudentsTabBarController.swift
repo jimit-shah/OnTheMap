@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 // MARK: - StudentsTabBarController
 
@@ -23,6 +24,11 @@ class StudentsTabBarController: UITabBarController {
     refreshData()
   }
   
+  // Facebook Login
+  @IBAction func loginWithFacebook(_ sender: Any) {
+    
+    
+  }
   @IBAction func addLocationPressed(_ sender: Any) {
     
     if let studentLocation = studentLocation {
@@ -49,10 +55,20 @@ class StudentsTabBarController: UITabBarController {
           self.completeLogout()
         } else {
           self.displayError(errorString)
-          self.notify(nil, message: "Invalid Link")
+          self.showAlert(nil, message: "Invalid Link")
         }
       }
     }
+  
+    // Logout from Facebook Login
+    
+//    if isAccountKitLogin {
+//      accountKit.logOut()
+//    } else {
+      let loginManager = FBSDKLoginManager()
+      loginManager.logOut()
+//    }
+    self.completeLogout()
     
   }
   
@@ -110,7 +126,7 @@ class StudentsTabBarController: UITabBarController {
         }
       } else {
         performUIUpdatesOnMain {
-          self.notify("No Data Found", message: (error?.localizedDescription)!)
+          self.showAlert("No Data Found", message: (error?.localizedDescription)!)
           self.stopWhiteActivityIndicator(self.activityIndicator, for: self)
         }
         

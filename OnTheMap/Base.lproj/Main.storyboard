@@ -119,7 +119,10 @@
                                             <constraint firstAttribute="height" constant="35" id="oeV-OB-Ecp"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                        <state key="normal" title="Sign in with Facebook"/>
+                                        <state key="normal" title="CONTINUE WITH FACEBOOK"/>
+                                        <connections>
+                                            <action selector="loginWithFacebook:" destination="G7R-lr-85U" eventType="touchUpInside" id="fFw-y1-KSR"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -142,6 +145,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eWT-4U-w1x" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="G7R-lr-85U" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-2065" y="779"/>
         </scene>
