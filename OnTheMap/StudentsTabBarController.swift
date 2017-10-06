@@ -24,11 +24,7 @@ class StudentsTabBarController: UITabBarController {
     refreshData()
   }
   
-  // Facebook Login
-  @IBAction func loginWithFacebook(_ sender: Any) {
-    
-    
-  }
+  
   @IBAction func addLocationPressed(_ sender: Any) {
     
     if let studentLocation = studentLocation {

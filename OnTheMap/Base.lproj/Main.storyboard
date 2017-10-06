@@ -121,6 +121,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                         <state key="normal" title="CONTINUE WITH FACEBOOK"/>
                                         <connections>
+                                            <action selector="loginWithFacebook:" destination="hmH-sU-e5J" eventType="touchUpInside" id="JkT-C4-d1V"/>
                                             <action selector="loginWithFacebook:" destination="G7R-lr-85U" eventType="touchUpInside" id="fFw-y1-KSR"/>
                                         </connections>
                                     </button>

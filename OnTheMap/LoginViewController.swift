@@ -26,6 +26,24 @@ class LoginViewController: UIViewController {
   
   // MARK: Actions
   
+  // Facebook login
+  @IBAction func loginWithFacebook(_ sender: Any) {
+    let readPermissions = ["public_profile"]
+    let loginManager = FBSDKLoginManager()
+    loginManager.logIn(withReadPermissions: readPermissions, from: self) { (result, error) in
+      if ((error) != nil){
+        self.showAlert("Login Failed", message: "Error: \(String(describing: error))")
+      } else if (result?.isCancelled)! {
+        self.showAlert("Login Canceled", message: "Login with Facebook Cancelled.")
+      } else {
+        //present the next view controller
+        //self.presentWithSegueIdentifier("showAccount",animated: true)
+        self.completeLogin()
+      }
+    }
+  }
+  
+  // Udacity Login
   @IBAction func loginPressed(_ sender: Any) {
     startGrayAcitivtyIndicator(activityIndicator, for: self)
     if checkTextfieldsEmpty() {
@@ -64,23 +82,6 @@ class LoginViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     configureTextFields()
-    
-    // Facebook Login
-    
-    // Create the login button
-    let loginButton = FBSDKLoginButton()
-    loginButton.center = view.center
-    loginButton.delegate = self
-    view.addSubview(loginButton)
-    
-     // Check if user is logged in
-    if ((FBSDKAccessToken.current()) != nil) {
-      //presentWithSegueIdentifier("showAccount", animated: false)
-      completeLogin()
-    }
-    
-    // Set read permissions
-    loginButton.readPermissions = ["public_profile"]
   }
   
   // MARK: Login
