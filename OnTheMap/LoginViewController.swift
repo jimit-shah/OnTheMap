@@ -34,7 +34,7 @@ class LoginViewController: UIViewController {
       if ((error) != nil){
         self.showAlert("Login Failed", message: "Error: \(String(describing: error))")
       } else if (result?.isCancelled)! {
-        self.showAlert("Login Canceled", message: "Login with Facebook Cancelled.")
+        self.showAlert("Login Canceled", message: "Login with Facebook Canceled.")
       } else {
         //present the next view controller
         //self.presentWithSegueIdentifier("showAccount",animated: true)

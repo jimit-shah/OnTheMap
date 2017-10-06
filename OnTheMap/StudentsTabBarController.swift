@@ -43,28 +43,23 @@ class StudentsTabBarController: UITabBarController {
   }
   
   @IBAction func logout(_ sender: Any) {
-    
-    UdacityClient.sharedInstance().sessionLogout{ (success, errorString) in
-      performUIUpdatesOnMain {
-        if success {
-          print("Logout Successfully.")
-          self.completeLogout()
-        } else {
-          self.displayError(errorString)
-          self.showAlert(nil, message: "Invalid Link")
+    if isFacebookLogin {
+      let loginManager = FBSDKLoginManager()
+      loginManager.logOut()
+      self.completeLogout()
+    } else {
+      UdacityClient.sharedInstance().sessionLogout{ (success, errorString) in
+        performUIUpdatesOnMain {
+          if success {
+            print("Logout Successfully.")
+            self.completeLogout()
+          } else {
+            self.displayError(errorString)
+            self.showAlert(nil, message: "Invalid Link")
+          }
         }
       }
     }
-  
-    // Logout from Facebook Login
-    
-//    if isAccountKitLogin {
-//      accountKit.logOut()
-//    } else {
-      let loginManager = FBSDKLoginManager()
-      loginManager.logOut()
-//    }
-    self.completeLogout()
     
   }
   
@@ -80,6 +75,13 @@ class StudentsTabBarController: UITabBarController {
       print(errorString)
     }
   }
+  
+  // MARK: Helpers
+  
+  // A flag indicating the presence of an Facebook SDK access token
+  fileprivate let isFacebookLogin: Bool = {
+    return FBSDKAccessToken.current() != nil
+  }()
   
   // MARK : Life Cycle
   

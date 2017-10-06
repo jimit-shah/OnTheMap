@@ -122,7 +122,6 @@
                                         <state key="normal" title="CONTINUE WITH FACEBOOK"/>
                                         <connections>
                                             <action selector="loginWithFacebook:" destination="hmH-sU-e5J" eventType="touchUpInside" id="JkT-C4-d1V"/>
-                                            <action selector="loginWithFacebook:" destination="G7R-lr-85U" eventType="touchUpInside" id="fFw-y1-KSR"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -146,7 +145,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eWT-4U-w1x" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="G7R-lr-85U" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-2065" y="779"/>
         </scene>
