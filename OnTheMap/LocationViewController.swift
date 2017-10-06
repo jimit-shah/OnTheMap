@@ -26,11 +26,13 @@ class LocationViewController: UIViewController {
   
   var activityIndicator:UIActivityIndicatorView = UIActivityIndicatorView()
   
-  enum Messages: String {
-    case putSuccess = "Your Location Updated Successfully!"
-    case postSuccess = "Your Location Added Successfully!"
-    case putError = "Error - Location Update Failed."
-    case postError = "Error - Didn't Save Location."
+  // MARK: Messages
+  struct Messages {
+    // Messages to Display Alert on API completion.
+    static let PutSuccess = "Your Location Updated Successfully!"
+    static let PostSuccess = "Your Location Added Successfully!"
+    static let PutError = "Error - Location Update Failed."
+    static let PostError = "Error - Didn't Save Location."
   }
   
   // MARK: Outlets
@@ -82,9 +84,9 @@ class LocationViewController: UIViewController {
     //var message: String?
     ParseClient.sharedInstance().putToStudentLocation(objectID, dictionary, { (success, error) in
       if success {
-        self.message = Messages.putSuccess.rawValue
+        self.message = Messages.PutSuccess
       } else {
-        self.message = Messages.putError.rawValue
+        self.message = Messages.PutError
       }
       performUIUpdatesOnMain {
         self.stopWhiteActivityIndicator(self.activityIndicator, for: self)
@@ -100,9 +102,9 @@ class LocationViewController: UIViewController {
   func postNewLocation(dictionary: [String:AnyObject]) {
     ParseClient.sharedInstance().postToStudentLocation(dictionary, { (success, error) in
       if success {
-        self.message = Messages.postSuccess.rawValue
+        self.message = Messages.PostSuccess
       } else {
-        self.message = Messages.postError.rawValue
+        self.message = Messages.PostError
       }
       performUIUpdatesOnMain {
         self.stopWhiteActivityIndicator(self.activityIndicator, for: self)
