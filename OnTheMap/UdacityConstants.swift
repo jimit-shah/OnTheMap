@@ -18,7 +18,6 @@ extension UdacityClient {
     static let ApiHost = "www.udacity.com"
     static let ApiPath = "/api"
     static let SignupPath = "https://www.udacity.com/account/auth#!/signup"
-    //https://www.udacity.com/api/users/
   }
   
   // MARK: Methods
@@ -43,6 +42,7 @@ extension UdacityClient {
   struct JSONBodyKeys {
     static let Username = "username"
     static let Password = "password"
+    static let AccessToken = "access_token"
   }
   
   // MARK: JSON Response Keys
@@ -61,14 +61,6 @@ extension UdacityClient {
     static let FirstName = "first_name"
     static let LastName = "last_name"
     static let UserResult = "user"
-    
-    //static let mapString = "location"
-    //static let Latitude = "latitude"
-    //static let Longitude = "longitude"
-    //static let Url = "website_url"
-    
-    //Example post to the Udacity
-      //{"uniqueKey": "1234", "firstName": "John", "lastName": "Doe","mapString": "Mountain View, CA", "mediaURL": "//https://udacity.com","latitude": 37.386052, "longitude": -122.083851}
     
   }
   

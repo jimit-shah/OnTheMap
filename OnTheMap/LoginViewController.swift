@@ -129,11 +129,12 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
   public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith
     result: FBSDKLoginManagerLoginResult!, error: Error!) {
     if let error = error {
-      showAlert("Login Failed", message: "Error: \(error)")
+      showAlert("Login with Facebook Failed", message: "Error: \(error)")
     }
-    
     // The FBSDKAccessToken is expected to be available, so we can let the user in.
     if result.token != nil {
+      
+      //user name password token -> UDacity API
       completeLogin()
       //presentWithSegueIdentifier("MasterNavigationController", animated: true)
     }

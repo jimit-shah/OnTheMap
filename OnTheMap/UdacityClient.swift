@@ -12,6 +12,10 @@ import Foundation
 
 // MARK: - TMDBClient: NSObject
 
+//extension Client {
+//  
+//}
+
 class UdacityClient : NSObject {
   
   // MARK: Properties
