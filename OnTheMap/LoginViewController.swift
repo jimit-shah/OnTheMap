@@ -28,17 +28,33 @@ class LoginViewController: UIViewController {
   
   // Facebook login
   @IBAction func loginWithFacebook(_ sender: Any) {
+    startGrayAcitivtyIndicator(activityIndicator, for: self)
     let readPermissions = ["public_profile"]
     let loginManager = FBSDKLoginManager()
     loginManager.logIn(withReadPermissions: readPermissions, from: self) { (result, error) in
       if ((error) != nil){
         self.showAlert("Login Failed", message: "Error: \(String(describing: error))")
+        self.stopGrayActivityIndicator(self.activityIndicator, for: self)
       } else if (result?.isCancelled)! {
         self.showAlert("Login Canceled", message: "Login with Facebook Canceled.")
+        self.stopGrayActivityIndicator(self.activityIndicator, for: self)
       } else {
-        //present the next view controller
-        //self.presentWithSegueIdentifier("showAccount",animated: true)
-        self.completeLogin()
+        guard let result = result else {
+          return
+        }
+        UdacityClient.sharedInstance().authenticateWithFBLogin(result.token.tokenString) { (success, errorString) in
+          if success {
+            performUIUpdatesOnMain {
+              self.stopGrayActivityIndicator(self.activityIndicator, for: self)
+              self.completeLogin()
+            }
+          } else {
+            performUIUpdatesOnMain {
+              self.stopGrayActivityIndicator(self.activityIndicator, for: self)
+              self.showAlert("Login Failed", message: "POST to Udacity Session with Facebook Failed: \(errorString!)")
+            }
+          }
+        }
       }
     }
   }
@@ -128,15 +144,9 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
   
   public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith
     result: FBSDKLoginManagerLoginResult!, error: Error!) {
-    if let error = error {
+    guard error != nil else {
       showAlert("Login with Facebook Failed", message: "Error: \(error)")
-    }
-    // The FBSDKAccessToken is expected to be available, so we can let the user in.
-    if result.token != nil {
-      
-      //user name password token -> UDacity API
-      completeLogin()
-      //presentWithSegueIdentifier("MasterNavigationController", animated: true)
+      return
     }
   }
   

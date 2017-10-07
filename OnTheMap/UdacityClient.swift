@@ -109,7 +109,7 @@ class UdacityClient : NSObject {
         sendError("Your request returned a status code other than 2xx!")
         return
       }
-      
+
       /* GUARD: Was there any data returned? */
       guard let data = data else {
         sendError("No data was returned by the request!")
