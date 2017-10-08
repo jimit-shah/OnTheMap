@@ -53,43 +53,34 @@ extension UIViewController {
   
   // Activity Indicators
   
-  // MARK: startWhiteAcitivityIndicator
-  func startWhiteAcitivtyIndicator(_ activityIndicator: UIActivityIndicatorView, for controller: UIViewController) {
+  // Get New Activity Indicator and Start Animating
+  func startActivityIndicator(for controller: UIViewController, _ activityIndicator: UIActivityIndicatorView, _ style: UIActivityIndicatorViewStyle) {
     activityIndicator.center = controller.view.center
     activityIndicator.hidesWhenStopped = true
-    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.whiteLarge
+    activityIndicator.activityIndicatorViewStyle = style
     
-    for subview in controller.view.subviews {
-      subview.alpha = 0.6
+    if style == .whiteLarge || style == .white {
+      for subview in controller.view.subviews {
+        subview.alpha = 0.6
+      }
+      controller.view.backgroundColor = UIColor.darkGray
     }
-    
-    controller.view.backgroundColor = UIColor.darkGray
     controller.view.addSubview(activityIndicator)
     activityIndicator.alpha = 1.0
     activityIndicator.startAnimating()
-    
   }
   
-  // MARK: stopWhiteAcitivityIndicator
-  func stopWhiteActivityIndicator(_ activityIndicator: UIActivityIndicatorView, for controller: UIViewController) {
-    controller.view.backgroundColor = UIColor.white
-    for subview in controller.view.subviews {
-      subview.alpha = 1.0
+  // Stop Activity Indicator
+  func stopActivityIndicator(for controller: UIViewController, _ activityIndicator: UIActivityIndicatorView) {
+    guard activityIndicator.isAnimating else {
+      return
     }
-    activityIndicator.stopAnimating()
-  }
-  
-  // MARK: startGrayAcitivityIndicator
-  func startGrayAcitivtyIndicator(_ activityIndicator: UIActivityIndicatorView, for controller: UIViewController) {
-    activityIndicator.center = controller.view.center
-    activityIndicator.hidesWhenStopped = true
-    activityIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-    controller.view.addSubview(activityIndicator)
-    activityIndicator.startAnimating()
-  }
-  
-  // MARK: stopGrayAcitivityIndicator
-  func stopGrayActivityIndicator(_ activityIndicator: UIActivityIndicatorView, for controller: UIViewController) {
+    if (activityIndicator.activityIndicatorViewStyle == .whiteLarge || activityIndicator.activityIndicatorViewStyle == .white) {
+      controller.view.backgroundColor = UIColor.white
+      for subview in controller.view.subviews {
+        subview.alpha = 1.0
+      }
+    }
     activityIndicator.stopAnimating()
   }
   

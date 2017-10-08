@@ -31,16 +31,16 @@ class LoginViewController: UIViewController {
   
   // Facebook login
   @IBAction func loginWithFacebook(_ sender: Any) {
-    startGrayAcitivtyIndicator(activityIndicator, for: self)
+    startActivityIndicator(for: self, activityIndicator, .gray)
     let readPermissions = ["public_profile"]
     let loginManager = FBSDKLoginManager()
     loginManager.logIn(withReadPermissions: readPermissions, from: self) { (result, error) in
       if ((error) != nil){
         self.showAlert("Login Failed", message: "Error: \(String(describing: error))")
-        self.stopGrayActivityIndicator(self.activityIndicator, for: self)
+        self.stopActivityIndicator(for: self, self.activityIndicator)
       } else if (result?.isCancelled)! {
         self.showAlert("Login Canceled", message: "Login with Facebook Canceled.")
-        self.stopGrayActivityIndicator(self.activityIndicator, for: self)
+        self.stopActivityIndicator(for: self, self.activityIndicator)
       } else {
         guard let result = result else {
           return
@@ -48,12 +48,12 @@ class LoginViewController: UIViewController {
         UdacityClient.sharedInstance().authenticateWithFBLogin(result.token.tokenString) { (success, errorString) in
           if success {
             performUIUpdatesOnMain {
-              self.stopGrayActivityIndicator(self.activityIndicator, for: self)
+              self.stopActivityIndicator(for: self, self.activityIndicator)
               self.completeLogin()
             }
           } else {
             performUIUpdatesOnMain {
-              self.stopGrayActivityIndicator(self.activityIndicator, for: self)
+              self.stopActivityIndicator(for: self, self.activityIndicator)
               self.showAlert("Login Failed", message: "POST to Udacity Session with Facebook Failed: \(errorString!)")
             }
           }
@@ -64,20 +64,17 @@ class LoginViewController: UIViewController {
   
   // Udacity Login
   @IBAction func loginPressed(_ sender: Any) {
-    startGrayAcitivtyIndicator(activityIndicator, for: self)
+    startActivityIndicator(for: self, activityIndicator, .gray)
     if checkTextfieldsEmpty() {
       showAlert(nil, message: "Email or Password Empty.")
-      stopGrayActivityIndicator(activityIndicator, for: self)
+      stopActivityIndicator(for: self, activityIndicator)
     } else {
       UdacityClient.sharedInstance().authenticateWithLogin(usernameTextField.text!, passwordTextField.text!) { (success, errorString) in
         performUIUpdatesOnMain {
           if success {
-            //self.stopGrayActivityIndicator(self.activityIndicator, for: self)
             self.completeLogin()
-            // reset textfields after successfully login.
             self.resetControls()
           } else {
-            //self.stopGrayActivityIndicator(self.activityIndicator, for: self)
             self.showAlert(nil, message: "Invalid Email or Password.")
             self.resetControls()
           }
@@ -94,7 +91,6 @@ class LoginViewController: UIViewController {
     if UIApplication.shared.canOpenURL(url!) {
       UIApplication.shared.open(url!, options: [:], completionHandler: nil)
     }
-    
   }
   
   
@@ -121,7 +117,7 @@ class LoginViewController: UIViewController {
   
   private func resetControls() {
     if activityIndicator.isAnimating {
-      stopGrayActivityIndicator(activityIndicator, for: self)
+      stopActivityIndicator(for: self, activityIndicator)
     }
     usernameTextField.text = nil
     passwordTextField.text = nil

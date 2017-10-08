@@ -42,7 +42,7 @@ class LocationViewController: UIViewController {
   @IBAction func finishPressed(_ sender: Any) {
     
     // show an activity indicator
-    startWhiteAcitivtyIndicator(activityIndicator, for: self)
+    startActivityIndicator(for: self, activityIndicator, .whiteLarge)
     
     // Get Student's Public Data
     UdacityClient.sharedInstance().getUserInfo { (student, error) in
@@ -69,33 +69,24 @@ class LocationViewController: UIViewController {
         }
         
       } else if let error = error {
-        self.dismissAlert(nil, message: "Error Retrieving User Info: \(error)", handler: {
-          self.stopWhiteActivityIndicator(self.activityIndicator, for: self)
-          self.startOver()
-        })
+        self.updateUI("Error Retrieving User Info: \(error)")
       }
     }
     
   }
   
+  
+  
   // Function to Update an Existing Location
   func putToExistingLocation(objectID: String, dictionary: [String:AnyObject]) {
-    
-    //var message: String?
     ParseClient.sharedInstance().putToStudentLocation(objectID, dictionary, { (success, error) in
       if success {
         self.message = Messages.PutSuccess
       } else {
         self.message = Messages.PutError
       }
-      performUIUpdatesOnMain {
-        self.stopWhiteActivityIndicator(self.activityIndicator, for: self)
-        self.dismissAlert(nil, message: self.message!, handler: {
-          self.startOver()
-        })
-      }
+      self.updateUI(self.message!)
     })
-    
   }
   
   // Function to Post a New Location
@@ -106,13 +97,7 @@ class LocationViewController: UIViewController {
       } else {
         self.message = Messages.PostError
       }
-      performUIUpdatesOnMain {
-        self.stopWhiteActivityIndicator(self.activityIndicator, for: self)
-        self.dismissAlert(nil, message: self.message!, handler: {
-          self.startOver()
-        })
-      }
-      
+      self.updateUI(self.message!)
     })
   }
  
@@ -178,7 +163,6 @@ class LocationViewController: UIViewController {
     
   }
   
-  
   // MARK: renderMapWithPinView
   func renderMapWithPinView(latitude: CLLocationDegrees, longitude: CLLocationDegrees, title: String) {
     let annotation = MKPointAnnotation()
@@ -197,6 +181,21 @@ class LocationViewController: UIViewController {
   func startOver() {
     self.navigationController?.dismiss(animated: true, completion: nil)
   }
+}
+
+// MARK: Update UI
+private extension LocationViewController {
+  
+  // Update UI with Alert message, stop indicator and startover
+  func updateUI(_ message: String) {
+    performUIUpdatesOnMain {
+      self.stopActivityIndicator(for: self, self.activityIndicator)
+      self.dismissAlert(nil, message: self.message!, handler: {
+        self.startOver()
+      })
+    }
+  }
+  
 }
 
 // MARK: MKMapViewDelegate
