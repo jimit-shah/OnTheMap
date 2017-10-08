@@ -17,9 +17,12 @@ class LoginViewController: UIViewController {
   
   @IBOutlet weak var usernameTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
-  @IBOutlet weak var loginButton: UIButton!
+  @IBOutlet weak var loginButton: BorderedButton!
+  @IBOutlet weak var fbLoginButton: BorderedButton!
   
   var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+  let lighterBlue = UIColor(red: 0.012, green: 0.706, blue: 0.898, alpha: 1.0)
+  let fbColor = UIColor(red: 0.229, green: 0.345, blue: 0.595, alpha: 1.0)
   
   // MARK: Text Field Delegate object
   let textFieldDelegate = TextFieldDelegate()
@@ -64,18 +67,19 @@ class LoginViewController: UIViewController {
     startGrayAcitivtyIndicator(activityIndicator, for: self)
     if checkTextfieldsEmpty() {
       showAlert(nil, message: "Email or Password Empty.")
+      stopGrayActivityIndicator(activityIndicator, for: self)
     } else {
       UdacityClient.sharedInstance().authenticateWithLogin(usernameTextField.text!, passwordTextField.text!) { (success, errorString) in
         performUIUpdatesOnMain {
           if success {
+            //self.stopGrayActivityIndicator(self.activityIndicator, for: self)
             self.completeLogin()
-            self.stopGrayActivityIndicator(self.activityIndicator, for: self)
             // reset textfields after successfully login.
             self.resetControls()
-            
           } else {
+            //self.stopGrayActivityIndicator(self.activityIndicator, for: self)
             self.showAlert(nil, message: "Invalid Email or Password.")
-            self.stopGrayActivityIndicator(self.activityIndicator, for: self)
+            self.resetControls()
           }
         }
       }
@@ -97,7 +101,7 @@ class LoginViewController: UIViewController {
   // MARK: Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    configureTextFields()
+    configure()
   }
   
   // MARK: Login
@@ -116,8 +120,12 @@ class LoginViewController: UIViewController {
   }
   
   private func resetControls() {
+    if activityIndicator.isAnimating {
+      stopGrayActivityIndicator(activityIndicator, for: self)
+    }
     usernameTextField.text = nil
     passwordTextField.text = nil
+    loginButton.setBackingColor(lighterBlue)
   }
 }
 
@@ -132,9 +140,10 @@ private extension LoginViewController {
   }
   
   // MARK: configure
-  func configureTextFields() {
+  func configure() {
     usernameTextField.delegate = textFieldDelegate
     passwordTextField.delegate = textFieldDelegate
+    fbLoginButton.setBackingColor(fbColor)
   }
   
 }
@@ -149,6 +158,7 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
       return
     }
   }
+  
   
   public func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
     // On logout, we just remain on the login view controller

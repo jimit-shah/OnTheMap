@@ -48,9 +48,9 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" returnKeyType="go" enablesReturnKeyAutomatically="YES" secureTextEntry="YES"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hki-ee-Ojd">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hki-ee-Ojd" customClass="BorderedButton" customModule="OnTheMap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="166" width="300" height="32"/>
-                                        <color key="backgroundColor" red="0.01051863842" green="0.70716160539999995" blue="0.89919906849999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.054073567708333332" green="0.65518248314950978" blue="0.89803921568627454" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="32" id="sh1-2x-XV4"/>
                                         </constraints>
@@ -112,7 +112,7 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="za8-pF-nk2" userLabel="FB Stack View">
                                 <rect key="frame" x="37.5" y="612" width="300" height="35"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ek6-AP-tAK">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ek6-AP-tAK" customClass="BorderedButton" customModule="OnTheMap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="35"/>
                                         <color key="backgroundColor" red="0.2292000949382782" green="0.34503141045570374" blue="0.59513741731643677" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -139,6 +139,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="fbLoginButton" destination="Ek6-AP-tAK" id="ACx-Un-Rw8"/>
                         <outlet property="loginButton" destination="Hki-ee-Ojd" id="NFO-CO-muB"/>
                         <outlet property="passwordTextField" destination="zZe-HP-g5e" id="Myq-da-4gN"/>
                         <outlet property="usernameTextField" destination="AuK-oc-JFH" id="uAd-tP-QbP"/>
@@ -358,7 +359,7 @@
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWz-a3-hzK">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hWz-a3-hzK" customClass="BorderedButton" customModule="OnTheMap" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="80" width="300" height="32"/>
                                         <color key="backgroundColor" red="0.01051863842" green="0.70716160539999995" blue="0.89919906849999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -417,11 +418,11 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="Q5B-ja-9Rt">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3mC-jX-gH4">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3mC-jX-gH4" customClass="BorderedButton" customModule="OnTheMap" customModuleProvider="target">
                                 <rect key="frame" x="10" y="608" width="355" height="34"/>
                                 <color key="backgroundColor" red="0.01051863842" green="0.70716160539999995" blue="0.89919906849999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <state key="normal" title="Finish"/>
+                                <state key="normal" title="FINISH"/>
                                 <connections>
                                     <action selector="findOnMapPressed:" destination="R6r-js-IxE" eventType="touchUpInside" id="wf1-Jk-fso"/>
                                     <action selector="finishPressed:" destination="TcT-ws-stR" eventType="touchUpInside" id="PN3-6t-lV7"/>
