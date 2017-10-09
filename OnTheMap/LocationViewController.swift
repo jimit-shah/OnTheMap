@@ -37,10 +37,12 @@ class LocationViewController: UIViewController {
   
   // MARK: Outlets
   @IBOutlet weak var mapView: MKMapView!
+  @IBOutlet weak var finishButton: BorderedButton!
   
   // MARK: Actions
   @IBAction func finishPressed(_ sender: Any) {
     
+    finishButton.isEnabled = false
     // show an activity indicator
     startActivityIndicator(for: self, activityIndicator, .whiteLarge)
     
@@ -75,8 +77,6 @@ class LocationViewController: UIViewController {
     
   }
   
-  
-  
   // Function to Update an Existing Location
   func putToExistingLocation(objectID: String, dictionary: [String:AnyObject]) {
     ParseClient.sharedInstance().putToStudentLocation(objectID, dictionary, { (success, error) in
@@ -106,6 +106,9 @@ class LocationViewController: UIViewController {
     super.viewDidLoad()
     mapView.delegate = self
     
+    // Do not show finish button until location lat and long are verfied.
+    finishButton.isHidden = true
+    
     // Call to Geacoding function
     lookupGeocoding()
   }
@@ -124,13 +127,14 @@ class LocationViewController: UIViewController {
       if let lat =  lat, let long = long {
         self.lat = lat
         self.long = long
+        self.finishButton.isHidden = false
         self.reverseGeocoding(latitude: lat, longitude: long)
       }
     })
     
   }
   
-  // MARK: reverseGeocoding for accuracy to save location.
+  // MARK: reverseGeocoding for accurate Pin info.
   func reverseGeocoding(latitude: CLLocationDegrees, longitude: CLLocationDegrees) {
     
     let location = CLLocation(latitude: latitude, longitude: longitude)
@@ -180,6 +184,7 @@ class LocationViewController: UIViewController {
   // MARK: startOver()
   func startOver() {
     self.navigationController?.dismiss(animated: true, completion: nil)
+    finishButton.isEnabled = true
   }
 }
 

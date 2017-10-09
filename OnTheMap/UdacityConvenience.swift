@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 // MARK: - UdacityClient (Convenient Resource Methods)
 
 extension UdacityClient {
@@ -135,7 +134,7 @@ extension UdacityClient {
     self.deleteSessionId { (success, sessionID, errorString) in
       
       if success {
-        print("Logout Success for SessionID: \(sessionID!)")
+        // Remove shared sessionID
         ParseClient.sharedInstance().sessionID = nil
         completionHandlerForLogout(success, errorString)
       } else {
@@ -160,10 +159,6 @@ extension UdacityClient {
         print("Could not find \(UdacityClient.JSONResponseKeys.SessionID) in \(results!)")
         completionHandlerForDELETESession(false, nil, "Logout Failed (Session ID).")
       }
-      
     }
-    
   }
-  
-  
 }

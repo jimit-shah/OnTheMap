@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		EF3ECD8E1F35AB09000A258E /* ParseClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3ECD8D1F35AB09000A258E /* ParseClient.swift */; };
-		EF3ECD901F35ABB5000A258E /* ParseConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3ECD8F1F35ABB5000A258E /* ParseConfig.swift */; };
 		EF3ECD921F364105000A258E /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3ECD911F364105000A258E /* ParseConstants.swift */; };
 		EF3ECD941F36DFDE000A258E /* ParseStudent.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3ECD931F36DFDE000A258E /* ParseStudent.swift */; };
 		EF3ECD981F36E514000A258E /* InfoPostingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF3ECD971F36E514000A258E /* InfoPostingViewController.swift */; };
@@ -37,7 +36,6 @@
 
 /* Begin PBXFileReference section */
 		EF3ECD8D1F35AB09000A258E /* ParseClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseClient.swift; sourceTree = "<group>"; };
-		EF3ECD8F1F35ABB5000A258E /* ParseConfig.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConfig.swift; sourceTree = "<group>"; };
 		EF3ECD911F364105000A258E /* ParseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConstants.swift; sourceTree = "<group>"; };
 		EF3ECD931F36DFDE000A258E /* ParseStudent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseStudent.swift; sourceTree = "<group>"; };
 		EF3ECD971F36E514000A258E /* InfoPostingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InfoPostingViewController.swift; sourceTree = "<group>"; };
@@ -143,7 +141,6 @@
 			isa = PBXGroup;
 			children = (
 				EF3ECD8D1F35AB09000A258E /* ParseClient.swift */,
-				EF3ECD8F1F35ABB5000A258E /* ParseConfig.swift */,
 				EF3ECD911F364105000A258E /* ParseConstants.swift */,
 				EF4777E21F411787008671EF /* ParseConvenience.swift */,
 				EF3ECD931F36DFDE000A258E /* ParseStudent.swift */,
@@ -291,7 +288,6 @@
 				EF3ECD9A1F36EA89000A258E /* StudentsTabBarController.swift in Sources */,
 				EF4777E31F411787008671EF /* ParseConvenience.swift in Sources */,
 				EF3ECD921F364105000A258E /* ParseConstants.swift in Sources */,
-				EF3ECD901F35ABB5000A258E /* ParseConfig.swift in Sources */,
 				EF4777DB1F3AA3E6008671EF /* UdacityConstants.swift in Sources */,
 				EF9D4C751F2EB95800ECC6A5 /* ListViewController.swift in Sources */,
 				EF4777DD1F3BB052008671EF /* UdacityClient.swift in Sources */,

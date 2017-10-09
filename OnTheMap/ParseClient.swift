@@ -8,7 +8,6 @@
 
 import UIKit
 
-
 // MARK: - ParseClient: NSObject
 
 class ParseClient: NSObject {
@@ -17,9 +16,6 @@ class ParseClient: NSObject {
   
   // shared session
   var session = URLSession.shared
-  
-  // configuration object
-  var config = ParseConfig()
   
   // authentication state
   var requestToken: String? = nil
@@ -73,14 +69,11 @@ class ParseClient: NSObject {
       
       // 5/6. Parse the data and use the data (happens in completion handler)
       self.convertDataWithCompletionHandler(data, completionHandlerForConvertData: completionHandlerForGET)
-      
     }
     
     // 7. Start the request
     task.resume()
-    
     return task
-    
   }
   
   // MARK: POST
@@ -165,7 +158,7 @@ class ParseClient: NSObject {
     task.resume()
     return task
   }
-  
+ 
   // MARK: Helpers
   
   // substitue the key for the value that is contained within the method name

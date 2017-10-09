@@ -19,8 +19,9 @@ class MapViewController: UIViewController {
   // MARK: Outlets
   @IBOutlet weak var mapView: MKMapView!
 
-  // Remove all pins
+  // Remove all pins from map
   func removeAnnotations() {
+    mapView.removeAnnotations(annotations)
     annotations.removeAll()
   }
   
@@ -28,7 +29,7 @@ class MapViewController: UIViewController {
   func addAnnotationsToMapView(locations: [ParseStudent]) {
     
     // Remove annotations from map view if previously loaded.
-    self.removeAnnotations()
+    removeAnnotations()
     
     for location in locations {
       

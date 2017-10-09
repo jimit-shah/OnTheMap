@@ -442,6 +442,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Location" id="gV7-WV-42K"/>
                     <connections>
+                        <outlet property="finishButton" destination="3mC-jX-gH4" id="6xE-xp-nrk"/>
                         <outlet property="mapView" destination="Q5B-ja-9Rt" id="nj3-sM-cCZ"/>
                     </connections>
                 </viewController>

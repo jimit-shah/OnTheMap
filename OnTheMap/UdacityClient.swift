@@ -10,11 +10,7 @@ import Foundation
 
 import Foundation
 
-// MARK: - TMDBClient: NSObject
-
-//extension Client {
-//  
-//}
+// MARK: - UdacityClient: NSObject
 
 class UdacityClient : NSObject {
   
@@ -23,11 +19,7 @@ class UdacityClient : NSObject {
   // shared session
   var session = URLSession.shared
   
-  // authentication state
- // var sessionID: String? = nil
-  //var userID: String? = nil
   var udacityStudnet: UdacityStudent? = nil
-  
   
   // MARK: Initializers
   
@@ -80,7 +72,6 @@ class UdacityClient : NSObject {
     
     /* 1. Set the parameters */
     var parametersWithApiKey = parameters
-    //    parametersWithApiKey[ParameterKeys.ApiKey] = Constants.ApiKey as AnyObject?
     
     /* 2/3. Build the URL, Configure the request */
     let request = NSMutableURLRequest(url: URLFromParameters(parametersWithApiKey, withPathExtension: method))

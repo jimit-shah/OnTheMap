@@ -24,7 +24,6 @@ class StudentsTabBarController: UITabBarController {
     refreshData()
   }
   
-  
   @IBAction func addLocationPressed(_ sender: Any) {
     
     if let studentLocation = studentLocation {
@@ -46,27 +45,24 @@ class StudentsTabBarController: UITabBarController {
     if isFacebookLogin {
       let loginManager = FBSDKLoginManager()
       loginManager.logOut()
-      self.completeLogout()
-    } else {
-      UdacityClient.sharedInstance().sessionLogout{ (success, errorString) in
-        performUIUpdatesOnMain {
-          if success {
-            print("Logout Successfully.")
-            self.completeLogout()
-          } else {
-            self.displayError(errorString)
-            self.showAlert(nil, message: "Invalid Link")
-          }
+    }
+    completeLogout()
+  }
+  
+  // MARK: Helpers
+  
+  // MARK: completeLogout()
+  fileprivate func completeLogout() {
+    // logout from Udacity and dimiss view
+    UdacityClient.sharedInstance().sessionLogout{ (success, errorString) in
+      performUIUpdatesOnMain {
+        if success {
+          self.dismiss(animated: true, completion: nil)
+        } else {
+          self.showAlert("Logout Failed", message: "\(errorString!)")
         }
       }
     }
-    
-  }
-  
-  
-  // Dismiss View Function
-  func completeLogout() {
-    self.dismiss(animated: true, completion: nil)
   }
   
   // Display error
@@ -75,8 +71,6 @@ class StudentsTabBarController: UITabBarController {
       print(errorString)
     }
   }
-  
-  // MARK: Helpers
   
   // A flag indicating the presence of an Facebook SDK access token
   fileprivate let isFacebookLogin: Bool = {
