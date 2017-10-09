@@ -13,41 +13,32 @@ extension UIViewController {
   
   // Alert Views
   
-  func showAlert( _ title: String?, message: String) -> Void
-  {
-    let alert = UIAlertController(title: title,
-                                  message: message,
-                                  preferredStyle: UIAlertControllerStyle.alert)
-    let action = UIAlertAction(title: "Dismiss", style: .default, handler: nil)
-    alert.addAction(action)
-    self.present(alert, animated: true, completion: nil)
-  }
-  
-  func askToContinueAlert(_ title: String?, message: String, _ completionHandler: @escaping (_ : Bool) -> Void) {
-    
-    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
-    let overwriteAction = UIAlertAction(title: "Overwrite", style: .default, handler: { (action) -> Void in
-      completionHandler(true)
-    })
-    // Create Cancel button with action handlder
-    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
-      completionHandler(false)
-    })
-    //Add OK and Cancel button to dialog message
-    alert.addAction(overwriteAction)
-    alert.addAction(cancelAction)
-    // Present dialog message to user
-    self.present(alert, animated: true, completion: nil)
-  }
-  
-  // generic alert that allow to dismiss with closure.
-  func dismissAlert(_ title: String?, message: String, handler: @escaping () -> Void) {
-    
+  // MARK: showAlert
+  // generic alert that allow to dismiss with optional closure.
+  func showAlert(_ title: String?, message: String, handler: @escaping() -> Void = {}) {
     let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
     let dismissAction = UIAlertAction(title: "Dismiss", style: .default, handler: { (action) -> Void in
       handler()
     })
     alert.addAction(dismissAction)
+    self.present(alert, animated: true, completion: nil)
+  }
+  
+  // MARK: askToContinueAlert
+  func askToContinueAlert(_ title: String?, message: String, _ completionHandler: @escaping (_ : Bool) -> Void) {
+    let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+    // Overwrite Button Action to pass true to completionHandler if pressed by user
+    let overwriteAction = UIAlertAction(title: "Overwrite", style: .default, handler: { (action) -> Void in
+      completionHandler(true)
+    })
+    // Cancel Button Action handlder to pass false to completion handler
+    let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) -> Void in
+      completionHandler(false)
+    })
+    //Add Overwrite and Cancel button to dialog message
+    alert.addAction(overwriteAction)
+    alert.addAction(cancelAction)
+    // Present dialog message to user
     self.present(alert, animated: true, completion: nil)
   }
   

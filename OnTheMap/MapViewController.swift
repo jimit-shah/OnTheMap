@@ -26,8 +26,8 @@ class MapViewController: UIViewController {
   
   // Function to Add Annotations to MapView
   func addAnnotationsToMapView(locations: [ParseStudent]) {
-    //remove
-    //mapViewController.removeAnnotations()
+    
+    // Remove annotations from map view if previously loaded.
     self.removeAnnotations()
     
     for location in locations {
@@ -49,7 +49,6 @@ class MapViewController: UIViewController {
       annotation.subtitle = mediaURL
       annotations.append(annotation)
     }
-    
     mapView.addAnnotations(annotations)
   }
   

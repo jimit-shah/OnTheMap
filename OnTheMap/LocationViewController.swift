@@ -190,7 +190,7 @@ private extension LocationViewController {
   func updateUI(_ message: String) {
     performUIUpdatesOnMain {
       self.stopActivityIndicator(for: self, self.activityIndicator)
-      self.dismissAlert(nil, message: self.message!, handler: {
+      self.showAlert(nil, message: self.message!, handler: {
         self.startOver()
       })
     }
