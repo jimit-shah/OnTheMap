@@ -210,7 +210,6 @@ extension LocationViewController: MKMapViewDelegate {
   func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
     
     let reuseId = "pin"
-    
     var pinAnnotationView = mapView.dequeueReusableAnnotationView(withIdentifier: reuseId) as? MKPinAnnotationView
     
     if pinAnnotationView == nil {

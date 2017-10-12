@@ -10,7 +10,6 @@ import UIKit
 
 extension UIViewController {
   
-  
   // Alert Views
   
   // MARK: showAlert

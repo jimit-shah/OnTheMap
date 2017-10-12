@@ -8,8 +8,6 @@
 
 import Foundation
 
-import Foundation
-
 // MARK: - UdacityClient: NSObject
 
 class UdacityClient : NSObject {
@@ -28,6 +26,7 @@ class UdacityClient : NSObject {
   }
   
   // MARK: GET
+  
   func taskForGETMethod(_ method: String, parameters: [String:AnyObject], completionHandlerForGET: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
     
     

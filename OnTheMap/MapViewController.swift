@@ -50,6 +50,7 @@ class MapViewController: UIViewController {
       annotation.subtitle = mediaURL
       annotations.append(annotation)
     }
+    // Finally add annotations to map view
     mapView.addAnnotations(annotations)
   }
   

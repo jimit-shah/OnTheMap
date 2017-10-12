@@ -210,9 +210,6 @@ class ParseClient: NSObject {
       components.queryItems!.append(queryItem)
     }
     
-    // print url for the request
-    print("url: \(String(describing: components.url))")
-    
     return components.url!
     
   }

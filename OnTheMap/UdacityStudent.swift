@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: Udacity Student
 struct UdacityStudent {
   
   let userID: String

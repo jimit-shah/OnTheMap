@@ -11,6 +11,7 @@ import Foundation
 extension UdacityClient {
   
   // MARK: Constants
+  
   struct Constants {
     
     // MARK: URLs
@@ -63,6 +64,5 @@ extension UdacityClient {
     static let UserResult = "user"
     
   }
-  
   
 }

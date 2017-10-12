@@ -42,10 +42,12 @@ class StudentsTabBarController: UITabBarController {
   }
   
   @IBAction func logout(_ sender: Any) {
+    // Logout from Facebook if login method is Facebook login
     if isFacebookLogin {
       let loginManager = FBSDKLoginManager()
       loginManager.logOut()
     }
+    // then logout from Udacity
     completeLogout()
   }
   
@@ -53,7 +55,7 @@ class StudentsTabBarController: UITabBarController {
   
   // MARK: completeLogout()
   fileprivate func completeLogout() {
-    // logout from Udacity and dimiss view
+    // logout from Udacity and dismiss view
     UdacityClient.sharedInstance().sessionLogout{ (success, errorString) in
       performUIUpdatesOnMain {
         if success {
@@ -83,60 +85,58 @@ class StudentsTabBarController: UITabBarController {
     super.viewDidLoad()
     let userID = ParseClient.sharedInstance().userID!
     
+    // Get a aStudent Location
     ParseClient.sharedInstance().getStudentLocation(userID, { (studentLocation, error) in
-      
       if let studentLocation = studentLocation {
         self.studentLocation = studentLocation
       }
     })
   }
   
-  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     refreshData()
   }
   
+  // load or refresh data and pass it to view controllers
   func refreshData() {
     
-    //startWhiteAcitivtyIndicator(activityIndicator, for: self)
+    // get activity indicator
     startActivityIndicator(for: self, activityIndicator, .whiteLarge)
     
     let mapViewController = self.viewControllers?[0] as! MapViewController
     let listViewController = self.viewControllers?[1] as! ListViewController
     
     ParseClient.sharedInstance().getStudentLocations{ (students, error) in
-      
       if let students = students {
         listViewController.students = students
-        
+      
         performUIUpdatesOnMain {
-          
           // Add Annotations to MapView and refresh data
           mapViewController.addAnnotationsToMapView(locations: students)
           listViewController.refreshTableView()
-          //self.stopWhiteActivityIndicator(self.activityIndicator, for: self)
+          
+          // stop activity indicator
           self.stopActivityIndicator(for: self, self.activityIndicator)
         }
       } else {
         performUIUpdatesOnMain {
+          // show alert and stop activity indicator
           self.showAlert("No Data Found", message: (error?.localizedDescription)!)
           self.stopActivityIndicator(for: self, self.activityIndicator)
-          //self.stopWhiteActivityIndicator(self.activityIndicator, for: self)
         }
         
       }
     }
-    
   }
   
   // MARK: prepareForSegue
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    //var overwriteLocation = false
     if segue.identifier == "infoPostingSegue" {
       if let studentLocation = studentLocation {
         let navController = segue.destination as! UINavigationController
         let controller = navController.viewControllers.first as! InfoPostingViewController
+        // pass student data to InfoPostingViewController
         controller.student = studentLocation
       }
     }

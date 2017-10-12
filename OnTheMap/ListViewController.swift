@@ -41,14 +41,11 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     if let studentFirstName = student.firstName {
       firstName = studentFirstName
     }
-    
     if let studentLastName = student.lastName {
       lastName = studentLastName
     }
-    
     cell?.textLabel!.text = "\(firstName) \(lastName)"
     cell?.detailTextLabel!.text = student.mediaURL
-    
     return cell!
   }
   
@@ -73,6 +70,7 @@ extension ListViewController: UITableViewDataSource, UITableViewDelegate {
     }
   }
   
+  // Refresh Table Data
   func refreshTableView() {
     if let studentsTableView = studentsTableView {
     studentsTableView.reloadData()
@@ -96,5 +94,3 @@ private extension ListViewController {
   }
   
 }
-  
-

@@ -11,6 +11,9 @@ import Foundation
 
 extension ParseClient {
   
+  // MARK: GET Convenience Methods
+  
+  // GET All Student Locations
   func getStudentLocations(_ completionHandlerForStudentLocations: @escaping (_ result: [ParseStudent]?, _ error: NSError?) -> Void) {
     
     var parametersWithKeys = [String:AnyObject]()
@@ -35,6 +38,7 @@ extension ParseClient {
     
   }
   
+  // Get a Student Location
   func getStudentLocation(_ userID: String, _ completionHandlerForStudentLocation: @escaping (_ result: ParseStudent?, _ error: NSError?) -> Void) {
     
     var parametersWithKeys = [String:AnyObject]()

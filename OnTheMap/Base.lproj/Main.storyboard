@@ -206,12 +206,12 @@
             </objects>
             <point key="canvasLocation" x="-1146" y="779"/>
         </scene>
-        <!--Students Tab Bar Controller-->
+        <!--On The Map-->
         <scene sceneID="Mtq-Lx-e1w">
             <objects>
                 <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="Lez-qt-ROq" customClass="StudentsTabBarController" customModule="OnTheMap" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationItem key="navigationItem" id="kzC-C4-R78">
+                    <navigationItem key="navigationItem" title="On The Map" id="kzC-C4-R78">
                         <barButtonItem key="leftBarButtonItem" title="Logout" id="f0A-yQ-6xp">
                             <connections>
                                 <action selector="logout:" destination="Lez-qt-ROq" id="pVL-BM-wpN"/>

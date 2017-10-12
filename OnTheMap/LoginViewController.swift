@@ -14,15 +14,15 @@ import FBSDKLoginKit
 class LoginViewController: UIViewController {
   
   // MARK: Properties
+  var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
+  let lighterBlue = UIColor(red: 0.012, green: 0.706, blue: 0.898, alpha: 1.0)
+  let fbColor = UIColor(red: 0.229, green: 0.345, blue: 0.595, alpha: 1.0)
   
+  // MARK: Outlets
   @IBOutlet weak var usernameTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var loginButton: BorderedButton!
   @IBOutlet weak var fbLoginButton: BorderedButton!
-  
-  var activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView()
-  let lighterBlue = UIColor(red: 0.012, green: 0.706, blue: 0.898, alpha: 1.0)
-  let fbColor = UIColor(red: 0.229, green: 0.345, blue: 0.595, alpha: 1.0)
   
   // MARK: Text Field Delegate object
   let textFieldDelegate = TextFieldDelegate()
@@ -100,13 +100,14 @@ class LoginViewController: UIViewController {
     configure()
   }
   
-  // MARK: Login
+  // MARK: Complete Login
   
   private func completeLogin() {
     let controller = storyboard!.instantiateViewController(withIdentifier: "MasterNavigationController") as! UINavigationController
     present(controller, animated: true, completion: nil)
   }
   
+  // TextField validation
   private func checkTextfieldsEmpty() -> Bool {
     if usernameTextField.text!.isEmpty || passwordTextField.text!.isEmpty {
       return true
@@ -115,6 +116,7 @@ class LoginViewController: UIViewController {
     }
   }
   
+  // Reset UIView
   private func resetControls() {
     if activityIndicator.isAnimating {
       stopActivityIndicator(for: self, activityIndicator)

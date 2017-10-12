@@ -8,6 +8,7 @@
 
 import UIKit
 
+// MARK: TextFieldDelegate: NSObject, UITextFieldDelegate
 class TextFieldDelegate: NSObject, UITextFieldDelegate {
   
   // Hide keyboard on pressing return
