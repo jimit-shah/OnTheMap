@@ -8,9 +8,9 @@
 
 import Foundation
 
-// MARK: - UdacityClient: NSObject
+// MARK: - UdacityClient
 
-class UdacityClient : NSObject {
+class UdacityClient{
   
   // MARK: Properties
   
@@ -21,10 +21,9 @@ class UdacityClient : NSObject {
   
   // MARK: Initializers
   
-  override init() {
-    super.init()
+  init() {
   }
-  
+
   // MARK: GET
   
   func taskForGETMethod(_ method: String, parameters: [String:AnyObject], completionHandlerForGET: @escaping (_ result: AnyObject?, _ error: NSError?) -> Void) -> URLSessionDataTask {
@@ -218,7 +217,7 @@ class UdacityClient : NSObject {
   
   class func sharedInstance() -> UdacityClient {
     struct Singleton {
-      static var sharedInstance = UdacityClient()
+      static let sharedInstance = UdacityClient()
     }
     return Singleton.sharedInstance
   }

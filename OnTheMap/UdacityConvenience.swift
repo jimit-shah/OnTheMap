@@ -52,8 +52,7 @@ extension UdacityClient {
     let _ = taskForPOSTMethod(Methods.Session, parameters: parameters as [String:AnyObject], jsonBody: jsonBody) { (results, error) in
       
       guard (error == nil) else {
-        print("Error: \(error!)")
-        completionHandlerForSession(false, nil, nil, "Login Failed (FB Session ID).")
+        completionHandlerForSession(false, nil, nil, error!.localizedDescription)
         return
       }
       if let session = results?[UdacityClient.JSONResponseKeys.Session] as? [String:AnyObject], let account = results?[UdacityClient.JSONResponseKeys.Account] as? [String:AnyObject] {
@@ -81,15 +80,11 @@ extension UdacityClient {
     let _ = taskForPOSTMethod(Methods.Session, parameters: parameters as [String:AnyObject], jsonBody: jsonBody) { (results, error) in
       
       if let error = error {
-        print(error)
-        completionHandlerForSession(false, nil, nil, "Login Failed (Session ID).")
+        completionHandlerForSession(false, nil, nil, error.localizedDescription)
       } else if let session = results?[UdacityClient.JSONResponseKeys.Session] as? [String:AnyObject], let account = results?[UdacityClient.JSONResponseKeys.Account] as? [String:AnyObject] {
         
         let sessionID = session[UdacityClient.JSONResponseKeys.SessionID] as? String
         let uniqueKey = account[UdacityClient.JSONResponseKeys.UniqueKey] as? String
-        
-        print("SessionID = \(sessionID!)")
-        print("UniqueKey = \(uniqueKey!)")
         
         completionHandlerForSession(true, sessionID, uniqueKey, nil)
       } else {
@@ -111,14 +106,10 @@ extension UdacityClient {
     let _ = taskForGETMethod(mutableMethod, parameters: parameters as [String:AnyObject]) { ( results, error) in
       
       if let error = error {
-        print(error)
         completionHandlerForGetUserInfo(nil, error)
       } else {
         if let results = results?[UdacityClient.JSONResponseKeys.UserResult] as? [String:AnyObject] {
-          print("Result: \(results)")
           let student = UdacityStudent.studentInfoFromResults(results)
-          
-          print("Student: \(student)")
           completionHandlerForGetUserInfo(student, nil)
         } else {
           completionHandlerForGetUserInfo(nil, NSError(domain: "getUserInfo parsing", code: 0, userInfo: [NSLocalizedDescriptionKey: "could not parse getUserInfo"]))
@@ -150,8 +141,7 @@ extension UdacityClient {
     let _ = taskForDELETEMethod(Methods.Session, parameters: parameters as [String:AnyObject]) { (results, error) in
       
       if let error = error {
-        print(error)
-        completionHandlerForDELETESession(false, nil, "Logout Failed (Session ID).")
+        completionHandlerForDELETESession(false, nil, error.localizedDescription)
       } else if let session = results?[UdacityClient.JSONResponseKeys.Session] as? [String:AnyObject] {
         let sessionID = session[UdacityClient.JSONResponseKeys.SessionID] as? String
         completionHandlerForDELETESession(true, sessionID, nil)

@@ -8,9 +8,9 @@
 
 import UIKit
 
-// MARK: - ParseClient: NSObject
+// MARK: - ParseClient
 
-class ParseClient: NSObject {
+class ParseClient {
   
   // MARK: - Properties
   
@@ -24,8 +24,8 @@ class ParseClient: NSObject {
   
   // MARK: - Initializers
   
-  override init() {
-    super.init()
+  init() {
+    
   }
   
   // MARK: GET
@@ -218,7 +218,7 @@ class ParseClient: NSObject {
   
   class func sharedInstance() -> ParseClient {
     struct Singleton {
-      static var sharedInstance = ParseClient()
+      static let sharedInstance = ParseClient()
     }
     return Singleton.sharedInstance
   }
