@@ -100,6 +100,17 @@ class LoginViewController: UIViewController {
     configure()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    subscribeToKeyboardNotifications()
+  }
+  
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    unsubscribeFromKeyboardNotifications()
+  }
+  
   // MARK: Complete Login
   
   private func completeLogin() {
@@ -125,17 +136,63 @@ class LoginViewController: UIViewController {
     passwordTextField.text = nil
     loginButton.setBackingColor(lighterBlue)
   }
-}
-
-// MARK: - LoginViewController (Configure UI)
-
-private extension LoginViewController {
   
-  func displayError(_ errorString: String?) {
-    if let errorString = errorString {
-      print(errorString)
+  // Keyboard hid or show
+  
+  @objc func keyboardWillShow(_ notification:Notification) {
+    if passwordTextField.isFirstResponder{
+      if (UIDeviceOrientation.landscapeLeft.isLandscape || UIDeviceOrientation.landscapeRight.isLandscape) {
+      view.frame.origin.y = -getKeyboardHeight(notification)
+    }
     }
   }
+  
+  @objc func keyboardWillHide(_ notification:Notification) {
+    view.frame.origin.y = 0
+  }
+  
+  // MARK: Get Keyboard Height
+  func getKeyboardHeight(_ notification:Notification) -> CGFloat {
+    let userInfo = notification.userInfo
+    let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
+    return keyboardSize.cgRectValue.height * 0.25
+  }
+  
+  // MARK: Subscribe to Keyboard Notifications
+  func subscribeToKeyboardNotifications() {
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+  }
+  // MARK: Unsubscribe to Keyboard Notifications
+  func unsubscribeFromKeyboardNotifications() {
+    NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
+    NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
+  }
+  
+
+  
+}
+
+// MARK: UITextFieldDelegate
+/*
+extension LoginViewController: UITextFieldDelegate {
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    if textField == passwordTextField {
+      print("Password textfield begin editing")
+    }
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    if textField == passwordTextField {
+      print("Password textfield editing ended.")
+    }
+  }
+
+}
+*/
+// MARK: - LoginViewController (Configure UI)
+
+extension LoginViewController {
   
   // MARK: configure
   func configure() {
@@ -144,6 +201,11 @@ private extension LoginViewController {
     fbLoginButton.setBackingColor(fbColor)
   }
   
+  func displayError(_ errorString: String?) {
+    if let errorString = errorString {
+      print(errorString)
+    }
+  }
 }
 
 // MARK: - LoginViewController: FBSDKLoginButtonDelegate
@@ -157,8 +219,8 @@ extension LoginViewController: FBSDKLoginButtonDelegate {
     }
   }
   
-  
   public func loginButtonDidLogOut(_ loginButton: FBSDKLoginButton!) {
     // On logout, we just remain on the login view controller
   }
+  
 }

@@ -8,8 +8,8 @@
 
 import UIKit
 
-// MARK: TextFieldDelegate: NSObject, UITextFieldDelegate
-class TextFieldDelegate: NSObject, UITextFieldDelegate {
+// MARK: TextFieldDelegate: UIViewController, UITextFieldDelegate
+class TextFieldDelegate: UIViewController, UITextFieldDelegate {
   
   // Hide keyboard on pressing return
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -17,4 +17,16 @@ class TextFieldDelegate: NSObject, UITextFieldDelegate {
     return true
   }
   
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    if textField.accessibilityIdentifier == "pwdTextField" {
+      print("Password textfield begin editing")
+    }
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    if textField.accessibilityIdentifier == "pwdTextField" {
+      print("Password textfield editing ended.")
+    }
+  }
+
 }
