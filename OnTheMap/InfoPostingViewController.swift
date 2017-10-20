@@ -79,13 +79,13 @@ extension InfoPostingViewController: UITextFieldDelegate {
   }
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
-    if textField == websiteTextField, UIDevice.current.orientation.isLandscape {
-      scrollView.setContentOffset(CGPoint(x:0,y:80), animated: true)
+    if UIDevice.current.orientation.isLandscape {
+      scrollView.setContentOffset(CGPoint(x:0,y:120), animated: true)
     }
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
-    if textField == websiteTextField, UIDevice.current.orientation.isLandscape {
+    if UIDevice.current.orientation.isLandscape {
       scrollView.setContentOffset(CGPoint(x:0,y:0), animated: true)
     }
   }
