@@ -12,15 +12,15 @@ import UIKit
 
 class InfoPostingViewController: UIViewController {
   
+  // Properties
+  
   var student: ParseStudent?
   
   // MARK: Outlets
   
   @IBOutlet weak var locationTextField: UITextField!
   @IBOutlet weak var websiteTextField: UITextField!
-  
-  // Text Field Delegate
-  let textFieldDelegate = TextFieldDelegate()
+  @IBOutlet weak var scrollView: UIScrollView!
   
   // MARK: Actions
   @IBAction func cancelButton(_ sender: Any) {
@@ -30,9 +30,8 @@ class InfoPostingViewController: UIViewController {
   // MARK: Life Cycle
   override func viewDidLoad() {
     super.viewDidLoad()
-    locationTextField.delegate = textFieldDelegate
-    websiteTextField.delegate = textFieldDelegate
-    
+    locationTextField.delegate = self
+    websiteTextField.delegate = self
   }
   
   // MARK: Prepare for Segue
@@ -48,7 +47,6 @@ class InfoPostingViewController: UIViewController {
         print("ObjectID being passed to LocationViewController \(student.objectID!)")
       }
     }
-    
   }
   
   // MARK: Shoud Perform Sqgue with Identifier on conditions
@@ -70,3 +68,27 @@ class InfoPostingViewController: UIViewController {
     return true
   }
 }
+
+// MARK: - UITextFieldDelegate
+
+extension InfoPostingViewController: UITextFieldDelegate {
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
+  }
+  
+  func textFieldDidBeginEditing(_ textField: UITextField) {
+    if textField == websiteTextField, UIDevice.current.orientation.isLandscape {
+      scrollView.setContentOffset(CGPoint(x:0,y:80), animated: true)
+    }
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField) {
+    if textField == websiteTextField, UIDevice.current.orientation.isLandscape {
+      scrollView.setContentOffset(CGPoint(x:0,y:0), animated: true)
+    }
+  }
+  
+}
+
