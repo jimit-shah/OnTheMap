@@ -99,17 +99,6 @@ class LoginViewController: UIViewController {
     configure()
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    //subscribeToKeyboardNotifications()
-  }
-  
-  
-  override func viewWillDisappear(_ animated: Bool) {
-    super.viewWillDisappear(animated)
-    //unsubscribeFromKeyboardNotifications()
-  }
-  
   // MARK: Complete Login
   
   private func completeLogin() {
@@ -126,39 +115,6 @@ class LoginViewController: UIViewController {
     }
   }
   
-  
-  // Keyboard hide or show
-  
-  @objc func keyboardWillShow(_ notification:Notification) {
-    if passwordTextField.isFirstResponder{
-      if (UIDeviceOrientation.landscapeLeft.isLandscape || UIDeviceOrientation.landscapeRight.isLandscape) {
-      view.frame.origin.y = -getKeyboardHeight(notification)
-    }
-    }
-  }
-  
-  @objc func keyboardWillHide(_ notification:Notification) {
-    view.frame.origin.y = 0
-  }
-  
-  // MARK: Get Keyboard Height
-  func getKeyboardHeight(_ notification:Notification) -> CGFloat {
-    let userInfo = notification.userInfo
-    let keyboardSize = userInfo![UIKeyboardFrameEndUserInfoKey] as! NSValue
-    return keyboardSize.cgRectValue.height * 0.25
-  }
-  
-  // MARK: Subscribe to Keyboard Notifications
-  func subscribeToKeyboardNotifications() {
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
-  }
-  // MARK: Unsubscribe to Keyboard Notifications
-  func unsubscribeFromKeyboardNotifications() {
-    NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-    NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
-  }
-  
 }
 
 // MARK: - UITextFieldDelegate
@@ -171,15 +127,13 @@ extension LoginViewController: UITextFieldDelegate {
   }
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
-    if textField == passwordTextField {
-      print("Password textfield begin editing")
-      scrollView.setContentOffset(CGPoint(x:0,y:250), animated: true)
+    if textField == passwordTextField, UIDevice.current.orientation.isLandscape {
+      scrollView.setContentOffset(CGPoint(x:0,y:35), animated: true)
     }
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
-    if textField == passwordTextField {
-      print("Password textfield editing ended.")
+    if textField == passwordTextField, UIDevice.current.orientation.isLandscape {
       scrollView.setContentOffset(CGPoint(x:0,y:0), animated: true)
     }
   }
