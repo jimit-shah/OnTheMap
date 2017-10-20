@@ -17,16 +17,5 @@ class TextFieldDelegate: UIViewController, UITextFieldDelegate {
     return true
   }
   
-  func textFieldDidBeginEditing(_ textField: UITextField) {
-    if textField.accessibilityIdentifier == "pwdTextField" {
-      print("Password textfield begin editing")
-    }
-  }
-  
-  func textFieldDidEndEditing(_ textField: UITextField) {
-    if textField.accessibilityIdentifier == "pwdTextField" {
-      print("Password textfield editing ended.")
-    }
-  }
 
 }

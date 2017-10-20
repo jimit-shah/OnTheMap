@@ -24,8 +24,7 @@ class LoginViewController: UIViewController {
   @IBOutlet weak var loginButton: BorderedButton!
   @IBOutlet weak var fbLoginButton: BorderedButton!
   
-  // MARK: Text Field Delegate object
-  let textFieldDelegate = TextFieldDelegate()
+  @IBOutlet weak var scrollView: UIScrollView!
   
   // MARK: Actions
   
@@ -102,13 +101,13 @@ class LoginViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    subscribeToKeyboardNotifications()
+    //subscribeToKeyboardNotifications()
   }
   
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillDisappear(animated)
-    unsubscribeFromKeyboardNotifications()
+    //unsubscribeFromKeyboardNotifications()
   }
   
   // MARK: Complete Login
@@ -127,17 +126,8 @@ class LoginViewController: UIViewController {
     }
   }
   
-  // Reset UIView
-  private func resetControls() {
-    if activityIndicator.isAnimating {
-      stopActivityIndicator(for: self, activityIndicator)
-    }
-    usernameTextField.text = nil
-    passwordTextField.text = nil
-    loginButton.setBackingColor(lighterBlue)
-  }
   
-  // Keyboard hid or show
+  // Keyboard hide or show
   
   @objc func keyboardWillShow(_ notification:Notification) {
     if passwordTextField.isFirstResponder{
@@ -169,46 +159,64 @@ class LoginViewController: UIViewController {
     NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
   }
   
-
-  
 }
 
-// MARK: UITextFieldDelegate
-/*
+// MARK: - UITextFieldDelegate
+
 extension LoginViewController: UITextFieldDelegate {
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
+  }
+  
   func textFieldDidBeginEditing(_ textField: UITextField) {
     if textField == passwordTextField {
       print("Password textfield begin editing")
+      scrollView.setContentOffset(CGPoint(x:0,y:250), animated: true)
     }
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
     if textField == passwordTextField {
       print("Password textfield editing ended.")
+      scrollView.setContentOffset(CGPoint(x:0,y:0), animated: true)
     }
   }
 
 }
-*/
+
 // MARK: - LoginViewController (Configure UI)
 
 extension LoginViewController {
   
   // MARK: configure
   func configure() {
-    usernameTextField.delegate = textFieldDelegate
-    passwordTextField.delegate = textFieldDelegate
+    usernameTextField.delegate = self
+    passwordTextField.delegate = self
     fbLoginButton.setBackingColor(fbColor)
   }
   
+  // Reset UIView
+  private func resetControls() {
+    if activityIndicator.isAnimating {
+      stopActivityIndicator(for: self, activityIndicator)
+    }
+    usernameTextField.text = nil
+    passwordTextField.text = nil
+    loginButton.setBackingColor(lighterBlue)
+  }
+  
+  // display error
   func displayError(_ errorString: String?) {
     if let errorString = errorString {
-      print(errorString)
+      showAlert("Error", message: errorString)
     }
   }
 }
 
-// MARK: - LoginViewController: FBSDKLoginButtonDelegate
+// MARK: - FBSDKLoginButtonDelegate
+
 extension LoginViewController: FBSDKLoginButtonDelegate {
   
   public func loginButton(_ loginButton: FBSDKLoginButton!, didCompleteWith
