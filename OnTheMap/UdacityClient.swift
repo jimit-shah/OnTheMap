@@ -55,7 +55,6 @@ class UdacityClient{
       
       /* 5/6. Parse the data and use the data (happens in completion handler) */
       self.convertDataWithCompletionHandler(newData, completionHandlerForConvertData: completionHandlerForGET)
-      
     }
     
     task.resume()
@@ -82,20 +81,20 @@ class UdacityClient{
     let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
       
       func sendError(_ error: String) {
-        print(error)
+        //print(error)
         let userInfo = [NSLocalizedDescriptionKey : error]
         completionHandlerForPOST(nil, NSError(domain: "taskForGETMethod", code: 1, userInfo: userInfo))
       }
       
       /* GUARD: Was there an error? */
       guard (error == nil) else {
-        sendError("There was an error with your request: \(error!)")
+        sendError("The Internet connection appears to be offline.")
         return
       }
       
       /* GUARD: Did we get a successful 2XX response? */
       guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
-        sendError("Your request returned a status code other than 2xx!")
+        sendError("Invalid Email or Password, Please try again.")
         return
       }
 

@@ -72,10 +72,10 @@ class LoginViewController: UIViewController {
         performUIUpdatesOnMain {
           if success {
             self.completeLogin()
-            self.resetControls()
+            self.resetControlsOnSuccess()
           } else {
-            self.showAlert(nil, message: "Invalid Email or Password.")
-            self.resetControls()
+            self.showAlert(nil, message: errorString!)
+            self.resetControlsOnFailure()
           }
         }
       }
@@ -137,7 +137,7 @@ extension LoginViewController: UITextFieldDelegate {
       scrollView.setContentOffset(CGPoint(x:0,y:0), animated: true)
     }
   }
-
+  
 }
 
 // MARK: - LoginViewController (Configure UI)
@@ -151,13 +151,17 @@ extension LoginViewController {
     fbLoginButton.setBackingColor(fbColor)
   }
   
-  // Reset UIView
-  private func resetControls() {
-    if activityIndicator.isAnimating {
-      stopActivityIndicator(for: self, activityIndicator)
-    }
+  // Reset View on Login Successfully.
+  private func resetControlsOnSuccess() {
+    stopActivityIndicator(for: self, activityIndicator)
+    loginButton.setBackingColor(lighterBlue)
     usernameTextField.text = nil
     passwordTextField.text = nil
+  }
+  
+  // Reset View on Login Fail except textfields.
+  private func resetControlsOnFailure() {
+    stopActivityIndicator(for: self, activityIndicator)
     loginButton.setBackingColor(lighterBlue)
   }
   
