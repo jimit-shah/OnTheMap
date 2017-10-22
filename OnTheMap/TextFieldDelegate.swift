@@ -8,14 +8,14 @@
 
 import UIKit
 
-// MARK: TextFieldDelegate: UIViewController, UITextFieldDelegate
-class TextFieldDelegate: UIViewController, UITextFieldDelegate {
-  
+// MARK: TextFieldDelegate: NSObject, UITextFieldDelegate
+
+class TextFieldDelegate: NSObject, UITextFieldDelegate {
+    
   // Hide keyboard on pressing return
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
     return true
   }
-  
 
 }

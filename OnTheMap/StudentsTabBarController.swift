@@ -42,13 +42,24 @@ class StudentsTabBarController: UITabBarController {
   }
   
   @IBAction func logout(_ sender: Any) {
-    // Logout from Facebook if login method is Facebook login
-    if isFacebookLogin {
-      let loginManager = FBSDKLoginManager()
-      loginManager.logOut()
-    }
-    // then logout from Udacity
-    completeLogout()
+    
+    let alertController = UIAlertController(title: nil, message: "Are you sure you want to sign out?", preferredStyle: .actionSheet)
+    
+    let yesAction = UIAlertAction(title: "Yes", style: .destructive, handler: { (action) -> Void in
+      
+      // Logout from Facebook if login method is Facebook login
+      if self.isFacebookLogin {
+        let loginManager = FBSDKLoginManager()
+        loginManager.logOut()
+      }
+      // then logout from Udacity
+      self.completeLogout()
+    })
+    
+    let noAction = UIAlertAction(title: "No", style: .cancel, handler: nil)
+    alertController.addAction(yesAction)
+    alertController.addAction(noAction)
+    present(alertController, animated: true, completion: nil)
   }
   
   // MARK: Helpers
@@ -98,7 +109,9 @@ class StudentsTabBarController: UITabBarController {
     refreshData()
   }
   
+  // MARK: refreshData()
   // load or refresh data and pass it to view controllers
+  
   func refreshData() {
     
     // get activity indicator
@@ -110,7 +123,7 @@ class StudentsTabBarController: UITabBarController {
     ParseClient.sharedInstance().getStudentLocations{ (students, error) in
       if let students = students {
         listViewController.students = students
-      
+        
         performUIUpdatesOnMain {
           // Add Annotations to MapView and refresh data
           mapViewController.addAnnotationsToMapView(locations: students)
@@ -130,7 +143,7 @@ class StudentsTabBarController: UITabBarController {
     }
   }
   
-  // MARK: prepareForSegue
+  // MARK:- prepareForSegue
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == "infoPostingSegue" {
       if let studentLocation = studentLocation {

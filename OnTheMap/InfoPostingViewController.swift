@@ -15,7 +15,7 @@ class InfoPostingViewController: UIViewController {
   // Properties
   
   var student: ParseStudent?
-  
+    
   // MARK: Outlets
   
   @IBOutlet weak var locationTextField: UITextField!
@@ -79,9 +79,24 @@ extension InfoPostingViewController: UITextFieldDelegate {
   }
   
   func textFieldDidBeginEditing(_ textField: UITextField) {
-    if UIDevice.current.orientation.isLandscape {
-      scrollView.setContentOffset(CGPoint(x:0,y:120), animated: true)
+    var y = 0
+    if textField == websiteTextField {
+      y = 120
+    } else if textField == locationTextField {
+      y = 60
     }
+    
+    if UIDevice.current.orientation.isLandscape {
+      scrollView.setContentOffset(CGPoint(x:0,y:y), animated: true)
+    }
+    
+    // Another option
+    //let width = self.view.frame.width
+    //let height = self.view.frame.height
+    
+    //if height < width {
+    //    scrollView.setContentOffset(CGPoint(x:0,y:y), animated: true)
+    //}
   }
   
   func textFieldDidEndEditing(_ textField: UITextField) {
