@@ -60,6 +60,7 @@
 		EF9D4C721F2EB91100ECC6A5 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		EF9D4C741F2EB95800ECC6A5 /* ListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListViewController.swift; sourceTree = "<group>"; };
 		EFA21DEF1F7F5D2D00488ECA /* GenericViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenericViewController.swift; sourceTree = "<group>"; };
+		EFCBB7961F9C668E000C29F7 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		EFD54B751F6A548300FC443D /* LocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationViewController.swift; sourceTree = "<group>"; };
 		EFDE500E1F319A9D009014AE /* BorderedButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -92,6 +93,7 @@
 		EF9D4C4A1F2E9A3B00ECC6A5 = {
 			isa = PBXGroup;
 			children = (
+				EFCBB7961F9C668E000C29F7 /* README.md */,
 				EF9D4C551F2E9A3B00ECC6A5 /* OnTheMap */,
 				EF9D4C541F2E9A3B00ECC6A5 /* Products */,
 				EF72F2BE1F85A57200D1E21D /* Frameworks */,
