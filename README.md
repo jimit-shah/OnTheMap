@@ -6,14 +6,14 @@ First, the user logs in to the app using their Udacity username and password. Af
 
 After viewing the information posted by other students, a user can post their own location and link. The locations are specified with a string and forward geocoded. They can be as specific as a full street address or as generic as “Costa Rica” or “Seattle, WA.”
 
-### The app has three view controller scenes: ###
+## Finished App ##
+<img src="AppDemo/OnTheMap.gif" width=250>
+
+## The app has three view controller scenes: ##
 
 + **Login View**: Allows the user to log in using their Udacity credentials, or using their Facebook account.
 + **Map and Table Tabbed View**: Allows users to see the locations of other students in two formats.  
 + **Information Posting View**: Allows the users specify their own locations and links.
-
-## Finished App ##
-<img src="AppDemo/OnTheMap.gif" width=250>
 
 These three scenes are described in detail below.
 
