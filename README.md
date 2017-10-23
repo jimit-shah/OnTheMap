@@ -12,6 +12,9 @@ After viewing the information posted by other students, a user can post their ow
 + **Map and Table Tabbed View**: Allows users to see the locations of other students in two formats.  
 + **Information Posting View**: Allows the users specify their own locations and links.
 
+## Finished App ##
+<img src="AppDemo/OnTheMap.gif" width=250>
+
 These three scenes are described in detail below.
 
 ### Login View ###
